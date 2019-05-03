@@ -21,7 +21,7 @@ extern "C" {
         else
             strName = musicStrmListNormal[strmID];
 
-        int log_printf_ = *(int *)0x10420000;
+        int log_printf_ = *(int *)(DATA_ADDR + 0x20000);
         ((void (*)(const char *format, ...))(log_printf_))("Stream id: %d\n", strmID);
         ((void (*)(const char *format, ...))(log_printf_))("Stream name: %s\n", strName);
         return strName;
@@ -42,7 +42,7 @@ extern "C" {
         else
             seqName = musicSeqListNormal[strmID];
 
-        int log_printf_ = *(int *)0x10420000;
+        int log_printf_ = *(int *)(DATA_ADDR + 0x20000);
         ((void (*)(const char *format, ...))(log_printf_))("Sequence id: %d\n", strmID);
         ((void (*)(const char *format, ...))(log_printf_))("Sequence name: %s\n", seqName);
         return seqName;
