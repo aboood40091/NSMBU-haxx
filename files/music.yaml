@@ -1,0 +1,17 @@
+
+---
+Files: [src/music.cpp]
+Hooks:
+  - type: branch
+    instr: bl
+    addr: F5785FC
+    func: isValidStrmID
+  - type: branch
+    instr: bl
+    addr: F57862C
+    func: getStrmNameForID
+  - type: branch
+    instr: bl
+    addr: F57863C
+    func: getSeqNameForID
+
