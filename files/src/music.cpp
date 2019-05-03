@@ -1,4 +1,4 @@
-#include "music.h"
+#include <music.h>
 #include <stdbool.h>
 
 extern "C" {
