@@ -1,3 +1,4 @@
+#include <logger.h>
 #include <music.h>
 #include <stdbool.h>
 
@@ -21,9 +22,8 @@ extern "C" {
         else
             strName = musicStrmListNormal[strmID];
 
-        int log_printf_ = *(int *)(DATA_ADDR + 0x20000);
-        ((void (*)(const char *format, ...))(log_printf_))("Stream id: %d\n", strmID);
-        ((void (*)(const char *format, ...))(log_printf_))("Stream name: %s\n", strName);
+        log_printf("Stream id: %d\n", strmID);
+        log_printf("Stream name: %s\n", strName);
         return strName;
     }
 
@@ -42,9 +42,8 @@ extern "C" {
         else
             seqName = musicSeqListNormal[strmID];
 
-        int log_printf_ = *(int *)(DATA_ADDR + 0x20000);
-        ((void (*)(const char *format, ...))(log_printf_))("Sequence id: %d\n", strmID);
-        ((void (*)(const char *format, ...))(log_printf_))("Sequence name: %s\n", seqName);
+        log_printf("Sequence id: %d\n", strmID);
+        log_printf("Sequence name: %s\n", seqName);
         return seqName;
     }
 }
