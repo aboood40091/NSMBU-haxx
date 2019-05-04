@@ -8,8 +8,10 @@ extern "C" {
         setLevelInstances();
         _this->wrapFlag = 0;
 
-        LevelArea *area = getAreaById(Level, (unsigned int)LevelInfo->currentAreaId);
-        AreaSettings *areaSettings = (AreaSettings *)(area->blockPtrs + 4);
+        char areaId = LevelInfo->currentAreaId;
+        LevelArea *area = getAreaById(Level, (unsigned int)areaId);
+        AreaSettings *areaSettings = (AreaSettings *)area->blockPtrs[1];
+
         if (areaSettings->flags & 1)
             _this->wrapFlag = 1;
 
@@ -26,7 +28,5 @@ extern "C" {
             setPlayerJumpMax(PlayerJumpMax);
             setPlayerDescentRate(PlayerDescentRate);
         }
-
-        return;
     }
 }
