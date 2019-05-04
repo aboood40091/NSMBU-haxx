@@ -132,6 +132,12 @@ const char *musicSeqListFast[MUSIC_LIST_NUM] = {
     0,
 };
 
+#ifdef __cplusplus
 extern "C" {
-    bool shouldHurryUp();
+#endif
+
+bool shouldHurryUp();
+
+#ifdef __cplusplus
 }
+#endif

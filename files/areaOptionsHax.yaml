@@ -1,0 +1,9 @@
+
+---
+Files: [src/tasks.cpp, src/physics.cpp]
+Hooks:
+  - type: branch
+    instr: bl
+    addr: F075D98
+    func: readHaxxOptions
+
