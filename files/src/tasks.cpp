@@ -10,12 +10,12 @@ extern "C" {
 
         char areaId = LevelInfo->currentAreaId;
         LevelArea *area = getAreaById(Level, (unsigned int)areaId);
-        AreaSettings *areaSettings = (AreaSettings *)area->blockPtrs[1];
+        AreaOptions *areaOptions = (AreaOptions *)area->blockPtrs[1];
 
-        if (areaSettings->flags & 1)
+        if (areaOptions->wrapByte & 1)
             _this->wrapFlag = 1;
 
-        if (areaSettings->flags & 2) {
+        if (areaOptions->wrapByte & 2) {
             setPlayerJumpArc(0.5);
             setMiniPlayerJumpArc(0.5);
             setPlayerJumpMax(4.5);

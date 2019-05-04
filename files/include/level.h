@@ -11,10 +11,21 @@ struct LevelData {
     LevelArea areas[4];
 };
 
-struct AreaSettings {
-	char _0[8];
-	unsigned short flags;
-	// ...
+struct AreaOptions {
+	unsigned int eventBits32;
+	unsigned int eventBits64;
+	unsigned short wrapByte;
+	unsigned short timelimit;
+	char _C; // unused
+	char _D;
+	char _E;
+	char _F;
+	char startEntrance;
+	char _11; // unused
+	char _12; // unused
+	char startEntranceCoinBoost;
+	unsigned short timelimit2;
+	unsigned short timelimit3;
 };
 
 struct LevelInfoStruct {
