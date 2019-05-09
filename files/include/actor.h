@@ -17,35 +17,35 @@ class Profile;
 class Actor;
 
 struct ActorBuildInfo {
-	unsigned int settings; // Nybbles 5 to 12
-	unsigned int settings2; // Nybbles 13 to 20
-	unsigned int parentId;
-	Profile *profile;
-	Vec3 position;
-	unsigned int rotation;
-	char layer;
-	char Nybble3_4;
-	char Nybble1_2;
-	char _23;
-	char movementId; // Nybbles 21 and 22
-	char linkId; // Nybbles 23 and 24
-	bool initStateFlag; // Sprite block[20]
-	char _27; // pad ?
-	unsigned int spriteRelated;
+    unsigned int settings; // Nybbles 5 to 12
+    unsigned int settings2; // Nybbles 13 to 20
+    unsigned int parentId;
+    Profile *profile;
+    Vec3 position;
+    unsigned int rotation;
+    char layer;
+    char Nybble3_4;
+    char Nybble1_2;
+    char _23;
+    char movementId; // Nybbles 21 and 22
+    char linkId; // Nybbles 23 and 24
+    bool initStateFlag; // Sprite block[20]
+    char _27; // pad ?
+    unsigned int spriteRelated;
 };
 
 struct ActorInfo {
-	int xoffs;
-	int yoffs;
-	unsigned int _8;
-	unsigned int _C;
-	unsigned int _10;
-	unsigned int _14;
-	unsigned short _18;
-	unsigned short _1A;
-	unsigned int _1C;
-	unsigned short flags;
-	unsigned short _22;
+    int xoffs;
+    int yoffs;
+    unsigned int _8;
+    unsigned int _C;
+    unsigned int _10;
+    unsigned int _14;
+    unsigned short _18;
+    unsigned short _1A;
+    unsigned int _1C;
+    unsigned short flags;
+    unsigned short _22;
 };
 
 class Profile {

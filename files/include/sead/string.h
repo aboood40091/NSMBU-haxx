@@ -9,10 +9,10 @@
 namespace sead {
     class String {
     public:
-		const char *str;
+        const char *str;
 
-		String(const char *str) {
-		    this->str = (char *)str;
-		}
-	};
+        String(const char *str) {
+            this->str = (char *)str;
+        }
+    };
 };

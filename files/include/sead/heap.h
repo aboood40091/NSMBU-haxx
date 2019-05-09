@@ -22,17 +22,17 @@ namespace sead {
 namespace sead {
     class Heap : public IDisposer {
     public:
-		sead::String name;
-		unsigned int addr;
-		unsigned int size;
-		Heap *parent;
-		sead::ListImpl children;
-		unsigned int _34;
-		unsigned int _38;
-		sead::ListImpl disposers;
-		unsigned int direction;
-		sead::CriticalSection mutex;
-		unsigned int flags;
-		void *vtable;
-	};
+        sead::String name;
+        unsigned int addr;
+        unsigned int size;
+        Heap *parent;
+        sead::ListImpl children;
+        unsigned int _34;
+        unsigned int _38;
+        sead::ListImpl disposers;
+        unsigned int direction;
+        sead::CriticalSection mutex;
+        unsigned int flags;
+        void *vtable;
+    };
 };
