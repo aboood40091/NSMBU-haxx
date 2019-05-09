@@ -4,4 +4,5 @@ Name: NSMBU haxx
 Modules:
   - areaOptionsHax.yaml
   - ctors.yaml
+  - magicplatform.yaml
   - music.yaml

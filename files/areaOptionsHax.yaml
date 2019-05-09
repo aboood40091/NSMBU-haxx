@@ -1,6 +1,6 @@
 
 ---
-Files: [src/tasks.cpp, src/physics.cpp]
+Files: [src/globals.cpp, src/tasks.cpp, src/physics.cpp]
 Hooks:
   - type: branch
     instr: bl

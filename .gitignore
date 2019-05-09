@@ -60,3 +60,4 @@ files/project.ld
 files/project.gpj
 files/Out/*
 OutProj/*
+*.ti

@@ -9,7 +9,7 @@ extern "C" {
         _this->wrapFlag = 0;
 
         char areaId = LevelInfo->currentAreaId;
-        LevelArea *area = getAreaById(Level, (unsigned int)areaId);
+        LevelArea *area = getAreaById(Level, areaId);
         AreaOptions *areaOptions = (AreaOptions *)area->blockPtrs[1];
 
         if (areaOptions->wrapByte & 1)
