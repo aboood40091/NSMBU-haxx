@@ -12,11 +12,12 @@ public:
     int onDraw();
 
     enum CollisionType {
-        Solid = 0,
-        SolidOnTop = 1,
-        None = 2,
-        SolidOnRight = 3
-        // TODO: add SolidOnBottom and SolidOnLeft
+        None = 0,
+        Solid = 1,
+        SolidOnTop = 2,
+        SolidOnBottom = 3,
+        SolidOnLeft = 4,
+        SolidOnRight = 5
     };
 
     // Settings
@@ -35,9 +36,11 @@ public:
     RectCollider solidCollider;
     SemiSolidShapedCollider solidColliderFix;
     SemiSolidShapedCollider solidColliderFix2;
+
     SemiSolidShapedCollider solidOnTopCollider;
+    SemiSolidShapedCollider solidOnBottomCollider;
+    SemiSolidShapedCollider solidOnLeftCollider;
     SemiSolidShapedCollider solidOnRightCollider;
-    // TODO: add SolidOnBottom, SolidOnRight and SolidOnLeft
 
     inline MagicPlatform(ActorBuildInfo *buildInfo) : StageActor(buildInfo) {} // Constructor
 };

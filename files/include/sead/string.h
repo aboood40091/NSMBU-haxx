@@ -12,7 +12,7 @@ namespace sead {
         const char *str;
 
         String(const char *str) {
-            this->str = (char *)str;
+            this->str = str;
         }
     };
 };

@@ -52,7 +52,8 @@ int MagicPlatform::onCreate() {
     if (height == 0) // Avoid it being 0
         height = 1;
 
-    collisionType = (CollisionType)((settings >> 8) & 0xF);
+    //collisionType = (CollisionType)((settings >> 8) & 0xF);
+    collisionType = MagicPlatform::SolidOnLeft;
     //log_printf("CollisionType: %d\n", (char)collisionType);
 
     //TODO: use ColliderRect
@@ -88,6 +89,26 @@ int MagicPlatform::onCreate() {
 
         solidOnTopCollider.init(this, &collisionParam, 2, 0);
         doRegister(PhysicsCollisionMgr, &solidOnTopCollider);
+    }
+
+    else if (collisionType == SolidOnBottom) {
+        float rect[] = {-8.0, 8.0, -8.0 + width * 16.0, 8.0};
+        SemiSolidShapedColliderParam collisionParam = {
+            (width - 1) * 16.0, (1 - height) * 16.0, 0.0, 0.0, rect, 0
+        };
+
+        solidOnBottomCollider.init(this, &collisionParam, 2, 0);
+        doRegister(PhysicsCollisionMgr, &solidOnBottomCollider);
+    }
+
+    else if (collisionType == SolidOnLeft) {
+        float rect[] = {-8.0, 8.0, -8.0 + height * 16.0, 8.0};
+        SemiSolidShapedColliderParam collisionParam = {
+            0.0, (1 - height) * 16.0, 0.0, 0.0, rect, 0
+        };
+
+        solidOnLeftCollider.init(this, &collisionParam, 2, 0);
+        doRegister(PhysicsCollisionMgr, &solidOnLeftCollider);
     }
 
     else if (collisionType == SolidOnRight) {
@@ -133,6 +154,16 @@ int MagicPlatform::onExecute() {
     else if (collisionType == SolidOnTop) {
         solidOnTopCollider.rotation = rotation.Z;
         solidOnTopCollider.vf3C();
+    }
+
+    else if (collisionType == SolidOnBottom) {
+        solidOnBottomCollider.rotation = rotation.Z + 0x80000000;
+        solidOnBottomCollider.vf3C();
+    }
+
+    else if (collisionType == SolidOnLeft) {
+        solidOnLeftCollider.rotation = rotation.Z + 0x40000000;
+        solidOnLeftCollider.vf3C();
     }
 
     else if (collisionType == SolidOnRight) {
