@@ -52,8 +52,7 @@ int MagicPlatform::onCreate() {
     if (height == 0) // Avoid it being 0
         height = 1;
 
-    //collisionType = (CollisionType)((settings >> 8) & 0xF);
-    collisionType = MagicPlatform::SolidOnLeft;
+    collisionType = (CollisionType)((settings >> 8) & 0xF);
     //log_printf("CollisionType: %d\n", (char)collisionType);
 
     //TODO: use ColliderRect
