@@ -17,6 +17,8 @@
       triggers the same glitch as above.
     * Baby Yoshi (and possibly everything that can be
       thrown is very glitchy with the Solid-On-Right collision.
+    * Solid-On-Bottom does not crush you (yet).
+    * Solid is actually not solid on bottom (yet).
 */
 
 Profile profile(MagicPlatform::build, Cookie, "MagicPlatform", &MagicPlatform_ActorInfo, 0); // Overwrite the Cookie profile
