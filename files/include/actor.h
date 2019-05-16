@@ -277,5 +277,5 @@ public:
 
 class SetActorFiles {
 public:
-    SetActorFiles(ActorIDs actorId, char count, const sead::String files[]);
+    SetActorFiles(ActorIDs id, char count, const sead::String list[]);
 };
