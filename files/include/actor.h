@@ -11,10 +11,12 @@
 #include <enums.h>
 #include <globals.h>
 #include <rect.h>
+#include <state.h>
 #include <vec.h>
 
 class Profile;
 class Actor;
+class StateActor;
 
 struct ActorBuildInfo {
     unsigned int settings; // Nybbles 5 to 12
@@ -189,14 +191,91 @@ public:
     int beforeExecute();
     void afterExecute(int);
     int beforeDraw();
+
+    void deleteActorWhenOutOfView(unsigned int);
 };
 
-class SetActorFiles{
+class PhysicsActor : public StageActor {
 public:
-    SetActorFiles(ActorIDs id, char count,const sead::String list[]);
+    unsigned int _27C;
+    char physics[0x14E0]; // TODO: ActorPhysics
+    unsigned int _1760;
+    unsigned int _1764;
+    Vec3 * positionPtr;
+    char _176C;
+    char _176D;
+    char _176E;
+    char _176F;
+    unsigned int mightBeTileRelated;
+    unsigned int _1774;
+    unsigned int _1778;
+    unsigned int _177C;
+    unsigned int _1780;
+    unsigned int _1784;
+    float maxYSpeed;
+    float minYSpeed;
+    float pgravity;
+    char _1794;
+    char _1795;
+    bool hasYSpeedLimitation;
+    char _1797;
+    char _1798;
+    char _1799;
+    char _179A;
+    char _179B;
+    unsigned int _179C;
+
+    PhysicsActor(ActorBuildInfo *);
+
+    void applyGravity();
+
+    bool checkDerivedRuntimeTypeInfo(sead::RuntimeTypeInfo::Interface const *) const;
+    ~PhysicsActor();
+    void afterCreate(int);
+    int beforeExecute();
+    void afterExecute(int);
+    int onDelete();
+
+    void *getPhysics(); // TODO: Physics
+
+    virtual void vf10C(char);
+    virtual void vf114(); //deleted
+    virtual void vf11C();
+    virtual void vf124(float);
+    virtual unsigned int vf12C();
+    virtual void vf134(); //deleted
+    virtual unsigned int vf13C();
+    virtual void vf144(bool);
+    virtual void vf14C();
+    virtual unsigned int vf154();
+    virtual void move(Vec2 *);
+    virtual void setYSpeed(float);
+    virtual unsigned int vf16C();
+    virtual unsigned int vf174();
+    virtual void getRect(Rect *);
 };
 
-SetActorFiles::SetActorFiles(ActorIDs id, char count,const sead::String list[]) {
-    fileCounts[id] = count;
-    fileLists[id] = list;
-}
+class StateActor2 : public PhysicsActor {
+public:
+    StateMgr<StateActor> stateMgr;
+
+    StateActor2(ActorBuildInfo *);
+
+    bool checkDerivedRuntimeTypeInfo(sead::RuntimeTypeInfo::Interface const *) const;
+    ~StateActor2();
+};
+
+class StateActor : public StateActor2 {
+public:
+    StateActor(ActorBuildInfo *);
+
+    bool checkDerivedRuntimeTypeInfo(sead::RuntimeTypeInfo::Interface const *) const;
+    ~StateActor();
+
+    virtual void doStateChange(StateBase *);
+};
+
+class SetActorFiles {
+public:
+    SetActorFiles(ActorIDs actorId, char count, const sead::String files[]);
+};

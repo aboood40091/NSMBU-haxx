@@ -14,5 +14,8 @@ namespace sead {
         String(const char *str) {
             this->str = str;
         }
+
+        virtual void vf0C(); // Destructor
+        virtual void vf14();
     };
 };

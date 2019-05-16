@@ -7,14 +7,20 @@
 */
 
 #include <sead/heap.h>
+#include <actor.h>
 #include <rect.h>
 #include <vec.h>
 
 class PhysicsCollider;
 typedef void (*PhysicsColliderCallback)(PhysicsCollider *self, void *other, unsigned int);
 
-struct ColliderNodeInfo {
-    char _0[0x20];
+class ColliderNodeInfo {
+public:
+    char _0[0x18];
+    unsigned int _18;
+    unsigned int _1C;
+
+    ColliderNodeInfo();
 };
 
 struct ColliderRect{
@@ -47,7 +53,7 @@ struct SemiSolidShapedColliderParam {
 };
 
 class PhysicsCollider : public sead::IDisposer {
-    public:
+public:
     char _10[0xC * 8];
     Rect rect;
     Vec2 _80;

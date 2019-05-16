@@ -13,6 +13,7 @@ enum ActorIDs {
     TwoWayController,
     PathController,
     ClapController,
+    Giant4WayCannon = 0x74,
     Cookie = 0x118
 };
 

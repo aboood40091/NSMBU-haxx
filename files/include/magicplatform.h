@@ -48,4 +48,4 @@ public:
 const ActorInfo MagicPlatform_ActorInfo = {8.0, -8.0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 // Set it to not have any files
-const SetActorFiles setFiles(Cookie, 0, 0);
+const SetActorFiles setMagicPlatformFiles(Cookie, 0, 0);

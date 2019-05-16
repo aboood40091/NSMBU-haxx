@@ -21,7 +21,7 @@
     * Solid is actually not solid on bottom (yet).
 */
 
-Profile profile(MagicPlatform::build, Cookie, "MagicPlatform", &MagicPlatform_ActorInfo, 0); // Overwrite the Cookie profile
+Profile MagicPlatform_Profile(MagicPlatform::build, Cookie, "MagicPlatform", &MagicPlatform_ActorInfo, 0); // Overwrite the Cookie profile
 
 Actor *MagicPlatform::build(ActorBuildInfo *buildInfo) {
     //log_printf("MagicPlatform::build reached\n");

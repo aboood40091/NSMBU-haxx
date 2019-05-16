@@ -3,8 +3,7 @@
 #include <coreinit/mutex.h>
 #include "heap.h"
 
-namespace sead
-{
+namespace sead {
     class CriticalSection : public sead::IDisposer {
     public:
         OSMutex mutex;

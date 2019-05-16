@@ -1,10 +1,19 @@
+#include <sead/string.h>
+#include <actor.h>
 #include <globals.h>
+#include <level.h>
 
 LevelData *Level;
 LevelInfoStruct *LevelInfo;
 
 void *PhysicsCollisionMgr;
 void *Drawer;
+void *ResLoader;
+
+SetActorFiles::SetActorFiles(ActorIDs id, char count, const sead::String list[]) {
+    fileCounts[id] = count;
+    fileLists[id] = list;
+}
 
 // Sometimes, instances of the globals above can be uninitialized
 // To avoid this, we set them at the right time
@@ -20,4 +29,8 @@ void setPhysCollMgrInstance() {
 
 void setDrawerInstance() {
     Drawer = *(void **)0x106D4F88;
+}
+
+void setResLoaderInstance() {
+    ResLoader = *(void **)0x106D4F50;
 }
