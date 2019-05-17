@@ -4,6 +4,7 @@
 #include <enums.h>
 #include <model.h>
 #include <state.h>
+#include <stdbool.h>
 #include <vec.h>
 
 class FlipBlock : public BlockBase {
@@ -16,6 +17,8 @@ public:
 
     void spawnItemUp();
     void spawnItemDown();
+
+    bool playerOverlaps();
 
     ResArchive *resArchive;
     Model2 *model;

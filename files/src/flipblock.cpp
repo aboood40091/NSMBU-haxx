@@ -3,10 +3,13 @@
 #include <enums.h>
 #include <flipblock.h>
 #include <globals.h>
+#include <misc.h>
 #include <model.h>
 #include <mtx.h>
+#include <player.h>
 #include <res.h>
 #include <state.h>
+#include <stdbool.h>
 #include <vec.h>
 //#include <logger.h>
 
@@ -15,9 +18,10 @@
     Currently uses the Snake Block model.
     Known bugs:
     * The flip block does not check if there
-      is an actor (like player) inside of it
-      and can change from the "flipping" state
-      to the "waiting" state while it is inside.
+      is an actor (other than the player)
+      overlapping with it and can change from
+      the "flipping" state to the "waiting"
+      state while the actor is inside.
 */
 
 Profile FlipBlock_Profile(FlipBlock::build, Giant4WayCannon, "FlipBlock", &FlipBlock_ActorInfo, 0);
@@ -93,8 +97,9 @@ void FlipBlock::executeState_Flipping() {
         rotation.X -= 0x8000000;
 
     if (rotation.X == 0)
-        if (--flipsRemaining == 0)
-            doStateChange(&StateID_Wait);
+        if (--flipsRemaining <= 0)
+            if (!playerOverlaps())
+                doStateChange(&StateID_Wait);
 }
 
 void FlipBlock::endState_Flipping() {
@@ -102,4 +107,33 @@ void FlipBlock::endState_Flipping() {
     topLeft = (Vec2){-8.0, 16.0};
     bottomRight = (Vec2){8.0, 0.0};
     solidColl.setRect(&topLeft, &bottomRight);
+}
+
+bool FlipBlock::playerOverlaps() {
+    setPlayerMgrInstance();
+
+    unsigned int playerActiveMask = 1;
+    bool overlaps = false;
+
+    Player *player;
+    Rect thisRect;
+    Rect playerRect;
+
+    for (int i = 0; i < 4; i++) {
+        if (PlayerMgrInst->playerFlags & playerActiveMask) {
+            player = PlayerMgrInst->players[i];
+            if (player != 0) {
+                GetStageActorRect(this, &thisRect);
+                GetStageActorRect(player, &playerRect);
+                overlaps = RectsOverlap(&thisRect, &playerRect);
+            }
+        }
+
+        if (overlaps)
+            return true;
+
+        playerActiveMask <<= 1;
+    }
+
+    return false;
 }

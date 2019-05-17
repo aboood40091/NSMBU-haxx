@@ -6,6 +6,8 @@
 LevelData *Level;
 LevelInfoStruct *LevelInfo;
 
+PlayerMgr *PlayerMgrInst;
+
 void *PhysicsCollisionMgr;
 void *Drawer;
 void *ResLoader;
@@ -21,6 +23,10 @@ SetActorFiles::SetActorFiles(ActorIDs id, char count, const sead::String list[])
 void setLevelInstances() {
     Level = *(LevelData **)0x106DD248;
     LevelInfo = *(LevelInfoStruct **)0x106D3AEC;
+}
+
+void setPlayerMgrInstance() {
+    PlayerMgrInst = *(PlayerMgr **)0x106E8B94;
 }
 
 void setPhysCollMgrInstance() {

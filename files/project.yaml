@@ -6,4 +6,5 @@ Modules:
   - ctors.yaml
   - flipblock.yaml
   - magicplatform.yaml
+  - misc.yaml
   - music.yaml
