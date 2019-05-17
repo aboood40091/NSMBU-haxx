@@ -7,6 +7,7 @@
 #include <model.h>
 #include <mtx.h>
 #include <player.h>
+#include <rect.h>
 #include <res.h>
 #include <state.h>
 #include <stdbool.h>
