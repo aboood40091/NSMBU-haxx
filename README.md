@@ -1,5 +1,5 @@
 # NSMBU-haxx
-A compilation of code hacks for NSMBU. Also an example for the CafeLoader Project Compiler.
+A compilation of code hacks for NSMBU. Also an example for the [CafeLoader Project Compiler](https://github.com/aboood40091/CafeLoader-Project-Compiler).
 
 ## Current haxx:
 * Custom music list  
@@ -8,4 +8,4 @@ A compilation of code hacks for NSMBU. Also an example for the CafeLoader Projec
 * Flip block sprite (Replaces actor "Giant4WayCannon". Currently uses the Snake Block model.)
 
 ## Special Thanks:
-* Kinnay: many structures and permission to use said structures. Help with debugging.
+* [Kinnay](https://github.com/Kinnay): many structures and permission to use said structures. Help with debugging.

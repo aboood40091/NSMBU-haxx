@@ -130,8 +130,10 @@ bool FlipBlock::playerOverlaps() {
             }
         }
 
-        if (overlaps)
+        if (overlaps) {
+            //log_printf("FlipBlock::playerOverlaps: overlaps!\n");
             return true;
+        }
 
         playerActiveMask <<= 1;
     }
