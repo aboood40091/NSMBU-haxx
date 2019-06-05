@@ -53,9 +53,13 @@ dkms.conf
 
 # Other files
 addrconv.py
+addrconv_cemu.py
+elf.py
 compiler.py
+compiler_cemu.py
 __pycache__/*
 files/game_NSMBU_US_Latest.x
+files/game_NSMBU_US_Latest_Cemu.x
 files/project.ld
 files/project.gpj
 files/Out/*
