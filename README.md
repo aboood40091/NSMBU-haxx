@@ -1,5 +1,5 @@
 # NSMBU-haxx
-A compilation of code hacks for NSMBU. Also an example for the [CafeLoader Project Compiler](https://github.com/aboood40091/CafeLoader-Project-Compiler).
+A compilation of code hacks for NSMBU. Also an example for the [CafeLoader Project Compiler](https://github.com/aboood40091/CafeLoader-Project-Compiler) ([cemu branch](https://github.com/aboood40091/CafeLoader-Project-Compiler/tree/cemu) is needed for building for cemu).
 
 ## Current haxx:
 * Custom music list  
