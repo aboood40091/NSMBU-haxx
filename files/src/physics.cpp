@@ -1,7 +1,7 @@
 void setPlayerJumpArc(float jumpArc) {
     #ifdef Cemu
 
-    #ifdef REGION_NSMBU_EU_Latest
+    #ifdef REGION_NSMBU_EU_Latest_Cemu
     float *PlayerJumpArcPtr = (float *)0x1016a820;
     #else
     float *PlayerJumpArcPtr = (float *)0x1016a800;
@@ -23,7 +23,7 @@ void setPlayerJumpArc(float jumpArc) {
 void setMiniPlayerJumpArc(float jumpArc) {
     #ifdef Cemu
 
-    #ifdef REGION_NSMBU_EU_Latest
+    #ifdef REGION_NSMBU_EU_Latest_Cemu
     float *MiniPlayerJumpArcPtr = (float *)0x1016a868;
     #else
     float *MiniPlayerJumpArcPtr = (float *)0x1016a848;
@@ -45,7 +45,7 @@ void setMiniPlayerJumpArc(float jumpArc) {
 void setPlayerJumpMax(float jumpMax) {
     #ifdef Cemu
 
-    #ifdef REGION_NSMBU_EU_Latest
+    #ifdef REGION_NSMBU_EU_Latest_Cemu
     float *PlayerJumpMaxPtr = (float *)0x10166e88;
     #else
     float *PlayerJumpMaxPtr = (float *)0x10166e68;
@@ -67,7 +67,7 @@ void setPlayerJumpMax(float jumpMax) {
 void setPlayerDescentRate(float descentRate) {
     #ifdef Cemu
 
-    #ifdef REGION_NSMBU_EU_Latest
+    #ifdef REGION_NSMBU_EU_Latest_Cemu
     float *PlayerDescentRatePtr = (float *)0x10166e94;
     #else
     float *PlayerDescentRatePtr = (float *)0x10166e74;
