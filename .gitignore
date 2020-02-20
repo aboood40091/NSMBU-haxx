@@ -64,4 +64,6 @@ files/project.ld
 files/project.gpj
 files/Out/*
 OutProj/*
+*.elf
+*.rpx
 *.ti
