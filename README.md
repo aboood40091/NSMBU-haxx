@@ -3,9 +3,6 @@ A compilation of code hacks for NSMBU. Also an example for the [CafeLoader Proje
 
 ## Current haxx:
 * Custom music list  
-* Space physics as area option (wrapByte & 2)  
-* Magic Platform sprite (Replaces actor "Cookie". Check magicplatform.h for settings for this sprite.)  
-* Flip block sprite (Replaces actor "Giant4WayCannon". Currently uses the Snake Block model.)
-
-## Special Thanks:
-* [Kinnay](https://github.com/Kinnay): many structures and permission to use said structures. Help with debugging.
+* Space physics as area option (Area data "wrapByte & 2")  
+* Flip Block sprite (Replaces profile "Giant4WayCannon", AKA sprite 178. Currently uses the Snake Block model.)
+* Magic Platform sprite (Replaces profile "Cookie", AKA sprite 538.)  

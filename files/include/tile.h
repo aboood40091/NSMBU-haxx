@@ -1,14 +1,14 @@
 #pragma once
 
-#include <vec.h>
+#include "types.h"
+#include "tiles.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-void drawTile(void* drawer, unsigned int tileNumber, Vec3 *pos, unsigned int *rotation, Vec3 *scale);
-unsigned short *getTilePtr(unsigned short x, unsigned short y, unsigned char layer, unsigned int *dstBlockIdx);
+class TileMgr
+{
+public:
+    static u16* getTilePtr(u16 x, u16 y, u32 area, u8 layer, u32* blockIndexOut = nullptr);
+    static u16* getTilePtrCurrentArea(u16 x, u16 y, u8 layer, u32* blockIndexOut = nullptr);
 
-#ifdef __cplusplus
-}
-#endif
+    static TileMgr* instance;
+};

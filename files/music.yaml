@@ -1,17 +1,19 @@
 
 ---
-Files: [src/music.cpp]
+Files: [source/musicplayer.cpp]
 Hooks:
   - type: branch
     instr: bl
     addr: F5785FC
-    func: isValidStrmID
+    func: isValidStrmID__11MusicPlayerFi
+
   - type: branch
     instr: bl
     addr: F57862C
-    func: getStrmNameForID
+    func: getStrmNameForID__11MusicPlayerFi
+
   - type: branch
     instr: bl
     addr: F57863C
-    func: getSeqNameForID
+    func: getSeqNameForID__11MusicPlayerFi
 

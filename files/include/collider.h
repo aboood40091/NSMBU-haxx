@@ -1,183 +1,321 @@
 #pragma once
 
-/*
-    TODO: finish this
-    Most of the structures here
-    were taken from Newer U.
-*/
+#include "sead.h"
+#include "util/rect.h"
+#include "util/vec2.h"
 
-#include <sead/heap.h>
-#include <actor.h>
-#include <rect.h>
-#include <vec.h>
+class Actor;
+class CollisionMgr;
 
-class PhysicsCollider;
-typedef void (*PhysicsColliderCallback)(PhysicsCollider *self, void *other, unsigned int);
-
-class ColliderNodeInfo {
+class ColliderBase : public sead::IDisposer     // size: 0x158
+{
 public:
-    char _0[0x18];
-    unsigned int _18;
-    unsigned int _1C;
+    typedef void (*Callback)(ColliderBase* cSelf, CollisionMgr* otherMgr, u32 sensorId);
 
-    ColliderNodeInfo();
-};
+    class List
+    {
+    public:
+        struct Node
+        {
+            ColliderBase* owner;    // 0
+            Node* next;             // 4
+            Node* prev;             // 8
+        };
 
-struct ColliderRect{
-    Vec2 topLeftPos;
-    Vec2 bottomRightPos;
-};
+    public:
+        virtual void insert(Node* where, Node* node);   // C
+        virtual void remove(Node* node);                // 14
+        virtual void insertBack(Node* node);            // 1C
+        virtual void insertFront(Node* node);           // 24
+        virtual void clear();                           // 2C
 
-struct RectColliderParam {
-    //TODO: use ColliderRect instead
-    float _0[4];
-    float _10[4];
-    unsigned int rotation;
-};
+        Node* first;            // 0
+        Node* last;             // 4
+    };
 
-/*
-struct SemiSolidShapedColliderParam {
-    Vec2 _0;
-    Vec2 _8;
-    ColliderRect *rect;
-    void *_14[4];
-    unsigned int _20;
-    unsigned int rotation;
-};
-*/
 
-struct SemiSolidShapedColliderParam {
-    float _0[4];
-    float *stuff;
-    unsigned int rot;
-};
+    class Node
+    {
+    public:
+        class Sensor
+        {
+            Sensor();
 
-class PhysicsCollider : public sead::IDisposer {
+            Vec2 p1;       // 0    Absolute position, Inited to (0, 0)
+            Vec2 p2;       // 8    Absolute position, Inited to (1, 0)
+        };
+
+    public:
+        Node();
+
+        u8 _0;             // 0    Inited to 8
+        u8 _1;             // 1    Inited to 0
+        u8 _2;             // 2    Inited to 0
+        u8 _3;             // 3    Inited to 0
+
+        Sensor sensor;     // 4    Sub class
+
+        u32 _14;           // 14   Inited to 0
+        u32 flags;         // 18   Inited to 0
+        u32 _1C;           // 1C   Inited to 0
+    };
+
+    class Node2 : public Node
+    {
+    public:
+        ColliderBase* owner;  // 20
+        u8 _24[4];            // 24
+        u32 flags2;           // 28
+        u32 _2C;              // 2C
+        u32 _30;              // 30
+        u32 _34;              // 34
+    };
+
+    struct OwnerInfo
+    {
+        Vec3* position;  // 0
+        Vec3* _4;        // 4
+        u8* layer;       // 8
+        u8* _C;          // C
+        s8* playerId;    // 10
+    };
+
+    enum Types
+    {
+        TypeSolid               = 0,
+        TypeCoin                = 1,
+        TypeGreenCoin           = 2,
+        TypeBlueCoin            = 3,
+        TypeCoinOutline         = 4,
+        TypeFence               = 5,
+        TypeVine                = 6,
+        TypeQuestionBlock       = 7,
+        TypeBrickBlock          = 8,
+        TypeQuestionBlockBig    = 9,
+        TypeBrickBlockBig       = 10,
+        TypeBlockUsedBig        = 11,
+        TypeBlockUsed           = 12,
+        TypeUnknown             = 13,
+        TypeWoodStoneBlock      = 14,
+        TypeUnknown2            = 15,
+        TypeDonutBlock          = 16,
+        TypeBoostBlock          = 17,
+        TypeUnknown3            = 18,
+        TypeWater               = 19,
+        TypeLava                = 20,
+        TypePoison              = 21,
+        TypeQuicksand           = 22,
+        TypeUnknown4            = 23,
+        TypeLeaves              = 24, // Used by Palm Tree
+        TypeWood                = 25, // Used by Floating Barrel
+        TypeUnknown5            = 26, // Used by Bouncy Cloud
+        TypeSwingingVine        = 27,
+        TypeSwingingChain       = 28,
+        TypeRopeLadder          = 29,
+        TypeIce                 = 30,
+        TypeIce2                = 31, // Used by frozen actors
+        TypeIce3                = 32, // Used by Portable Ice Block
+        TypeUnknown6            = 33, // Used by Grrrol Passage and Grrrol Spawner
+        TypeUnknown7            = 34,
+        TypeUnknown8            = 35, // Used by Pipe Bubbles
+        TypeUnknown9            = 36, // Used by Airship Hand
+        TypeUnknown10           = 37, // Used by Water Geyser
+        TypeUnknown11           = 38, // Used by Pipes
+        TypeUnknown12           = 39, // Used by Spine Coaster
+        TypeUnknown13           = 40, // Used by Urchin
+        TypeInvisibleBlock      = 41
+    };
+
+    enum SurfaceTypes
+    {
+        SurfaceTypeRegular      = 0,
+        SurfaceTypeIce          = 1,
+        SurfaceTypeSnow         = 2,
+        SurfaceTypeQuicksand    = 3,
+        SurfaceTypeSand         = 4,
+        SurfaceTypeGrass        = 5
+    };
+
 public:
-    char _10[0xC * 8];
-    Rect rect;
-    Vec2 _80;
-    unsigned int _88;
-    unsigned int _8C;
-    StageActor *owner;
-    unsigned int _94;
-    unsigned int _98;
-    unsigned int _9C;
-    unsigned int _A0;
-    unsigned int _A4;
-    unsigned int _A8;
-    Vec2 _AC[6];
-    char _DC;
-    char _DD;
-    char _DE;
-    char _DF;
-    unsigned int _E0;
-    float _E4[4];
-    unsigned int rotation;
-    unsigned int _F8;
-    char _FC[0xC * 4];
-    unsigned int _12C;
-    unsigned int _130;
-    unsigned int _134;
-    PhysicsColliderCallback collCB1;
-    PhysicsColliderCallback collCB2;
-    PhysicsColliderCallback collCB3;
-    unsigned int _144;
-    unsigned int _148;
-    unsigned int _14C;
-    unsigned int _150;
-    unsigned int _154;
+    ColliderBase();
+    virtual ~ColliderBase();
 
-    PhysicsCollider();
+    SEAD_RTTI_BASE(ColliderBase)
 
-    virtual ~PhysicsCollider();
-    virtual bool checkDerivedRuntimeTypeInfo(void *);
-    virtual void vf1C(); //deleted
-    virtual bool vf24(unsigned int *, unsigned int);
-    virtual void vf2C(); //deleted
+    virtual bool vf24(u32*, u32); // TODO: Define
+    virtual u32 vf2C(u32*);       // deleted
     virtual void vf34() = 0;
-    virtual void vf3C() = 0;
-    virtual bool vf44(void *, unsigned short *, Vec2 *, Vec2 *, unsigned int) = 0;
-    virtual bool vf4C(void *, Vec2 *, Vec2 *, unsigned int, void *) = 0;
-    virtual bool vf54(char *, Vec2 *) = 0;
-    virtual void vf5C() = 0; //pure, deleted by subclasses
+    virtual void execute() = 0;
+    virtual bool vf44(Node2*, u8*, Vec2*, Vec2*, u8) = 0;
+    virtual bool vf4C(Node2*, Vec2*, Vec2*, s32 sensorId, CollisionMgr* collisionMgr) = 0;
+    virtual bool vf54(u8*, Vec2*) = 0;
+    virtual bool vf5C(u32*) = 0;
     virtual void vf64();
     virtual void vf6C() = 0;
-    virtual void vf74(unsigned int *) = 0; //unsigned int[2]
-    virtual bool vf7C(Vec2 *) = 0;
+    virtual void vf74(u32*) = 0;
+    virtual bool vf7C(Vec2*, f32) = 0;
+
+    void setType(Types type);
+    void setSolidity(u32 solidity);
+    void setSurfaceType(u32 surfaceType);
+
+    List::Node _10[8];          // 10
+    Rect rect;                  // 70
+    Vec2 _80;                   // 80
+    u32 _88;                    // 88
+    u32 _8C;                    // 8C
+    Actor* owner;               // 90
+    u32 _94;                    // 94
+    OwnerInfo ownerInfo;        // 98
+    Vec2 distToCenter;          // AC
+    Vec2 _B4;                   // B4
+    Vec2 _BC;                   // BC
+    Vec2 _C4;                   // C4
+    Vec2 _CC;                   // CC
+    Vec2 _D4;                   // D4
+    u32 _DC;                    // DC
+    u32 _E0;                    // E0
+    Rect _E4;                   // E4 Vec4, maybe?
+    u32 rotation;               // F4
+    u32 _F8;                    // F8
+    List _FC[4];                // FC
+    Types type;                 // 12C
+    u32 flags;                  // 130
+    u32 _134;                   // 134
+    Callback topCallback;       // 138 CollisionMgr Sensor colliding with top of the collider
+    Callback bottomCallback;    // 13C CollisionMgr Sensor colliding with bottom of the collider
+    Callback sideCallback;      // 140 CollisionMgr Sensor colliding with side of the collider
+    void* _144;                 // 144
+    void* _148;                 // 148
+    void* _14C;                 // 14C
+    void** callbackTable;       // 150
+    u32 _154;                   // 154
 };
 
-class ShapedCollider : public PhysicsCollider {
+class ShapedCollider : public ColliderBase  // size: 0x170
+{
+    SEAD_RTTI_OVERRIDE(ShapedCollider, ColliderBase)
+
 public:
-    char _158[0x18];
+    struct Info
+    {
+        Vec2 distToCenter;  // 0
+        f32 _8;             // 8
+        f32 _C;             // C
+        Vec2 topLeft;       // 10
+        Vec2 bottomRight;   // 18
+        u32 rotation;       // 20
 
-    void setRect(Vec2 *topLeft, Vec2 *bottomRight);
-    ShapedCollider(unsigned int, Vec2 *, ColliderNodeInfo *, ColliderNodeInfo *);
+    };
 
-    ~ShapedCollider();
-    bool checkDerivedRuntimeTypeInfo(void *);
-    //bool vf24(unsigned int *, unsigned int);
-    void vf34();
-    void vf3C();
-    bool vf44(void *, unsigned short *, Vec2 *, Vec2 *, unsigned int);
-    bool vf4C(void *, Vec2 *, Vec2 *, unsigned int, void *);
-    bool vf54(char *, Vec2 *);
-    void vf5C(); //deleted
-    void vf64();
-    void vf6C();
-    void vf74(unsigned int *);
-    bool vf7C(Vec2 *);
-};
-
-class RectCollider : public ShapedCollider {
 public:
-    Vec2 nodes[4];
-    ColliderNodeInfo nodesInfos1[4];
-    ColliderNodeInfo nodesInfos2[4];
+    ShapedCollider();
+    ShapedCollider(s32 numPoints, Vec2* points, Node* nodes1, Node* nodes2);
+    virtual ~ShapedCollider();
 
-    inline RectCollider() : ShapedCollider(4, nodes, nodesInfos1, nodesInfos2) {} // Constructor
+    void init(Actor* owner, const Info& info);
 
-    void init(StageActor *, RectColliderParam *, unsigned int, unsigned int);
+    void vf34() override;
+    void execute() override;
+    bool vf44(Node2*, u8*, Vec2*, Vec2*, u8) override;
+    bool vf4C(Node2*, Vec2*, Vec2*, s32 sensorId, CollisionMgr* collisionMgr) override;
+    bool vf54(u8*, Vec2*) override;
+    bool vf5C(u32*) override; // deleted
+    void vf64() override;
+    void vf6C() override;
+    void vf74(u32*) override;
+    bool vf7C(Vec2*, f32) override;
 
-    ~RectCollider(); // Destructor
-    bool checkDerivedRuntimeTypeInfo(void *);
-    //bool vf24(unsigned int *, unsigned int);
-    bool vf54(char *, Vec2 *);
+    virtual void vf84();
+
+    void setRect(Vec2* topLeft, Vec2* bottomRight);
+
+    sead::Buffer<Vec2> points;
+    sead::Buffer<Node> nodes1;
+    sead::Buffer<Node> nodes2;
 };
 
-class SemiSolidShapedCollider : public PhysicsCollider {
+
+class RectCollider : public ShapedCollider  // size: 0x290
+{
+    SEAD_RTTI_OVERRIDE(RectCollider, ShapedCollider)
+
 public:
-    unsigned int _158[2];
-    unsigned int _160[2];
-    unsigned int _168[2];
-    unsigned int _16C;
-    float _170;
+    forceinline RectCollider()
+        : ShapedCollider(4, points, nodes[0], nodes[1])
+    {
+        for (u32 i = 0; i < 4; i++)
+        {
+            points[i].x = 0.0f;
+            points[i].y = 0.0f;
+        }
 
-    SemiSolidShapedCollider();
+        for (u32 i = 0; i < 4; i++)
+        {
+            nodes[0][i].flags = flags;
+            nodes[0][i]._1C = _134;
+            nodes[1][i].flags = flags;
+            nodes[1][i]._1C = _134;
+        }
+    }
 
-    void init(StageActor *, SemiSolidShapedColliderParam *, unsigned int, unsigned int);
+    virtual ~RectCollider() { }
 
-    ~SemiSolidShapedCollider();
-    bool checkDerivedRuntimeTypeInfo(void *);
-    //bool vf24(unsigned int *, unsigned int);
-    void vf34();
-    void vf3C();
-    bool vf44(void *, unsigned short *, Vec2 *, Vec2 *, unsigned int);
-    bool vf4C(void *, Vec2 *, Vec2 *, unsigned int, void *);
-    bool vf54(char *, Vec2 *);
-    void vf5C(); //deleted
-    void vf64();
-    void vf6C();
-    void vf74(unsigned int *);
-    bool vf7C(Vec2 *);
+    bool vf54(u8*, Vec2*) override;
+
+    Vec2 points[4];             // 170
+    Node nodes[2][4];           // 190
 };
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-void doRegister(void *physicsCollisionMgr, PhysicsCollider* collider);
+class SolidOnTopCollider : public ColliderBase  // size: 0x178
+{
+    SEAD_RTTI_OVERRIDE(SolidOnTopCollider, ColliderBase)
 
-#ifdef __cplusplus
-}
-#endif
+public:
+    struct Info
+    {
+        Vec2 distToCenter;  // 0
+        f32 _8;             // 8
+        f32 _C;             // C
+        Vec2* points;       // 10
+        u32 rotation;       // 14
+    };
+
+public:
+    SolidOnTopCollider();
+    SolidOnTopCollider(s32 numPoints, Vec2* points, Node* nodes1, Node* nodes2);
+    virtual ~SolidOnTopCollider();
+
+    void init(Actor* owner, const Info& info);
+    void init(Actor* owner, const Info& info, s32 numPoints, sead::Heap* heap = nullptr);
+
+    void vf34() override;
+    void execute() override;
+    bool vf44(Node2*, u8*, Vec2*, Vec2*, u8) override;
+    bool vf4C(Node2*, Vec2*, Vec2*, s32 sensorId, CollisionMgr* collisionMgr) override;
+    bool vf54(u8*, Vec2*) override;
+    bool vf5C(u32*) override;
+    void vf64() override;
+    void vf6C() override;
+    void vf74(u32*) override;
+    bool vf7C(Vec2*, f32) override;
+
+    sead::Buffer<Vec2> points;
+    sead::Buffer<Node> nodes1;
+    sead::Buffer<Node> nodes2;
+    f32 _170;
+    u8 _174[0x178-0x174];
+};
+
+
+class ColliderMgr : public sead::IDisposer    // size: 0x64
+{
+public:
+    void add(ColliderBase* collider);
+    void remove(ColliderBase* collider);
+
+    static ColliderMgr* instance;
+
+    ColliderBase::List lists[7];    // 10
+};

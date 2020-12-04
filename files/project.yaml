@@ -1,10 +1,9 @@
 
 ---
-Name: NSMBU haxx
+Name: NSMBU Haxx
 Modules:
-  - areaOptionsHax.yaml
+  - activecollider.yaml
+  - areatask.yaml
   - ctors.yaml
-  - flipblock.yaml
-  - magicplatform.yaml
-  - misc.yaml
+  - customactors.yaml
   - music.yaml

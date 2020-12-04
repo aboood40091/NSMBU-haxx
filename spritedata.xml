@@ -1,0 +1,34 @@
+	<sprite id="178" name="Flip Block">
+		<checkbox nybble="16" title="Place Behind Other Sprites"/>
+	</sprite>
+	<sprite id="538" name="Magic Platform">
+		<value nybble="11-12" title="Location ID"/>
+		<list nybble="10" title="Collider type">
+			<entry value="0">Solid</entry>
+			<entry value="1">Solid-on-top</entry>
+			<entry value="2">None</entry>
+		</list>
+		<value nybble="7-8" title="Type"/>
+		<list nybble="9" title="Surface Type">
+			<entry value="0">Normal</entry>
+			<entry value="1">Ice</entry>
+			<entry value="2">Snow</entry>
+			<entry value="3">Quicksand</entry>
+			<entry value="4">Sand</entry>
+			<entry value="5">Grass</entry>
+		</list>
+		<list nybble="20" title="Movement Type">
+			<entry value="0">None</entry>
+			<entry value="1">Sway Or Spin (68, 69, 116, 118)</entry>
+			<entry value="2">Bolt (238)</entry>
+			<entry value="3">Path (100)</entry>
+			<entry value="4">Two-Way (70)</entry>
+			<entry value="6">BoltMushroom (241)</entry>
+			<entry value="7">No-bolt Mushroom (242)</entry>
+			<entry value="8">Shifting Platform (132)</entry>
+			<entry value="9">Spinning (214, 484)</entry>
+			<entry value="10">Rolling Hill (265)</entry>
+			<entry value="11">Moving Mushroom Lift (210)</entry>
+		</list>
+		<value nybble="21-22" title="Movement ID"/>
+	</sprite>
