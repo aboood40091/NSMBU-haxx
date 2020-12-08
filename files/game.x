@@ -3,15 +3,57 @@
 
 SECTIONS {
 
+	/* Math */
+	sin__Ff = 0xf6bdd40;
+	cos__Ff = 0xf6be528;
+
 	/* new/delete */
 	__nw__FUi = 0xF5B1594;
 	__nwa__FUi = 0xf5b1630;
+	__nwa__FUiPQ2_4sead4Heapi = 0xF5B18DC;
 	__dl__FPv = 0xF5B1748;
 	__dla__FPv = 0xF5B17D0;
 
 	/* GHS C++ FUNCTIONS */
+	__pure_virtual_called = 0xF6BA554;
 	__deleted_virtual_called = 0xf6ba5e8;
 	__vec_new = 0xF6BA350;
+
+	/* sead::IDisposer */
+	__ct__Q2_4sead9IDisposerFv = 0xF5CA2FC;
+	__dt__Q2_4sead9IDisposerFv = 0xf5ca384;
+
+	/* sead::HeapMgr */
+	sInstancePtr__Q2_4sead7HeapMgr = 0x106EA240;
+	getCurrentHeap__Q2_4sead7HeapMgrFv = 0xF5CD554;
+
+	/* sead::FileDevice */
+	__CPR122__tryOpen__Q2_4sead10FileDeviceFPQ2_J12J10FileHandleRCQ2_J12J23SafeStringBase__tm__2_cQ3_J12JJ17J12FileOpenFlagUi = 0xF5B7804;
+	tryClose__Q2_4sead10FileDeviceFPQ2_4sead10FileHandle = 0xF5B78C0;
+
+	/* sead::FileDeviceMgr */
+	sInstance__Q2_4sead13FileDeviceMgr = 0x106EA118;
+	tryOpen__Q2_4sead13FileDeviceMgrFPQ2_4sead10FileHandleRCQ2_4sead23SafeStringBase__tm__2_cQ3_4sead10FileDevice12FileOpenFlagUi = 0xF5B8B0C;
+
+	/* sead::FileHandle */
+	read__Q2_4sead10FileHandleFPUcUi = 0xF5B81D0;
+
+	/* sead::SZSDecompressor */
+	getDecompSize__Q2_4sead15SZSDecompressorSFPCv = 0xF5D54CC;
+	getDecompAlignment__Q2_4sead15SZSDecompressorSFPCv = 0xF5D5AA0;
+	decomp__Q2_4sead15SZSDecompressorSFPvUiPCvT2 = 0xF5D5654;
+	__CPR87__streamDecomp__Q2_4sead15SZSDecompressorSFPQ3_J17JJ22J13DecompContextPCvUi = 0xF5D57FC;
+
+	/* sead::SZSDecompressor::DecompContext */
+	__ct__Q3_4sead15SZSDecompressor13DecompContextFPv = 0xF5D5AF4;
+
+	/* sead::DirectResource */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EBDB8;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EC118;
+
+	/* sead::Endian */
+	cHostEndian__Q2_4sead6Endian = 0x10AECC78;
+	cConvFuncTable__Q2_4sead6Endian = 0x10694BA8;
 
 	/* Profile */
 	__ct__7ProfileFPFPC14ActorBuildInfo_P4BaseUiRCQ2_4sead23SafeStringBase__tm__2_cPC9ActorInfoT2 = 0xEBD9554;
@@ -299,6 +341,8 @@ SECTIONS {
 	twoWayPlatformCbCallback2__14TwoWayPlatformFP12ColliderBaseP4Vec2 = 0xF40184C;
 
 	/* Misc */
+	BLOSDynLoad_Acquire = 0xF65EF58;
+	BOSDynLoad_FindExport = 0xF65F418;
 	PlayerJumpArc = 0x1066CA00;
 	MiniPlayerJumpArc = 0x1066CA48;
 	PlayerJumpMax = 0x10669068;

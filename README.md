@@ -6,3 +6,7 @@ A compilation of code hacks for NSMBU. Also an example for the [CafeLoader Proje
 * Space physics as area option (Area data "wrapByte & 2")  
 * Flip Block sprite (Replaces profile "Giant4WayCannon", AKA sprite 178. Currently uses the Snake Block model.)
 * Magic Platform sprite (Replaces profile "Cookie", AKA sprite 538.)  
+
+## Credits:
+* Bent: Contribution to headers, original basic Magic Platform implementation  
+* Modified dynamic_libs to work with this project, based on original implementation by dimok and Maschell fork  

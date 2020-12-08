@@ -6,4 +6,6 @@ Modules:
   - areatask.yaml
   - ctors.yaml
   - customactors.yaml
+  - dynamic_libs.yaml
   - music.yaml
+  - sead.yaml

@@ -6,6 +6,7 @@
 #include "collider.h"
 #include "movementhandler.h"
 #include "level.h"
+#include "math.h"
 #include "tile.h"
 
 /*
@@ -142,9 +143,8 @@ u32 MagicPlatform::onCreate()
 
     u32 movementMask = movementHandler.getMaskForMovementType(settings2 & 0xFF);
     movementHandler.link(position, movementMask, movementId);
-    rotation.z = movementHandler.rotation;
 
-    return 1;
+    return onExecute();
 }
 
 u32 MagicPlatform::onExecute()
@@ -169,11 +169,22 @@ u32 MagicPlatform::onExecute()
 
 u32 MagicPlatform::onDraw()
 {
-    for (u32 y = 0; y < tileH; y++)
+    f32 angle = (static_cast<f32>(rotation.z) / 0x80000000) * M_PI;
+    f32 angleCos = cos(angle);
+    f32 angleSin = sin(angle);
+
+    for (s32 y = 0; y < tileH; y++)
     {
-        for (u32 x = 0; x < tileW; x++)
+        for (s32 x = 0; x < tileW; x++)
         {
-            Vec3 drawPos(position.x + x*16 - tileW*8 + 8, position.y - y*16 + tileH*8 - 8, position.z);
+            s32 offsetX = x*16 - tileW*8 + 8;
+            s32 offsetY = y*16 - tileH*8 + 8;
+
+            // https://en.wikipedia.org/wiki/Rotation_matrix#In_two_dimensions
+            f32 rotatedX =  offsetX * angleCos + offsetY * angleSin;
+            f32 rotatedY = -offsetX * angleSin + offsetY * angleCos;
+            Vec3 drawPos(position.x + rotatedX, position.y - rotatedY, position.z);
+
             DrawMgr::instance->drawTile(tileData[y*tileW + x], drawPos, rotation.z, scale);
         }
     }
