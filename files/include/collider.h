@@ -105,35 +105,42 @@ public:
         TypeLava                = 20,
         TypePoison              = 21,
         TypeQuicksand           = 22,
-        TypeUnknown4            = 23,
+        TypeCarpet              = 23, // Unused
         TypeLeaves              = 24, // Used by Palm Tree
         TypeWood                = 25, // Used by Floating Barrel
-        TypeUnknown5            = 26, // Used by Bouncy Cloud
+        TypeUnknown4            = 26, // Used by Bouncy Cloud
         TypeSwingingVine        = 27,
         TypeSwingingChain       = 28,
         TypeRopeLadder          = 29,
         TypeIce                 = 30,
         TypeIce2                = 31, // Used by frozen actors
         TypeIce3                = 32, // Used by Portable Ice Block
-        TypeUnknown6            = 33, // Used by Grrrol Passage and Grrrol Spawner
-        TypeUnknown7            = 34,
-        TypeUnknown8            = 35, // Used by Pipe Bubbles
-        TypeUnknown9            = 36, // Used by Airship Hand
-        TypeUnknown10           = 37, // Used by Water Geyser
-        TypeUnknown11           = 38, // Used by Pipes
-        TypeUnknown12           = 39, // Used by Spine Coaster
-        TypeUnknown13           = 40, // Used by Urchin
+        TypeUnknown5            = 33, // Used by Grrrol Passage and Grrrol Spawner
+        TypeUnknown6            = 34,
+        TypeUnknown7            = 35, // Used by Pipe Bubbles
+        TypeUnknown8            = 36, // Used by Airship Hand
+        TypeUnknown9            = 37, // Used by Water Geyser
+        TypeUnknown10           = 38, // Used by Pipes
+        TypeUnknown11           = 39, // Used by Spine Coaster
+        TypeUnknown12           = 40, // Used by Urchin
         TypeInvisibleBlock      = 41
     };
 
     enum SurfaceTypes
     {
-        SurfaceTypeRegular      = 0,
-        SurfaceTypeIce          = 1,
-        SurfaceTypeSnow         = 2,
-        SurfaceTypeQuicksand    = 3,
-        SurfaceTypeSand         = 4,
-        SurfaceTypeGrass        = 5
+        SurfaceTypeRegular       = 0,
+        SurfaceTypeIce           = 1,
+        SurfaceTypeSnow          = 2,
+        SurfaceTypeQuicksand     = 3,
+        SurfaceTypeSand          = 4,
+        SurfaceTypeGrass         = 5,
+        SurfaceTypeCloud         = 6,
+        SurfaceTypeBeachSand     = 7, // Unused
+        SurfaceTypeCarpet        = 8, // Unused
+        SurfaceTypeLeaves        = 9,
+        SurfaceTypeWood          = 10,
+        SurfaceTypeWaterSurface  = 11,
+        SurfaceTypeBeanstalkLeaf = 12
     };
 
 public:
