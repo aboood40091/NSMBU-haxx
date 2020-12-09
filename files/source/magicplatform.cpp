@@ -111,9 +111,16 @@ u32 MagicPlatform::onCreate()
     }
 
     collisionType = (settings1 >> 8) & 0xF;
+    if (collisionType > 2)
+        return 2;
+
     const ColliderBase::Types colliderType = ColliderBase::Types((settings1 >> 16) & 0xFF);
     if (colliderType > ColliderBase::TypeInvisibleBlock)
         return 2;
+
+    ColliderBase::SurfaceTypes colliderSurfaceType = ColliderBase::SurfaceTypes((settings1 >> 12) & 0xF);
+    if (colliderSurfaceType > ColliderBase::SurfaceTypeBeanstalkLeaf)
+        colliderSurfaceType = ColliderBase::SurfaceTypeRegular;
 
     if (collisionType == 0)
     {
@@ -128,7 +135,7 @@ u32 MagicPlatform::onCreate()
         rectCollider._14C = reinterpret_cast<void*>(&TwoWayPlatform::cbCallback6);
 
         rectCollider.setType(colliderType);
-        rectCollider.setSurfaceType((settings1 >> 12) & 0xF);
+        rectCollider.setSurfaceType(colliderSurfaceType);
         ColliderMgr::instance->add(&rectCollider);
     }
     else if (collisionType == 1)
@@ -137,7 +144,7 @@ u32 MagicPlatform::onCreate()
         SolidOnTopCollider::Info info = { Vec2(0.0f, 0.0f), 0.0f, 0.0f, points, 0 };
         solidOnTopCollider.init(this, info, 2);
         solidOnTopCollider.setType(colliderType);
-        solidOnTopCollider.setSurfaceType((settings1 >> 12) & 0xF);
+        solidOnTopCollider.setSurfaceType(colliderSurfaceType);
         ColliderMgr::instance->add(&solidOnTopCollider);
     }
 

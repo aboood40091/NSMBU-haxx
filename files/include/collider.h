@@ -126,6 +126,19 @@ public:
         TypeInvisibleBlock      = 41
     };
 
+    enum SolidityTypes
+    {
+        SolidityTypesNone                = 0,
+        SolidityTypesSolid               = 1,
+        SolidityTypesSolidOnTop          = 2,
+        SolidityTypesSolidOnBottom       = 3,
+        SolidityTypesSolidOnTopAndBottom = 4,
+        SolidityTypesSlide               = 17,
+        SolidityTypesSteepSlide          = 18,
+        SolidityTypesStaircase           = 33,
+        SolidityTypesStaircase2          = 34
+    };
+
     enum SurfaceTypes
     {
         SurfaceTypeRegular       = 0,
@@ -139,7 +152,7 @@ public:
         SurfaceTypeCarpet        = 8, // Unused
         SurfaceTypeLeaves        = 9,
         SurfaceTypeWood          = 10,
-        SurfaceTypeWaterSurface  = 11,
+        SurfaceTypeWater         = 11,
         SurfaceTypeBeanstalkLeaf = 12
     };
 
@@ -163,8 +176,8 @@ public:
     virtual bool vf7C(Vec2*, f32) = 0;
 
     void setType(Types type);
-    void setSolidity(u32 solidity);
-    void setSurfaceType(u32 surfaceType);
+    void setSolidity(SolidityTypes solidity);
+    void setSurfaceType(SurfaceTypes surfaceType);
 
     List::Node _10[8];          // 10
     Rect rect;                  // 70

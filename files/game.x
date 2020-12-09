@@ -238,7 +238,7 @@ SECTIONS {
 
 	/* ColliderBase */
 	setType__12ColliderBaseFQ2_12ColliderBase5Types = 0xED65A70;
-	setSurfaceType__12ColliderBaseFUi = 0xED65AD0;
+	__CPR62__setSurfaceType__12ColliderBaseFQ2_J16J12SurfaceTypes = 0xED65AD0;
 
 	/* ColliderBase::Node */
 	__ct__Q2_12ColliderBase4NodeFv = 0xED61ACC;
