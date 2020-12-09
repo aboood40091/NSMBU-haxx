@@ -128,15 +128,15 @@ public:
 
     enum SolidityTypes
     {
-        SolidityTypesNone                = 0,
-        SolidityTypesSolid               = 1,
-        SolidityTypesSolidOnTop          = 2,
-        SolidityTypesSolidOnBottom       = 3,
-        SolidityTypesSolidOnTopAndBottom = 4,
-        SolidityTypesSlide               = 17,
-        SolidityTypesSteepSlide          = 18,
-        SolidityTypesStaircase           = 33,
-        SolidityTypesStaircase2          = 34
+        SolidityTypeNone                = 0,
+        SolidityTypeSolid               = 1,
+        SolidityTypeSolidOnTop          = 2,
+        SolidityTypeSolidOnBottom       = 3,
+        SolidityTypeSolidOnTopAndBottom = 4,
+        SolidityTypeSlide               = 17,
+        SolidityTypeSteepSlide          = 18,
+        SolidityTypeStaircase           = 33,
+        SolidityTypeStaircase2          = 34
     };
 
     enum SurfaceTypes
