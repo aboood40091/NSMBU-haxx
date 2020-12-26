@@ -135,7 +135,9 @@ u32 MagicPlatform::onCreate()
         rectCollider._14C = reinterpret_cast<void*>(&TwoWayPlatform::cbCallback6);
 
         rectCollider.setType(colliderType);
-        rectCollider.setSurfaceType(colliderSurfaceType);
+        if ((settings1 >> 8) & 1)
+            rectCollider.setSurfaceType(colliderSurfaceType);
+
         ColliderMgr::instance->add(&rectCollider);
     }
     else if (collisionType == 1)
@@ -144,7 +146,9 @@ u32 MagicPlatform::onCreate()
         SolidOnTopCollider::Info info = { Vec2(0.0f, 0.0f), 0.0f, 0.0f, points, 0 };
         solidOnTopCollider.init(this, info, 2);
         solidOnTopCollider.setType(colliderType);
-        solidOnTopCollider.setSurfaceType(colliderSurfaceType);
+        if ((settings1 >> 8) & 1)
+            solidOnTopCollider.setSurfaceType(colliderSurfaceType);
+
         ColliderMgr::instance->add(&solidOnTopCollider);
     }
 

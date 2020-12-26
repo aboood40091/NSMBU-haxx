@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<game name="NSMBU Haxx" version="1.0" description="A compilation of code haxx for NSMBU.">
+
+    <!-- Files -->
+    <file name="spritedata" path="spritedata.xml" />
+
+</game>

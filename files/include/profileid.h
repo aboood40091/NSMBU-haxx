@@ -4,8 +4,10 @@ namespace ProfileId {
 
 enum ProfileIdType
 {
-    Giant4WayCannon = 116,
+    Small4WayCannon = 115,
+    Giant4WayCannon,
+
     Cookie = 280
 };
 
-};
+}

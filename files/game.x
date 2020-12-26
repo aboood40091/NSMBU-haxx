@@ -57,9 +57,15 @@ SECTIONS {
 
 	/* Profile */
 	__ct__7ProfileFPFPC14ActorBuildInfo_P4BaseUiRCQ2_4sead23SafeStringBase__tm__2_cPC9ActorInfoT2 = 0xEBD9554;
+	get__7ProfileSFUi = 0xEBD9774;
+	spriteToProfileList__7Profile = 0x106EEF8C;
 	hasResourcesOriginal__7Profile = 0x10504264;
 	resourceCountOriginal__7Profile = 0x105045F8;
 	resourceListsOriginal__7Profile = 0x106C541C;
+
+	/* ActorMgr */
+	instance__8ActorMgr = 0x106c52c8;
+	create__8ActorMgrFP14ActorBuildInfoUi = 0xebc9a58;
 
 	/* Base */
 	__vtbl__4Base = 0x105028c0;
@@ -284,6 +290,9 @@ SECTIONS {
 	setSensor__12CollisionMgrFPCQ2_12CollisionMgr6SensorUi = 0xED4AEFC;
 	getSensor__12CollisionMgrCFUi = 0xED4CE74;
 	process__12CollisionMgrFv = 0xED4D954;
+
+	/* EventMgr */
+	instance__8EventMgr = 0x106dd26c;
 
 	/* MusicPlayer */
 	shouldHurryUp__11MusicPlayerFv = 0xF5783D8;

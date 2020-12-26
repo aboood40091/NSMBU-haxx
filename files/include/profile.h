@@ -21,6 +21,8 @@ public:
     u8 hasResourcesLoaded;                      // C
     u32 flags;                                  // 10
 
+    static u32 spriteToProfileList[];
+
     static const u32 NUM_PROFILES_ORIGINAL = 913;
 
     static u8 hasResourcesOriginal[NUM_PROFILES_ORIGINAL];

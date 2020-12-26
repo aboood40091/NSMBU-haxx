@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<sprites>
+	<sprite id="177" name="Actor Spawner">
+		<value nybble="1-2" title="Triggering Event ID"/>
+		<list nybble="21" title="ID Type">
+			<entry value="0">Profile ID</entry>
+			<entry value="1">Sprite ID</entry>
+		</list>
+		<value nybble="22-24" title="ID"/>
+		<value nybble="3" title="Child Event ID 1 (Nybble 2)"/>
+		<value nybble="4" title="Child Event ID 2 (Nybble 4)"/>
+		<value nybble="5" title="Child Nybble 5"/>
+		<value nybble="6" title="Child Nybble 6"/>
+		<value nybble="7" title="Child Nybble 7"/>
+		<value nybble="8" title="Child Nybble 8"/>
+		<value nybble="9" title="Child Nybble 9"/>
+		<value nybble="10" title="Child Nybble 10"/>
+		<value nybble="11" title="Child Nybble 11"/>
+		<value nybble="12" title="Child Nybble 12"/>
+		<value nybble="13" title="Child Nybble 13"/>
+		<value nybble="14" title="Child Nybble 14"/>
+		<value nybble="15" title="Child Nybble 15"/>
+		<value nybble="16" title="Child Nybble 16"/>
+		<value nybble="17" title="Child Nybble 17"/>
+		<value nybble="18" title="Child Nybble 18"/>
+		<value nybble="19" title="Child Nybble 19"/>
+		<value nybble="20" title="Child Nybble 20"/>
+	</sprite>
+	<sprite id="178" name="Flip Block">
+		<checkbox nybble="16" title="Place Behind Other Sprites"/>
+	</sprite>
+	<sprite id="538" name="Magic Platform">
+		<value nybble="11-12" title="Location ID"/>
+		<list nybble="10" title="Collider type">
+			<entry value="0">Solid</entry>
+			<entry value="1">Solid-on-top</entry>
+			<entry value="2">None</entry>
+		</list>
+		<list nybble="7-8" title="Type" comment="Presets for surface types and other properties.">
+			<entry value="0">Normal</entry>
+			<entry value="1">Coin</entry>
+			<entry value="2">Green Coin</entry>
+			<entry value="3">Blue Coin</entry>
+			<entry value="4">Coin Outline</entry>
+			<entry value="5">Fence</entry>
+			<entry value="6">Vine</entry>
+			<entry value="7">? Block</entry>
+			<entry value="8">Brick Block</entry>
+			<entry value="9">Big ? Block</entry>
+			<entry value="10">Big Brick Block</entry>
+			<entry value="11">Big Empty Block</entry>
+			<entry value="12">Empty Block</entry>
+			<entry value="13">UNUSED</entry>
+			<entry value="14">Wooden/Stone Block</entry>
+			<entry value="15">UNUSED</entry>
+			<entry value="16">Donut Lift</entry>
+			<entry value="17">Boost Block</entry>
+			<entry value="18">UNUSED</entry>
+			<entry value="19">Water</entry>
+			<entry value="20">Lava</entry>
+			<entry value="21">Poison Water</entry>
+			<entry value="22">Quicksand</entry>
+			<entry value="23">Carpet (UNUSED)</entry>
+			<entry value="24">Leaves</entry>
+			<entry value="25">Wood</entry>
+			<entry value="26">Bouncy Cloud?</entry>
+			<entry value="27">Swinging Vine</entry>
+			<entry value="28">Swinging Chain</entry>
+			<entry value="29">Rope Ladder</entry>
+			<entry value="30">Ice</entry>
+			<entry value="31">Frozen Actor?</entry>
+			<entry value="32">Portable Ice Block?</entry>
+			<entry value="33">Grrrols can pass through?</entry>
+			<entry value="34">UNUSED</entry>
+			<entry value="35">Pipe Bubbles?</entry>
+			<entry value="36">Airship Hand?</entry>
+			<entry value="37">Water Geyser?</entry>
+			<entry value="38">Pipe?</entry>
+			<entry value="39">Spine Coaster?</entry>
+			<entry value="40">Urchin?</entry>
+			<entry value="41">Invisible Block</entry>
+		</list>
+		<list nybble="9" title="Surface Type" comment="Surface type to override the one set by the &quot;Type&quot; option.">
+			<entry value="0">Default</entry>
+			<entry value="1">Ice</entry>
+			<entry value="2">Snow</entry>
+			<entry value="3">Quicksand</entry>
+			<entry value="4">Desert Sand</entry>
+			<entry value="5">Grass</entry>
+			<entry value="6">Cloud</entry>
+			<entry value="7">Beach Sand</entry>
+			<entry value="8">Carpet</entry>
+			<entry value="9">Leaves</entry>
+			<entry value="10">Wood</entry>
+			<entry value="11">Water</entry>
+			<entry value="12">Beanstalk Leaf</entry>
+		</list>
+		<checkbox nybble="10" title="Use Surface Type" comment="If checked, the &quot;Surface Type&quot; option will override the surface type set by the &quot;Type&quot; option."/>
+		<list nybble="20" title="Movement Type">
+			<entry value="0">None</entry>
+			<entry value="1">Sway Or Spin (68, 69, 116, 118)</entry>
+			<entry value="2">Bolt (238)</entry>
+			<entry value="3">Path (100)</entry>
+			<entry value="4">Two-Way (70)</entry>
+			<entry value="6">BoltMushroom (241)</entry>
+			<entry value="7">No-bolt Mushroom (242)</entry>
+			<entry value="8">Shifting Platform (132)</entry>
+			<entry value="9">Spinning (214, 484)</entry>
+			<entry value="10">Rolling Hill (265)</entry>
+			<entry value="11">Moving Mushroom Lift (210)</entry>
+		</list>
+		<value nybble="21-22" title="Movement ID"/>
+	</sprite>
+</sprites>
