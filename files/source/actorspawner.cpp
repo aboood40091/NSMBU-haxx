@@ -2,6 +2,10 @@
 #include "actormgr.h"
 #include "eventmgr.h"
 
+/*
+    Replaces Actor "Small4WayCannon".
+*/
+
 class ActorSpawner : public Actor
 {
 public:
