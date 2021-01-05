@@ -1,0 +1,4 @@
+Use the xdelta tool variation of your choice to apply one of these patches to the original NSMBU v1.3.0 rpx of the same region to generate a new rpx with NSMBU Haxx patches applied.
+
+Example:
+https://www.romhacking.net/utilities/598/
