@@ -1,7 +1,7 @@
 #include "sound.h"
 
 extern nw::snd::internal::FxReverbHiParam DefaultReverbHiParam;
-extern nw::snd::internal::FxDelayParam DefaultDelayParam;
+extern nw::snd::internal::FxDelayParam    DefaultDelayParam;
 
 extern f32 SFXReverb_0;
 extern f32 SFXReverb_1;
