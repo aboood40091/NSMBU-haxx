@@ -38,8 +38,6 @@ public:
     };
 };
 
-typedef FxReverbHi::ReverbHiParam FxReverbHiParam;
-
 class FxDelay
 {
 public:
@@ -62,6 +60,11 @@ public:
     };
 };
 
+namespace internal {
+
+typedef FxReverbHi::ReverbHiParam FxReverbHiParam;
 typedef FxDelay::DelayParam FxDelayParam;
+
+}
 
 } }

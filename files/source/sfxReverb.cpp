@@ -1,7 +1,7 @@
 #include "sound.h"
 
-extern nw::snd::FxReverbHi::ReverbHiParam DefaultReverbHiParam;
-extern nw::snd::FxDelay::DelayParam DefaultDelayParam;
+extern nw::snd::internal::FxReverbHiParam DefaultReverbHiParam;
+extern nw::snd::internal::FxDelayParam DefaultDelayParam;
 
 extern f32 SFXReverb_0;
 extern f32 SFXReverb_1;
@@ -10,8 +10,8 @@ extern f32 SFXReverbPlyJump_1;
 
 void SetFxReverbHiAndDelay(void*, u32 sfxMode)
 {
-    nw::snd::FxReverbHiParam& reverbHiParam = SoundSystem::instance->getAudioFx()->getReverbHiParam();
-    nw::snd::FxDelayParam&    delayParam    = SoundSystem::instance->getAudioFx()->getDelayParam();
+    nw::snd::internal::FxReverbHiParam& reverbHiParam = SoundSystem::instance->getAudioFx()->getReverbHiParam();
+    nw::snd::internal::FxDelayParam&    delayParam    = SoundSystem::instance->getAudioFx()->getDelayParam();
 
     reverbHiParam.preDelayTime = 0.02f;
     reverbHiParam.fusedTime = 3.0f;

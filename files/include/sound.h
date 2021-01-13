@@ -6,8 +6,8 @@
 class AudioFx
 {
 public:
-    nw::snd::FxReverbHiParam& getReverbHiParam();
-    nw::snd::FxDelayParam&    getDelayParam();
+    nw::snd::internal::FxReverbHiParam& getReverbHiParam();
+    nw::snd::internal::FxDelayParam&    getDelayParam();
 };
 
 class SoundSystemBase
