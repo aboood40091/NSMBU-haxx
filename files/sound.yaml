@@ -1,6 +1,8 @@
 
 ---
-Files: [source/musicplayer.cpp]
+Files:
+  - source/musicplayer.cpp
+  - source/sfxReverb.cpp
 Hooks:
   - type: branch
     instr: bl
@@ -16,4 +18,9 @@ Hooks:
     instr: bl
     addr: F57863C
     func: getSeqNameForID__11MusicPlayerFi
+
+  - type: branch
+    instr: b
+    addr: F583B7C
+    func: SetFxReverbHiAndDelay__FPvUi
 

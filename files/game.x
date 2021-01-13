@@ -324,6 +324,16 @@ SECTIONS {
 	getMaskForMovementType__15MovementHandlerFUi = 0xF40A37C;
 	execute__15MovementHandlerFv = 0xF40B8C4;
 
+	/* SoundSystemBase */
+	getAudioFx__15SoundSystemBaseFv = 0xF571AA4;
+
+	/* SoundSystem */
+	instance__11SoundSystem = 0x106E9E84;
+
+	/* AudioFx */
+	getReverbHiParam__7AudioFxFv = 0xF572FD8;
+	getDelayParam__7AudioFxFv = 0xF572FE0;
+
 	/* Level */
 	instance__5Level = 0x106dd248;
 	getArea__5LevelFUi = 0xf25a2dc;
@@ -356,5 +366,11 @@ SECTIONS {
 	MiniPlayerJumpArc = 0x1066CA48;
 	PlayerJumpMax = 0x10669068;
 	PlayerDescentRate = 0x10669074;
+	DefaultReverbHiParam = 0x1072F528;
+	DefaultDelayParam = 0x1072F554;
+	SFXReverb_0 = 0x106E9F14;
+	SFXReverb_1 = 0x106E9F18;
+	SFXReverbPlyJump_0 = 0x106E9F1C;
+	SFXReverbPlyJump_1 = 0x106E9F20;
 
 }

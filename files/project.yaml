@@ -7,5 +7,5 @@ Modules:
   - ctors.yaml
   - customactors.yaml
   - dynamic_libs.yaml
-  - music.yaml
   - sead.yaml
+  - sound.yaml
