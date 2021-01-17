@@ -15,22 +15,32 @@ class Model     // this has 2 base classes
     SEAD_RTTI_BASE(Model)
 
 public:
-    virtual void vf1C();
-    virtual void CalcView(int viewIndex, const Mtx34& cameraMtx);
-    virtual void vf2C();
-    virtual void vf34();
-    virtual void vf3C();
-    virtual void vf44();
-    virtual void vf4C();
-    virtual void vf54();
-    virtual void vf5C();
+    // Calculates the drawing resources for skeleton matrices, shapes and materials
+    virtual void Calc();
+
+    // Calculates the drawing resources for the view
+    virtual void CalcView(s32 viewIndex, const Mtx34& cameraMtx);
+
+    virtual void vf2C(s32 bufferIdx, u32, u32, void*); // always a nullsub
+    virtual void vf34(s32 bufferIdx, u32, u32, void*);
+    virtual void vf3C(s32 bufferIdx, u32, u32, void*);
+    virtual void vf44(s32 bufferIdx, u32, u32, void*);
+    virtual void vf4C(s32 bufferIdx, u32, u32, void*);
+    virtual void vf54(s32 bufferIdx, u32, u32, void*);
+    virtual u32 vf5C(); // gets a flag
+
     virtual ~Model();
+
     virtual void updateAnimations();
     virtual void updateModel();
+
+    // Rotation + Translation matrix
     virtual void setMtx(const Mtx34& mtx);
     virtual const Mtx34& getMtx() const;
+
     virtual void setScale(const Vec3& scale);
     virtual const Vec3& getScale() const;
+
     virtual void vf9C();
     virtual void vfA4();
     virtual s32 getBoneIdx(const sead::SafeString& name) const;
