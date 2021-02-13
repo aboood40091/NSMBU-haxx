@@ -1,0 +1,102 @@
+
+---
+Files: [source/profile.cpp, source/profile.S]
+Hooks:
+  # Replace the original Profile ctor with our custom one
+  - type: branch
+    instr: b
+    addr: EBD9554
+    func: __ct__7ProfileFPFPC14ActorBuildInfo_P4BaseUiRCQ2_4sead23SafeStringBase__tm__2_cPC9ActorInfoT2
+
+  # Replace the original get function with our custom one
+  - type: branch
+    instr: b
+    addr: EBD9774
+    func: get__7ProfileSFUi
+
+  # Replace the original getPriority function with our custom one
+  - type: branch
+    instr: b
+    addr: EBD9988
+    func: getPriority__7ProfileSFUi
+
+  # Replace the original getHasResources function with our custom one
+  - type: branch
+    instr: b
+    addr: EBD99A8
+    func: getHasResources__7ProfileSFUi
+
+  # Replace the original getResourceCount function with our custom one
+  - type: branch
+    instr: b
+    addr: EBD99CC
+    func: getResourceCount__7ProfileSFUi
+
+  # Replace the original getResourceList function with our custom one
+  - type: branch
+    instr: b
+    addr: EBD99EC
+    func: getResourceList__7ProfileSFUi
+
+
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBC4578
+    func: LoadCustomSpriteList_02004578
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBC4DA8
+    func: LoadCustomSpriteList_02004DA8
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBC5018
+    func: LoadCustomSpriteList_02005018
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBC7C60
+    func: LoadCustomSpriteList_02007C60_0200806C_02008260
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBC806C
+    func: LoadCustomSpriteList_02007C60_0200806C_02008260
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBC8260
+    func: LoadCustomSpriteList_02007C60_0200806C_02008260
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBC844C
+    func: LoadCustomSpriteList_0200844C
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBC86A0
+    func: LoadCustomSpriteList_020086A0
+
+  # Make the game load our custom spriteToProfileList instead of the original
+  - type: branch
+    instr: bl
+    addr: EBCA830
+    func: LoadCustomSpriteList_0200A830
+
+
+
+  # Make the function that initializes the original spriteToProfileList do nothing
+  - type: patch
+    addr: EBD7388
+    data: 4E 80 00 20    # blr

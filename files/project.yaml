@@ -8,5 +8,6 @@ Modules:
   - ctors.yaml
   - customactors.yaml
   - dynamic_libs.yaml
+  - profile.yaml
   - sead.yaml
   - sound.yaml

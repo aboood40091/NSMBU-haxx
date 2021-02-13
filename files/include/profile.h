@@ -4,8 +4,9 @@
 #include "preprocessor.h"
 #include "profileid.h"
 
+class ResArchive;
 class Base;
-struct ActorInfo;
+class ActorInfo;
 struct ActorBuildInfo;
 
 class Profile
@@ -13,37 +14,53 @@ class Profile
 public:
     Profile(Base* (*buildFunc)(const ActorBuildInfo*), u32 id, const sead::SafeString& name, const ActorInfo* actorInfo, u32 flags);
 
-    static Profile* get(u32 id);
+    ResArchive* getResArchiveById(u32 idx);
 
-    Base* (*buildFunc)(const ActorBuildInfo*);  // 0
-    u32 id;                                     // 4
-    const ActorInfo* actorInfo;                 // 8
-    u8 hasResourcesLoaded;                      // C
-    u32 flags;                                  // 10
+    static Profile* get(u32 id);
+    static s16 getPriority(u32 id);
+    static bool getHasResources(u32 id);
+    static u8 getResourceCount(u32 id);
+    static const sead::SafeString* getResourceList(u32 id);
+
+    Base* (*buildFunc)(const ActorBuildInfo*);       // 0
+    u32 id;                                          // 4
+    const ActorInfo* actorInfo;                      // 8
+    bool hasResourcesLoaded;                         // C
+    u32 flags;                                       // 10
 
     static u32 spriteToProfileList[];
 
     static const u32 NUM_PROFILES_ORIGINAL = 913;
+    static const u32 NUM_PROFILES_CUSTOM   = ProfileId::Num - NUM_PROFILES_ORIGINAL;
+    static const u32 NUM_PROFILES          = NUM_PROFILES_ORIGINAL + NUM_PROFILES_CUSTOM;
 
-    static u8 hasResourcesOriginal[NUM_PROFILES_ORIGINAL];
-    static u8 resourceCountOriginal[NUM_PROFILES_ORIGINAL];
+    static Profile* profilesOriginal[NUM_PROFILES_ORIGINAL];
+    static Profile* profilesCustom[NUM_PROFILES_CUSTOM];
+
+    static const s16 prioritiesOriginal[NUM_PROFILES_ORIGINAL];
+    static s16 prioritiesCustom[NUM_PROFILES_CUSTOM];
+
+    static const bool hasResourcesOriginal[NUM_PROFILES_ORIGINAL];
+    static bool hasResourcesCustom[NUM_PROFILES_CUSTOM];
+
+    static const u8 resourceCountOriginal[NUM_PROFILES_ORIGINAL];
+    static u8 resourceCountCustom[NUM_PROFILES_CUSTOM];
+
     static const sead::SafeString* resourceListsOriginal[NUM_PROFILES_ORIGINAL];
+    static const sead::SafeString* resourceListsCustom[NUM_PROFILES_CUSTOM];
 };
-
 
 struct ProfileResources
 {
-    ProfileResources(s32 id, u32 count, const sead::SafeString resources[])
+    ProfileResources(u32 id, u8 count, const sead::SafeString resources[])
     {
-        if (id >= Profile::NUM_PROFILES_ORIGINAL)
-            id = 0;
-
-        else if (id < 0)
+        if (id < Profile::NUM_PROFILES_ORIGINAL || id >= Profile::NUM_PROFILES)
             return;
 
-        Profile::hasResourcesOriginal[id] = count > 0;
-        Profile::resourceCountOriginal[id] = count;
-        Profile::resourceListsOriginal[id] = resources;
+        u32 customId = id - Profile::NUM_PROFILES_ORIGINAL;
+        Profile::hasResourcesCustom[customId] = count > 0;
+        Profile::resourceCountCustom[customId] = count;
+        Profile::resourceListsCustom[customId] = resources;
     }
 };
 
