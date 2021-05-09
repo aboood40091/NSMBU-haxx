@@ -37,10 +37,10 @@ public:
     Actor(const ActorBuildInfo* buildInfo);
     virtual ~Actor();
 
-    void afterCreate(u32);
-    u32 beforeExecute();
-    void afterExecute(u32);
-    u32 beforeDraw();
+    void afterCreate(u32) override;
+    u32 beforeExecute() override;
+    void afterExecute(u32) override;
+    u32 beforeDraw() override;
 
     virtual void setPlayerId(s8 id)
     {
