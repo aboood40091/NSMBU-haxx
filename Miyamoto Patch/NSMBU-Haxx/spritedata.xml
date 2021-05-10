@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sprites>
-	<sprite id="177" name="Actor Spawner">
+	<sprite id="724" name="Actor Spawner">
 		<value nybble="1-2" title="Triggering Event ID"/>
 		<list nybble="21" title="ID Type">
 			<entry value="0">Profile ID</entry>
@@ -26,10 +26,10 @@
 		<value nybble="19" title="Child Nybble 19"/>
 		<value nybble="20" title="Child Nybble 20"/>
 	</sprite>
-	<sprite id="178" name="Flip Block">
+	<sprite id="725" name="Flip Block">
 		<checkbox nybble="16" title="Place Behind Other Sprites"/>
 	</sprite>
-	<sprite id="538" name="Magic Platform">
+	<sprite id="726" name="Magic Platform">
 		<value nybble="11-12" title="Location ID"/>
 		<list nybble="10" title="Collider type">
 			<entry value="0">Solid</entry>

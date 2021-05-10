@@ -1,0 +1,121 @@
+
+---
+Files: [source/profile.cpp, source/profile.S]
+Hooks:
+  - type: branch
+    instr: b
+    addr: 0ebd9554
+    func: __ct__7ProfileFPFPC14ActorBuildInfo_P4BaseUiRCQ2_4sead23SafeStringBase__tm__2_cPC9ActorInfoT2
+
+  - type: branch
+    instr: b
+    addr: 0ebd9774
+    func: get__7ProfileSFUi
+
+  - type: branch
+    instr: b
+    addr: 0ebd9988
+    func: getPriority__7ProfileSFUi
+
+  - type: branch
+    instr: b
+    addr: 0ebd99a8
+    func: getHasResources__7ProfileSFUi
+
+  - type: branch
+    instr: b
+    addr: 0ebd99cc
+    func: getResourceCount__7ProfileSFUi
+
+  - type: branch
+    instr: b
+    addr: 0ebd99ec
+    func: getResourceList__7ProfileSFUi
+
+  - type: patch
+    addr: 0ebc501a
+    data: ffff
+
+  - type: patch
+    addr: 0ebc7c62
+    data: ffff
+
+  - type: patch
+    addr: 0ebc806e
+    data: ffff
+
+  - type: patch
+    addr: 0ebc8262
+    data: ffff
+
+  - type: patch
+    addr: 0ebc844e
+    data: ffff
+
+  - type: patch
+    addr: 0ebc457a
+    data: ffff
+
+  - type: patch
+    addr: 0ebd7388
+    data: 4e800020
+
+  - type: branch
+    instr: bl
+    addr: 0ebca89c
+    func: loadNumProfiles_r29
+
+  - type: branch
+    instr: bl
+    addr: 0ebca950
+    func: loadNumProfiles_r30
+
+  - type: branch
+    instr: bl
+    addr: 0ebc4da8
+    func: SpriteToProfileList_r3
+
+  - type: branch
+    instr: bl
+    addr: 0ebc4948
+    func: SpriteToProfileList_r3_2
+
+  - type: branch
+    instr: bl
+    addr: 0ebc4ff8
+    func: SpriteToProfileList_r19
+
+  - type: branch
+    instr: bl
+    addr: 0ebc4570
+    func: SpriteToProfileList_r22
+
+  - type: branch
+    instr: bl
+    addr: 0ebc7c50
+    func: SpriteToProfileList_r24
+
+  - type: branch
+    instr: bl
+    addr: 0ebc8064
+    func: SpriteToProfileList_r24
+
+  - type: branch
+    instr: bl
+    addr: 0ebc8258
+    func: SpriteToProfileList_r24
+
+  - type: branch
+    instr: bl
+    addr: 0ebc8440
+    func: SpriteToProfileList_r26
+
+  - type: branch
+    instr: bl
+    addr: 0ebca7ec
+    func: SpriteToProfileList_r30
+
+  - type: branch
+    instr: bl
+    addr: 0ebc8678
+    func: SpriteToProfileList_r31

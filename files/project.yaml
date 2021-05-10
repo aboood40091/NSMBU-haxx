@@ -9,5 +9,6 @@ Modules:
   - customactors.yaml
   - distantviewmgr.yaml
   - dynamic_libs.yaml
+  - profile.yaml
   - sead.yaml
   - sound.yaml

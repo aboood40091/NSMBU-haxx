@@ -8,9 +8,9 @@ Pre-built versions can be found in the `build` folder. Stable builds are in the 
 * NSMBW-style SFX reverb and delay  
 * Disabled Fast approximate anti-aliasing (FXAA)  
 * Fixed zone BG offsets  
-* Actor Spawner sprite (Replaces profile "Small4WayCannon", AKA sprite 177.)  
-* Flip Block sprite (Replaces profile "Giant4WayCannon", AKA sprite 178. Currently uses the Snake Block model.)  
-* Magic Platform sprite (Replaces profile "Cookie", AKA sprite 538.)  
+* Actor Spawner sprite (Added as sprite 724.)  
+* Flip Block sprite (Added as sprite 725. Currently uses the Snake Block model.)  
+* Magic Platform sprite (Added as sprite 726.)  
 
 ## Credits:
 * [RicBent](https://github.com/RicBent/codedx): Contribution to headers, original Actor Spawner and basic Magic Platform implementations  

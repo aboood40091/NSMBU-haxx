@@ -4,6 +4,7 @@
 #define nullptr NULL
 #define override
 #define forceinline __attribute__((always_inline))
+#define static_assert(condition, ...) typedef int static_assert_##__LINE__[(condition) ? 1 : -1]
 
 typedef unsigned char       u8;
 typedef unsigned short      u16;
@@ -31,4 +32,3 @@ enum Direction
     UP    = 2,
     DOWN  = 3
 };
-

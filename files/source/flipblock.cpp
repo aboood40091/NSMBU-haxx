@@ -5,7 +5,6 @@
 #include "playermgr.h"
 
 /*
-    Replaces Actor "Giant4WayCannon".
     Notes:
     * Currently uses the Snake Block model.
     * The flip block does not check if there
@@ -51,8 +50,8 @@ public:
 CREATE_STATE(FlipBlock, Flipping);
 
 const ActorInfo FlipBlockActorInfo = { 8, -16, 8, -8, 0x100, 0x100, 0, 0, 0, 0, ActorInfo::FlagUnknown };
-const Profile FlipBlockProfile(&FlipBlock::build, ProfileId::Giant4WayCannon, "FlipBlock", &FlipBlockActorInfo, 0x1002);
-PROFILE_RESOURCES(ProfileId::Giant4WayCannon, "block_snake");
+const Profile FlipBlockProfile(&FlipBlock::build, ProfileId::FlipBlock, "FlipBlock", &FlipBlockActorInfo, 0x1002);
+PROFILE_RESOURCES(ProfileId::FlipBlock, "block_snake");
 
 const ActiveCollider::Info FlipBlock::colliderInfo = { Vec2(0.0f, 8.0f), Vec2(8.0f, 8.0f), 0, 0, 0, 0, 0, 0, nullptr };
 

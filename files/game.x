@@ -56,12 +56,14 @@ SECTIONS {
 	cConvFuncTable__Q2_4sead6Endian = 0x10694BA8;
 
 	/* Profile */
-	__ct__7ProfileFPFPC14ActorBuildInfo_P4BaseUiRCQ2_4sead23SafeStringBase__tm__2_cPC9ActorInfoT2 = 0xEBD9554;
-	get__7ProfileSFUi = 0xEBD9774;
-	spriteToProfileList__7Profile = 0x106EEF8C;
+	profilesOriginal__7Profile = 0x106EFADC;
+	prioritiesOriginal__7Profile = 0x10503B40;
 	hasResourcesOriginal__7Profile = 0x10504264;
 	resourceCountOriginal__7Profile = 0x105045F8;
 	resourceListsOriginal__7Profile = 0x106C541C;
+
+	/* ActorInfo */
+	Default__9ActorInfo = 0x10503AF4;
 
 	/* ActorMgr */
 	instance__8ActorMgr = 0x106c52c8;

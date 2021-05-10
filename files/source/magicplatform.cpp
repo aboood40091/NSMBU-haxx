@@ -10,7 +10,6 @@
 #include "tile.h"
 
 /*
-    Replaces Actor "Cookie".
     TODO:
     * Add other solidity types.
 */
@@ -47,8 +46,7 @@ public:
 };
 
 const ActorInfo magicPlatformActorInfo = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ActorInfo::FlagIgnoreSpawnRange | ActorInfo::FlagUnknown };
-const Profile magicPlatformProfile(&MagicPlatform::build, ProfileId::Cookie, "MagicPlatform", &magicPlatformActorInfo, 0);
-PROFILE_RESOURCES(ProfileId::Cookie);
+const Profile magicPlatformProfile(&MagicPlatform::build, ProfileId::MagicPlatform, "MagicPlatform", &magicPlatformActorInfo, 0);
 
 // Ugh
 // Callback table, useful for squishing the player

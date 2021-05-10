@@ -4,10 +4,13 @@ namespace ProfileId {
 
 enum ProfileIdType
 {
-    Small4WayCannon = 115,
-    Giant4WayCannon,
+    NumOriginal = 913,
 
-    Cookie = 280
+    ActorSpawner = NumOriginal,
+    FlipBlock,
+    MagicPlatform,
+
+    Num
 };
 
 }
