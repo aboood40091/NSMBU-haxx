@@ -2,6 +2,18 @@
 
 #include "actor/base.h"
 
+class ActorBuffer
+{
+public:
+    Base* findActorWithId(u32* id);
+
+    sead::Buffer<Base*> buffer;
+    u32 usedCount;
+    Base** last;
+    u32 _10;
+    u8 _14;
+};
+
 class ActorMgr
 {
 public:
@@ -13,5 +25,16 @@ public:
 
     static ActorMgr* instance;
 
+    sead::IDisposer disposer;
+    sead::UnitHeap* playerUnitHeap;
+    sead::UnitHeap* actorUnitHeap;
+    u8 deferredActorCreations[0x5970]; // sead::FixedRingBuffer<ActorBuildInfo, 520>
+    Base::ActorList actorsToCreate;
+    Base::ActorList actorsToDelete;
+    Base::ActorList activeActors;
+    Base::ActorList drawableActors;
+    sead::FixedPtrArray<sead::Heap, 520> deletedActorHeaps;
+    sead::FixedPtrArray<Base, 520> finalExecuteList;
+    ActorBuffer actors;
     // ...
 };

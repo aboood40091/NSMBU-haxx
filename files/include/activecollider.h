@@ -97,3 +97,37 @@ public:
     f32 _B0[0xF];
     f32 _EC[0xF];
 };
+
+
+class ActiveColliderMgr : public sead::IDisposer    // size: 0x40
+{
+public:
+    bool isInActiveList(ActiveCollider* aCollider);
+    void removeFromActiveList(ActiveCollider* aCollider);
+
+    bool isInCreateList(ActiveCollider* aCollider);
+    void addToCreateList(ActiveCollider* aCollider);
+    void removeFromCreateList(ActiveCollider* aCollider);
+
+    void removeFromList3(ActiveCollider* aCollider);
+
+    inline void add(ActiveCollider* aCollider)
+    {
+        if (!isInActiveList(aCollider) && !isInCreateList(aCollider))
+            addToCreateList(aCollider);
+    }
+
+    inline void remove(ActiveCollider* aCollider)
+    {
+        removeFromActiveList(aCollider);
+        removeFromCreateList(aCollider);
+        removeFromList3(aCollider);
+    }
+
+    static ActiveColliderMgr* instance;
+
+    ActiveCollider::List activeList;    // 10
+    ActiveCollider::List createList;    // 1C
+    ActiveCollider::List list3;         // 28
+    ActiveCollider::List list4;         // 34
+};
