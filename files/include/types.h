@@ -4,7 +4,12 @@
 #define nullptr NULL
 #define override
 #define forceinline __attribute__((always_inline))
-#define static_assert(condition, ...) typedef int static_assert_##__LINE__[(condition) ? 1 : -1]
+
+// https://stackoverflow.com/a/1597129
+#define TOKENPASTE(x, y) x ## y
+#define TOKENPASTE2(x, y) TOKENPASTE(x, y)
+
+#define static_assert(condition, ...) typedef int TOKENPASTE2(static_assert_, __LINE__)[(condition) ? 1 : -1]
 
 typedef unsigned char       u8;
 typedef unsigned short      u16;
