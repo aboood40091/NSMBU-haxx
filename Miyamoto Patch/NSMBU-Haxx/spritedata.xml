@@ -111,4 +111,7 @@
 		</list>
 		<value nybble="21-22" title="Movement ID"/>
 	</sprite>
+	<sprite id="727" name="Effect Player (Emitter Sets)">
+		<checkbox nybble="12" title="Rotate X and Y By 90 degrees"/>
+	</sprite>
 </sprites>

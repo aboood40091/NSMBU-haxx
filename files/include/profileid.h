@@ -9,6 +9,7 @@ enum ProfileIdType
     ActorSpawner = NumOriginal,
     FlipBlock,
     MagicPlatform,
+    EffectPlayer,
 
     Num
 };

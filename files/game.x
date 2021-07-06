@@ -4,11 +4,11 @@
 SECTIONS {
 
 	/* Math */
-	sin__Ff = 0xf6bdd40;
-	cos__Ff = 0xf6be528;
-	atan2__FfT1 = 0xf6be670;
-	pow__FfT1 = 0xF6BDEA8;
-	sqrt__Ff = 0xF6BDCCC;
+	sinf__Ff = 0xf6bdd40;
+	cosf__Ff = 0xf6be528;
+	atan2f__FfT1 = 0xf6be670;
+	powf__FfT1 = 0xF6BDEA8;
+	sqrtf__Ff = 0xF6BDCCC;
 
 	/* new/delete */
 	__nw__FUi = 0xF5B1594;
@@ -21,6 +21,22 @@ SECTIONS {
 	__pure_virtual_called = 0xF6BA554;
 	__deleted_virtual_called = 0xf6ba5e8;
 	__vec_new = 0xF6BA350;
+
+	/* GHS C FUNCTIONS */
+	_f_ftoll = 0xF6BEBFC;
+
+	/* nw::eft::EmitterSet */
+	SetMtx__Q3_2nw3eft10EmitterSetFRCQ3_2nw4math5MTX34 = 0xF62AD00;
+
+	/* nw::eft::System */
+	CreateEmitterSetID__Q3_2nw3eft6SystemFPQ3_2nw3eft6HandleRCQ3_2nw4math5MTX34iUiUcT4 = 0xF63F57C;
+
+	/* nw::math */
+	F_PI__Q2_2nw4math = 0x106B82FC;
+	I_HALF_ROUND_IDX__Q2_2nw4math = 0x106B8300;
+
+	/* nw::math::internal */
+	gSinCosTbl__Q3_2nw4math8internal = 0x106B830C;
 
 	/* sead::IDisposer */
 	__ct__Q2_4sead9IDisposerFv = 0xF5CA2FC;
@@ -385,6 +401,19 @@ SECTIONS {
 	cbCallback5__14TwoWayPlatformSFP5Actor = 0xF3FFBE0;
 	cbCallback6__14TwoWayPlatformSFP5ActorUiT2 = 0xF3FFC14;
 	twoWayPlatformCbCallback2__14TwoWayPlatformFP12ColliderBaseP4Vec2 = 0xF40184C;
+
+	/* PtclMgr */
+	instance__7PtclMgr = 0x106CF5A8;
+	getEmitterSetGroupID__7PtclMgrCFiUi = 0xEE6CE58;
+
+	/* PlayerInput */
+	isDownPressed__11PlayerInputCFv = 0xF4D6114;
+	isDownHeld__11PlayerInputCFv = 0xF4D5F84;
+	isOnlyDownHeld__11PlayerInputCFv = 0xF4D644C;
+	isUpPressed__11PlayerInputCFv = 0xF4D6108;
+	isUpHeld__11PlayerInputCFv = 0xF4D5F78;
+	isRightHeld__11PlayerInputCFv = 0xF4D5F9C;
+	isLeftHeld__11PlayerInputCFv = 0xF4D5F90;
 
 	/* Misc */
 	ASM_MTXConcat = 0xF6B98A0;

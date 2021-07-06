@@ -30,6 +30,8 @@ typedef signed int          ssize_t;
 typedef unsigned int        uintptr_t;
 typedef signed int          intptr_t;
 
+typedef int BOOL;
+
 enum Direction
 {
     RIGHT = 0,
