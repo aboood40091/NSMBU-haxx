@@ -28,6 +28,10 @@ SECTIONS {
 	/* nw::eft::EmitterSet */
 	SetMtx__Q3_2nw3eft10EmitterSetFRCQ3_2nw4math5MTX34 = 0xF62AD00;
 
+	/* nw::eft::Random */
+	__LSG__a__L0__Init__Q3_2nw3eft6RandomFUi = 0x106EBE88;
+	a__L0__Init__Q3_2nw3eft6RandomFUi = 0x106EDE7C;
+
 	/* nw::eft::System */
 	CreateEmitterSetID__Q3_2nw3eft6SystemFPQ3_2nw3eft6HandleRCQ3_2nw4math5MTX34iUiUcT4 = 0xF63F57C;
 
@@ -38,20 +42,33 @@ SECTIONS {
 	/* nw::math::internal */
 	gSinCosTbl__Q3_2nw4math8internal = 0x106B830C;
 
-	/* sead::IDisposer */
-	__ct__Q2_4sead9IDisposerFv = 0xF5CA2FC;
-	__dt__Q2_4sead9IDisposerFv = 0xf5ca384;
+	/* nw::math::MTX34 */
+	__LSG__identity__L0__Identity__Q3_2nw4math5MTX34SFv = 0x106EBA08;
+	identity__L0__Identity__Q3_2nw4math5MTX34SFv = 0x106EC9D8;
 
-	/* sead::PrimitiveRenderer */
-	instance__Q2_4sead17PrimitiveRenderer = 0x106EA210;
-	setCamera__Q2_4sead17PrimitiveRendererFRCQ2_4sead6Camera = 0xF5C83D0;
-	setProjection__Q2_4sead17PrimitiveRendererFRCQ2_4sead10Projection = 0xF5C83E4;
-	begin__Q2_4sead17PrimitiveRendererFv = 0xF5C8408;
-	end__Q2_4sead17PrimitiveRendererFv = 0xF5C841C;
+	/* nw::math::MTX44 */
+	__LSG__identity__L0__Identity__Q3_2nw4math5MTX44SFv = 0x106EBA0C;
+	identity__L0__Identity__Q3_2nw4math5MTX44SFv = 0x106EDED0;
 
-	/* sead::HeapMgr */
-	sInstancePtr__Q2_4sead7HeapMgr = 0x106EA240;
-	getCurrentHeap__Q2_4sead7HeapMgrFv = 0xF5CD554;
+	/* nw::math::VEC2 */
+	__LSG__zero__L0__Zero__Q3_2nw4math4VEC2SFv = 0x106EB9EC;
+	zero__L0__Zero__Q3_2nw4math4VEC2SFv = 0x106EDE74;
+
+	/* nw::math::VEC3 */
+	__LSG__zero__L0__Zero__Q3_2nw4math4VEC3SFv = 0x106EB9F0;
+	zero__L0__Zero__Q3_2nw4math4VEC3SFv = 0x106ED104;
+
+	/* sead::Camera */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead6CameraSFv = 0x106EBD88;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead6CameraSFv = 0x106EDE10;
+
+	/* sead::DirectResource */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EBDB8;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EC118;
+
+	/* sead::Endian */
+	cHostEndian__Q2_4sead6Endian = 0x10AECC78;
+	cConvFuncTable__Q2_4sead6Endian = 0x10694BA8;
 
 	/* sead::FileDevice */
 	__CPR122__tryOpen__Q2_4sead10FileDeviceFPQ2_J12J10FileHandleRCQ2_J12J23SafeStringBase__tm__2_cQ3_J12JJ17J12FileOpenFlagUi = 0xF5B7804;
@@ -64,6 +81,33 @@ SECTIONS {
 	/* sead::FileHandle */
 	read__Q2_4sead10FileHandleFPUcUi = 0xF5B81D0;
 
+	/* sead::Heap */
+	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead4HeapSFv */
+	/* typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead4HeapSFv */
+
+	/* sead::HeapMgr */
+	sInstancePtr__Q2_4sead7HeapMgr = 0x106EA240;
+	getCurrentHeap__Q2_4sead7HeapMgrFv = 0xF5CD554;
+
+	/* sead::IDisposer */
+	__ct__Q2_4sead9IDisposerFv = 0xF5CA2FC;
+	__dt__Q2_4sead9IDisposerFv = 0xf5ca384;
+
+	/* sead::PrimitiveRenderer */
+	instance__Q2_4sead17PrimitiveRenderer = 0x106EA210;
+	setCamera__Q2_4sead17PrimitiveRendererFRCQ2_4sead6Camera = 0xF5C83D0;
+	setProjection__Q2_4sead17PrimitiveRendererFRCQ2_4sead10Projection = 0xF5C83E4;
+	begin__Q2_4sead17PrimitiveRendererFv = 0xF5C8408;
+	end__Q2_4sead17PrimitiveRendererFv = 0xF5C841C;
+
+	/* sead::Projection */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead10ProjectionSFv = 0x106EBD74;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead10ProjectionSFv = 0x106ECA08;
+
+	/* sead::Resource */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8ResourceSFv = 0x106EBDB4;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8ResourceSFv = 0x106EC114;
+
 	/* sead::SZSDecompressor */
 	getDecompSize__Q2_4sead15SZSDecompressorSFPCv = 0xF5D54CC;
 	getDecompAlignment__Q2_4sead15SZSDecompressorSFPCv = 0xF5D5AA0;
@@ -73,13 +117,9 @@ SECTIONS {
 	/* sead::SZSDecompressor::DecompContext */
 	__ct__Q3_4sead15SZSDecompressor13DecompContextFPv = 0xF5D5AF4;
 
-	/* sead::DirectResource */
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EBDB8;
-	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EC118;
-
-	/* sead::Endian */
-	cHostEndian__Q2_4sead6Endian = 0x10AECC78;
-	cConvFuncTable__Q2_4sead6Endian = 0x10694BA8;
+	/* sead::UnitHeap */
+	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8UnitHeapSFv */
+	/* typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8UnitHeapSFv */
 
 	/* Profile */
 	profilesOriginal__7Profile = 0x106EFADC;
@@ -161,6 +201,8 @@ SECTIONS {
 
 	/* BlockCoinBase */
 	__vtbl__13BlockCoinBase = 0x10603c80;
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__13BlockCoinBaseSFv = 0x106EBEA4;
+	typeInfo__L0__getRuntimeTypeInfoStatic__13BlockCoinBaseSFv = 0x106EBEA8;
 	StateID_BlockCoinState3__13BlockCoinBase = 0x10722764;
 	StateID_BumpUp2__13BlockCoinBase = 0x1072271C;
 	checkDerivedRuntimeTypeInfo__13BlockCoinBaseCFPCQ3_4sead15RuntimeTypeInfo9Interface = 0xf2c8dc0;
@@ -206,6 +248,8 @@ SECTIONS {
 
 	/* MovementBlockCoinBase */
 	__vtbl__21MovementBlockCoinBase = 0x106097ac;
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__21MovementBlockCoinBaseSFv = 0x106EBEEC;
+	typeInfo__L0__getRuntimeTypeInfoStatic__21MovementBlockCoinBaseSFv = 0x106EBEF0;
 	checkDerivedRuntimeTypeInfo__21MovementBlockCoinBaseCFPCQ3_4sead15RuntimeTypeInfo9Interface = 0xf2e7a08;
 	spawnItemUp__21MovementBlockCoinBaseFv = 0xf2e6610;
 	spawnItemDown__21MovementBlockCoinBaseFv = 0xf2e6634;
@@ -293,6 +337,8 @@ SECTIONS {
 
 	/* RectCollider */
 	__vtbl__12RectCollider = 0x105FDA20;
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__12RectColliderSFv = 0x106EBF38;
+	typeInfo__L0__getRuntimeTypeInfoStatic__12RectColliderSFv = 0x106EC1BC;
 
 	/* SolidOnTopCollider */
 	__ct__18SolidOnTopColliderFv = 0xED61D38;
@@ -320,11 +366,17 @@ SECTIONS {
 	changeState__8StateMgrFP9StateBase = 0xF584AF0;
 
 	/* CollisionMgr */
+	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__12CollisionMgrSFv */
+	/* typeInfo__L0__getRuntimeTypeInfoStatic__12CollisionMgrSFv */
 	__dt__12CollisionMgrFv = 0xED4ADFC;
 	init__12CollisionMgrFP5ActorPCQ2_12CollisionMgr6SensorN22 = 0xED4AF6C;
 	setSensor__12CollisionMgrFPCQ2_12CollisionMgr6SensorUi = 0xED4AEFC;
 	getSensor__12CollisionMgrCFUi = 0xED4CE74;
 	process__12CollisionMgrFv = 0xED4D954;
+
+	/* ActorCollisionMgr */
+	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__17ActorCollisionMgrSFv */
+	/* typeInfo__L0__getRuntimeTypeInfoStatic__17ActorCollisionMgrSFv */
 
 	/* EventMgr */
 	instance__8EventMgr = 0x106dd26c;
@@ -414,6 +466,22 @@ SECTIONS {
 	isUpHeld__11PlayerInputCFv = 0xF4D5F78;
 	isRightHeld__11PlayerInputCFv = 0xF4D5F9C;
 	isLeftHeld__11PlayerInputCFv = 0xF4D5F90;
+
+	/* LayerAgl::Node */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8LayerAgl4NodeSFv = 0x106EBF00;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8LayerAgl4NodeSFv = 0x106EC194;
+
+	/* ObjLayer::Node */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8ObjLayer4NodeSFv = 0x106EBF04;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8ObjLayer4NodeSFv = 0x106EC198;
+
+	/* RenderObjLayer::Node */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EBF08;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EC19C;
+
+	/* Model */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC178;
+	typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC1A0;
 
 	/* Misc */
 	ASM_MTXConcat = 0xF6B98A0;
