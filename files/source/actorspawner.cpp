@@ -44,7 +44,7 @@ u32 ActorSpawner::onCreate()
 
 u32 ActorSpawner::onExecute()
 {
-    if (EventMgr::instance->isActive(eventId2-1))
+    if (EventMgr::instance()->isActive(eventId2-1))
     {
         if (!spawned)
         {

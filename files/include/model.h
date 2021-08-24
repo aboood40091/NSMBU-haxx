@@ -1,5 +1,7 @@
 #pragma once
 
+#include <container/seadBuffer.h>
+
 #include "renderobjlayer.h"
 #include "resarchive.h"
 

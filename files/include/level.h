@@ -1,11 +1,14 @@
 #pragma once
 
+#include <heap/seadDisposer.h>
+
 #include "util/rect.h"
-#include "sead.h"
 
 
-class Level : public sead::IDisposer
+class Level
 {
+    SEAD_SINGLETON_DISPOSER(Level)
+
 public:
 
     class Area
@@ -93,17 +96,15 @@ public:
 
     Area* getArea(u32 id);
 
-    static Level* instance;
-
     Area areas[4];
 };
 
 
-class LevelInfo : public sead::IDisposer
+class LevelInfo
 {
-public:
-    static LevelInfo* instance;
+    SEAD_SINGLETON_DISPOSER(LevelInfo)
 
+public:
     u8 world;                   // 10
     u8 level;                   // 11
     u8 area;                    // 12

@@ -13,5 +13,10 @@ Pre-built versions can be found in the `build` folder. Stable builds are in the 
 * Magic Platform sprite (Added as sprite 726.)  
 
 ## Credits:
-* [RicBent](https://github.com/RicBent/codedx): Contribution to headers, original Actor Spawner and basic Magic Platform implementations  
+### Libraries:
+* [NW4F Eft](https://github.com/open-ead/NW4F-Eft/tree/nsmbu) - NintendoWare for Cafe Effect Library.
+* [SEAD](https://github.com/aboood40091/sead) - Nintendo EAD Standard Library.
 * Modified dynamic_libs to work with this project, based on original implementation by dimok and [Maschell fork](https://github.com/Maschell/dynamic_libs)  
+
+### Special thanks:
+* [RicBent](https://github.com/RicBent/codedx): Contribution to headers, original Actor Spawner and basic Magic Platform implementations  

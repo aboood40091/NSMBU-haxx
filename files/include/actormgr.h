@@ -1,5 +1,9 @@
 #pragma once
 
+#include <container/seadBuffer.h>
+#include <container/seadPtrArray.h>
+#include <heap/seadDisposer.h>
+
 #include "actor/base.h"
 
 class ActorBuffer

@@ -1,9 +1,10 @@
 #pragma once
 
+#include <prim/seadRuntimeTypeInfo.h>
+
 #include "actormultistate.h"
 #include "collider.h"
 #include "movementhandler.h"
-#include "sead.h"
 #include "states.h"
 
 class BlockCoinBase : public ActorMultiState

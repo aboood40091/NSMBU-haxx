@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util/vec3u.h"
+#include "util/vec.h"
 #include "base.h"
 #include "activecollider.h"
 #include "eatdata.h"

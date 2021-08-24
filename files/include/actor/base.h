@@ -1,13 +1,14 @@
 #pragma once
 
-#include "util/vec2i.h"
-#include "util/vec3.h"
-#include "sead.h"
+#include <container/seadOffsetList.h>
+#include <heap/seadHeap.h>
+#include <prim/seadRuntimeTypeInfo.h>
+
+#include "util/vec.h"
 #include "profile.h"
 
-class ActorInfo
+struct ActorInfo
 {
-public:
     enum Flags
     {
         FlagIgnoreSpawnRange = 0x002,
@@ -16,11 +17,9 @@ public:
         FlagUnknown2         = 0x100
     };
 
-public:
     static ActorInfo Default;
 
-    s32 xoffs;                    // 0
-    s32 yoffs;                    // 4
+    Vec2i offset;                 // 0
     Vec2i spawnRangeOffset;       // 8
     Vec2i spawnRangeSize;         // 10
     u16 _18;                      // 18

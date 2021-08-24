@@ -1,5 +1,6 @@
 #include "actor/blockbase.h"
 #include "actor/player.h"
+#include "activecollider.hpp"
 #include "drawmgr.h"
 #include "model.h"
 #include "playermgr.h"
@@ -49,7 +50,7 @@ public:
 
 CREATE_STATE(FlipBlock, Flipping);
 
-const ActorInfo FlipBlockActorInfo = { 8, -16, 8, -8, 0x100, 0x100, 0, 0, 0, 0, ActorInfo::FlagUnknown };
+const ActorInfo FlipBlockActorInfo = { Vec2i(8, -16), Vec2i(8, -8), Vec2i(0x100, 0x100), 0, 0, 0, 0, ActorInfo::FlagUnknown };
 const Profile FlipBlockProfile(&FlipBlock::build, ProfileId::FlipBlock, "FlipBlock", &FlipBlockActorInfo, 0x1002);
 PROFILE_RESOURCES(ProfileId::FlipBlock, "block_snake");
 
@@ -170,7 +171,7 @@ void FlipBlock::destroy2()
 void FlipBlock::beginState_Flipping()
 {
     flipsRemaining = 7;
-    ColliderMgr::instance->remove(&rectCollider);
+    ColliderMgr::instance()->remove(&rectCollider);
 }
 
 void FlipBlock::executeState_Flipping()
@@ -198,7 +199,7 @@ void FlipBlock::updateModel()
 {
     Vec3 pos(position.x, position.y + 8.0f, position.z);
     Mtx34 mtx;
-    mtx.rotateAndTranslate(rotation, pos);
+    mtx.makeRTIdx(rotation, pos);
 
     model->setMtx(mtx);
     model->updateModel();
@@ -213,9 +214,9 @@ bool FlipBlock::playerOverlaps()
 
     for (s32 i = 0; i < 4; i++)
     {
-        if (PlayerMgr::instance->playerFlags & playerActiveMask)
+        if (PlayerMgr::instance()->playerFlags & playerActiveMask)
         {
-            player = PlayerMgr::instance->players[i];
+            player = PlayerMgr::instance()->players[i];
             if (player != nullptr)
                 overlaps = ActiveCollider::collidersOverlap(&this->aCollider, &player->aCollider);
         }

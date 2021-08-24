@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util/vec2.h"
+#include "util/vec.h"
 
 class TileCheck
 {

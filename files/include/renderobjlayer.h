@@ -1,8 +1,10 @@
 #pragma once
 
+#include <heap/seadDisposer.h>
+#include <prim/seadSafeString.h>
+
 #include "nw/g3d.h"
 #include "objlayer.h"
-#include "sead.h"
 
 class SkeletalAnimation;
 class TextureAnimation;

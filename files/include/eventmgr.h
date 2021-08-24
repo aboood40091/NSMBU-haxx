@@ -1,9 +1,11 @@
 #pragma once
 
-#include "sead.h"
+#include <heap/seadDisposer.h>
 
 class EventMgr
 {
+    SEAD_SINGLETON_DISPOSER(EventMgr)
+
 public:
     void set(u32 id, u32 time, bool active, u32 unk1 = 0, u32 unk2 = 0, u32 unk3 = 0, u32 unk4 = 0);
 
@@ -22,9 +24,6 @@ public:
         return (events & mask(id)) == 0;
     }
 
-    static EventMgr* instance;
-
-    sead::IDisposer disposer;
     u64 events;
     u8 _unk18[0x940-0x18];
 };

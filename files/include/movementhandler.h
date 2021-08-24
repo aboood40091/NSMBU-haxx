@@ -1,7 +1,7 @@
 #pragma once
 
+#include "util/vec.h"
 #include "states.h"
-#include "util/vec3.h"
 
 class MovementHandler
 {

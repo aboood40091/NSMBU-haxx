@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util/vec3.h"
+#include "util/vec.h"
 
 class YoshiEatData
 {

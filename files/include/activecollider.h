@@ -1,8 +1,9 @@
 #pragma once
 
+#include <heap/seadDisposer.h>
+
 #include "util/rect.h"
-#include "util/vec2.h"
-#include "sead.h"
+#include "util/vec.h"
 
 class Actor;
 
@@ -68,9 +69,8 @@ public:
     f32 getCenterX();
     f32 getCenterY();
 
-
-    void getRect(Rect& outRect);
-    static bool collidersOverlap(ActiveCollider* acSelf, ActiveCollider* acOther);
+    void getRect(Rect& outRect) const;
+    static bool collidersOverlap(const ActiveCollider* acSelf, const ActiveCollider* acOther);
 
     List::Node activeNode;  // 10
     List::Node createNode;  // 1C

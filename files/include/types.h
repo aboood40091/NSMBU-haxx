@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 // Workarounds to match newer standards
 #define nullptr NULL
 #define override
@@ -30,7 +32,9 @@ typedef signed int          ssize_t;
 typedef unsigned int        uintptr_t;
 typedef signed int          intptr_t;
 
-typedef int BOOL;
+typedef wchar_t             char16;
+
+typedef int                 BOOL;
 
 enum Direction
 {

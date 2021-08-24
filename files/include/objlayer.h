@@ -1,7 +1,6 @@
 #pragma once
 
-#include "util/mtx34.h"
-#include "util/mtx44.h"
+#include "util/mtx.h"
 #include "layeragl.h"
 
 class ObjLayerRenderer;

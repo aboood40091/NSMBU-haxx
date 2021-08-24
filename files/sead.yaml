@@ -9,10 +9,13 @@ Hooks:
     addr: 0106A5F7C
     func: tryDecompFromDevice__Q2_4sead15SZSDecompressorFRCQ3_4sead11ResourceMgr7LoadArgPQ2_4sead8ResourcePUiT3Pb
 
-  # Restoration of sead::PrimitiveRendererCafe's deleted drawCircle16Impl and drawCircle32Impl
+  # Restoration of sead::PrimitiveRendererCafe's deleted drawLineImpl, drawCircle16Impl and drawCircle32Impl
+  - type: funcptr
+    addr: 01069315C
+    func: drawLineImpl__Q2_4sead21PrimitiveRendererCafeFRCQ2_4sead17Matrix34__tm__2_fRCQ2_4sead7Color4fT2
   - type: funcptr
     addr: 010693184
-    func: drawCircle16Impl__Q2_4sead21PrimitiveRendererCafeFRC5Mtx34RCQ2_4sead7Color4f
+    func: drawCircle16Impl__Q2_4sead21PrimitiveRendererCafeFRCQ2_4sead17Matrix34__tm__2_fRCQ2_4sead7Color4f
   - type: funcptr
     addr: 01069318C
-    func: drawCircle32Impl__Q2_4sead21PrimitiveRendererCafeFRC5Mtx34RCQ2_4sead7Color4f
+    func: drawCircle32Impl__Q2_4sead21PrimitiveRendererCafeFRCQ2_4sead17Matrix34__tm__2_fRCQ2_4sead7Color4f

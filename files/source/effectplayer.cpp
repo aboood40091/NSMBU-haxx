@@ -124,7 +124,7 @@ u32 EffectPlayer::onCreate()
 
 u32 EffectPlayer::onExecute()
 {
-    s32 numEmitterSet = PtclMgr::instance->system->resources[0]->resource->numEmitterSet;
+    s32 numEmitterSet = PtclMgr::instance()->system->resources[0]->resource->numEmitterSet;
     if (numEmitterSet < 1 || currentEmitterSetID >= numEmitterSet)
     {
 failure:
@@ -135,8 +135,8 @@ failure:
     }
 
     const Player* player1 = nullptr;
-    if (PlayerMgr::instance->playerFlags & 1)
-        player1 = PlayerMgr::instance->players[0];
+    if (PlayerMgr::instance()->playerFlags & 1)
+        player1 = PlayerMgr::instance()->players[0];
 
     if (player1 == nullptr)
         goto update;
@@ -163,7 +163,7 @@ failure:
 
     killEffect();
 
-    if (!PtclMgr::instance->system->CreateEmitterSetID(&effectHandle, nw::math::MTX34::Identity(), currentEmitterSetID, 0, PtclMgr::instance->getEmitterSetGroupID(currentEmitterSetID, 0), 0xFFFFFFFF))
+    if (!PtclMgr::instance()->system->CreateEmitterSetID(&effectHandle, nw::math::MTX34::Identity(), currentEmitterSetID, 0, PtclMgr::instance()->getEmitterSetGroupID(currentEmitterSetID, 0), 0xFFFFFFFF))
         goto failure;
 
     LOG("Create succeeded")

@@ -1,14 +1,14 @@
 #pragma once
 
+#include <heap/seadDisposer.h>
+
 #include "actor/player.h"
-#include "sead.h"
 
-
-class PlayerMgr : public sead::IDisposer
+class PlayerMgr
 {
-public:
-    static PlayerMgr* instance;
+    SEAD_SINGLETON_DISPOSER(PlayerMgr)
 
+public:
     u32 _10;
     u32 _14;
     u32 _18;

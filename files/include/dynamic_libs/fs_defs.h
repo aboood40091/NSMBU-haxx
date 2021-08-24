@@ -84,6 +84,14 @@ typedef struct FSAsyncResult_ {
     u32                 result;
 } FSAsyncResult;
 
+typedef enum {
+} FSVolumeState;
+
+typedef s32 FSFileHandle;
+typedef s32 FSDirHandle;
+typedef s32 FSStatus;
+typedef u32 FSRetFlag;
+
 #ifdef __cplusplus
 }
 #endif

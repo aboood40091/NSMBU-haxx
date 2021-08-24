@@ -12,7 +12,7 @@ void AreaTask::readHaxxOptions()
 {
     this->wrapFlag = 0;
 
-    Level::Area* area = Level::instance->getArea(LevelInfo::instance->area);
+    Level::Area* area = Level::instance()->getArea(LevelInfo::instance()->area);
     Level::Area::Options* areaOptions = reinterpret_cast<Level::Area::Options*>(area->blocks[1]);
 
     if (areaOptions->wrapByte & 1)
@@ -39,37 +39,25 @@ void AreaTask::readHaxxOptions()
 
 #define COLLISION_DRAW_DIAGONAL 0
 
+#include <gfx/seadPrimitiveRenderer.h>
+
 #include "agl/renderinfo.h"
+#include "activecollider.hpp"
 #include "actormgr.h"
 #include "collider.h"
 #include "collisionmgr.h"
-#include "math.h"
+//#include "math.h"
 
 #include "log.h"
 
-void drawLine(const Vec2& position, const f32 rotation, const sead::Color4f& color, const float lineLength, const float lineThickness)
+static inline void drawLine(const Vec2& point1, const Vec2& point2, const sead::Color4f& color, const float lineThickness)
 {
-    Vec3 scale(lineLength, lineThickness, 1.0f);
-    Vec3 rot(0.0f, 0.0f, rotation);
-    Vec3 pos(position.x + (lineLength * cosf(rotation)) / 2, position.y + (lineLength * sinf(rotation)) / 2, 4000.f);
-
-    Mtx34 mtx;
-    Mtx34::makeSRT(mtx, scale, rot, pos);
-    sead::PrimitiveRenderer::instance->mRendererImpl->drawQuadImpl(mtx, color, color);
+    // TODO: Line thickness
+    Vec3 _p1(point1.x, point1.y, 4000.f);
+    Vec3 _p2(point2.x, point2.y, 4000.f);
+    sead::PrimitiveRenderer::instance()->drawLine(_p1, _p2, color, color);
 }
 
-void drawLine(const Vec2& point1, const Vec2& point2, const sead::Color4f& color, const float lineThickness)
-{
-    const f32 diffX = point1.x - point2.x;
-    const f32 diffY = point1.y - point2.y;
-    f32 length = sqrtf(diffX*diffX + diffY*diffY);
-
-    const Vec2& leftPoint = (point1.x < point2.x) ? point1 : point2;
-    const Vec2& rightPoint = (&leftPoint == &point1) ? point2 : point1;
-    f32 angle = atan2f(rightPoint.y - leftPoint.y, rightPoint.x - leftPoint.x);
-
-    drawLine(leftPoint, angle, color, length, lineThickness);
-}
 #endif // COLLISION_DRAW
 
 void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
@@ -77,9 +65,9 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
     drawLayer3D(renderInfo);
 
 #if COLLISION_DRAW
-    sead::PrimitiveRenderer::instance->setCamera(*renderInfo.camera);
-    sead::PrimitiveRenderer::instance->setProjection(*renderInfo.projection);
-    sead::PrimitiveRenderer::instance->begin();
+    sead::PrimitiveRenderer::instance()->setCamera(*renderInfo.camera);
+    sead::PrimitiveRenderer::instance()->setProjection(*renderInfo.projection);
+    sead::PrimitiveRenderer::instance()->begin();
 
     static const sead::Color4f colorRed(1.0f, 0.0f, 0.0f, 1.0f);
     static const sead::Color4f colorGreen(0.0f, 1.0f, 0.0f, 1.0f);
@@ -103,10 +91,10 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
 
             if (aCollider->info.shape == ActiveCollider::ShapeRectangle)
             {
-                Vec2 point1(rect.left, rect.top);
-                Vec2 point2(rect.right, rect.top);
-                Vec2 point3(rect.right, rect.bottom);
-                Vec2 point4(rect.left, rect.bottom);
+                Vec2 point1 = rect.getTL();
+                Vec2 point2 = rect.getTR();
+                Vec2 point3 = rect.getBR();
+                Vec2 point4 = rect.getBL();
 
                 drawLine(point1, point2, colorRed, 1.0f);
                 drawLine(point2, point3, colorRed, 1.0f);
@@ -119,11 +107,18 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
 
             else if (aCollider->info.shape == ActiveCollider::ShapeCircle)
             {
-                f32 radius = (rect.right - rect.left) / 2.0f;
+                f32 radiusX = rect.getHalfSizeX();
+                f32 radiusY = rect.getHalfSizeY();
+                const Vec2& bl = rect.getMin();
 
-                sead::PrimitiveRenderer::instance->drawCircle32(
-                    Vec3(rect.left + radius, rect.bottom + radius, 4000.f),
-                    radius, colorRed
+                if (radiusX != radiusY)
+                {
+                    LOG("WARNING: radiusX != radiusY; actor id: 0x%x, profile id: 0x%x\n", aCollider->owner->id, aCollider->owner->profile->id)
+                }
+
+                sead::PrimitiveRenderer::instance()->drawCircle32(
+                    Vec3(bl.x + radiusX, bl.y + radiusX, 4000.f),
+                    radiusX, colorRed
                 );
             }
         }
@@ -142,10 +137,10 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
 
         if (aCollider->info.shape == ActiveCollider::ShapeRectangle)
         {
-            Vec2 point1(rect.left, rect.top);
-            Vec2 point2(rect.right, rect.top);
-            Vec2 point3(rect.right, rect.bottom);
-            Vec2 point4(rect.left, rect.bottom);
+            Vec2 point1 = rect.getTL();
+            Vec2 point2 = rect.getTR();
+            Vec2 point3 = rect.getBR();
+            Vec2 point4 = rect.getBL();
 
             drawLine(point1, point2, colorRed, 1.0f);
             drawLine(point2, point3, colorRed, 1.0f);
@@ -158,18 +153,25 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
 
         else if (aCollider->info.shape == ActiveCollider::ShapeCircle)
         {
-            f32 radius = (rect.right - rect.left) / 2.0f;
+            f32 radiusX = rect.getHalfSizeX();
+            f32 radiusY = rect.getHalfSizeY();
+            const Vec2& bl = rect.getMin();
 
-            sead::PrimitiveRenderer::instance->drawCircle32(
-                Vec3(rect.left + radius, rect.bottom + radius, 4000.f),
-                radius, colorRed
+            if (radiusX != radiusY)
+            {
+                LOG("WARNING: radiusX != radiusY; actor id: 0x%x, profile id: 0x%x\n", aCollider->owner->id, aCollider->owner->profile->id)
+            }
+
+            sead::PrimitiveRenderer::instance()->drawCircle32(
+                Vec3(bl.x + radiusX, bl.y + radiusX, 4000.f),
+                radiusX, colorRed
             );
         }
 
         aColliderNode = aColliderNode->next;
     }
 
-    ColliderBase::List* activeList = &ColliderMgr::instance->lists[0];
+    ColliderBase::List* activeList = &ColliderMgr::instance()->lists[0];
     ColliderBase::List::Node* node = activeList->first;
 
     while (node != nullptr)
@@ -179,7 +181,7 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
         {
             CircularCollider* collider = static_cast<CircularCollider*>(colliderBase);
 
-            sead::PrimitiveRenderer::instance->drawCircle32(
+            sead::PrimitiveRenderer::instance()->drawCircle32(
                 Vec3(collider->ownerInfo.position->x + collider->distToCenter.x + collider->_160.x, collider->ownerInfo.position->y + collider->distToCenter.y + collider->_160.y, 4000.f),
                 collider->radius, colorBlue
             );
@@ -191,7 +193,7 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
             if (collider->points.mSize < 2)
                 continue;
 
-            const Vec2 center = Vec2(*collider->ownerInfo.position) + collider->distToCenter;
+            const Vec2 center = *(const Vec2*)collider->ownerInfo.position + collider->distToCenter;
 
             for (int i = 0; i < collider->nodes1.mSize; i++)
             {
@@ -206,7 +208,7 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
             if (collider->points.mSize < 2)
                 continue;
 
-            const Vec2 center = Vec2(*collider->ownerInfo.position) + collider->distToCenter;
+            const Vec2 center = *(const Vec2*)collider->ownerInfo.position + collider->distToCenter;
 
             for (int i = 0; i < collider->nodes1.mSize; i++)
             {
@@ -277,6 +279,6 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
         }
     }
 
-    sead::PrimitiveRenderer::instance->end();
+    sead::PrimitiveRenderer::instance()->end();
 #endif // COLLISION_DRAW
 }

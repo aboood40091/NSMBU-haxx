@@ -4,11 +4,11 @@
 SECTIONS {
 
 	/* Math */
-	sinf__Ff = 0xf6bdd40;
-	cosf__Ff = 0xf6be528;
-	atan2f__FfT1 = 0xf6be670;
-	powf__FfT1 = 0xF6BDEA8;
-	sqrtf__Ff = 0xF6BDCCC;
+	sinf = 0xf6bdd40;
+	cosf = 0xf6be528;
+	atan2f = 0xf6be670;
+	powf = 0xF6BDEA8;
+	sqrtf = 0xF6BDCCC;
 
 	/* new/delete */
 	__nw__FUi = 0xF5B1594;
@@ -24,6 +24,21 @@ SECTIONS {
 
 	/* GHS C FUNCTIONS */
 	_f_ftoll = 0xF6BEBFC;
+
+	/* GFD */
+	GFDGetVertexShaderCount = 0xF6B8C04;
+	GFDGetVertexShaderHeaderSize = 0xF6B8D00;
+	GFDGetVertexShaderProgramSize = 0xF6B8D30;
+	GFDGetVertexShader = 0xF6B8E3C;
+	GFDGetPixelShaderCount = 0xF6B8C10;
+	GFDGetPixelShaderHeaderSize = 0xF6B8D10;
+	GFDGetPixelShaderProgramSize = 0xF6B8D40;
+	GFDGetPixelShader = 0xF6B8FC0;
+
+	/* MTX Library */
+	ASM_MTXConcat = 0xF6B98A0;
+	ASM_VECMag = 0xF6B96C4;
+	ASM_MTXScale = 0xF6B9B64;
 
 	/* nw::eft::EmitterSet */
 	SetMtx__Q3_2nw3eft10EmitterSetFRCQ3_2nw4math5MTX34 = 0xF62AD00;
@@ -63,6 +78,7 @@ SECTIONS {
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead6CameraSFv = 0x106EDE10;
 
 	/* sead::DirectResource */
+	__vtbl__Q2_4sead14DirectResource = 0x106A5C78;
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EBDB8;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EC118;
 
@@ -77,6 +93,7 @@ SECTIONS {
 	/* sead::FileDeviceMgr */
 	sInstance__Q2_4sead13FileDeviceMgr = 0x106EA118;
 	tryOpen__Q2_4sead13FileDeviceMgrFPQ2_4sead10FileHandleRCQ2_4sead23SafeStringBase__tm__2_cQ3_4sead10FileDevice12FileOpenFlagUi = 0xF5B8B0C;
+	tryLoad__Q2_4sead13FileDeviceMgrFRQ3_4sead10FileDevice7LoadArg = 0xF5B8BBC;
 
 	/* sead::FileHandle */
 	read__Q2_4sead10FileHandleFPUcUi = 0xF5B81D0;
@@ -90,11 +107,19 @@ SECTIONS {
 	getCurrentHeap__Q2_4sead7HeapMgrFv = 0xF5CD554;
 
 	/* sead::IDisposer */
+	__vtbl__Q2_4sead9IDisposer = 0x106931A8;
 	__ct__Q2_4sead9IDisposerFv = 0xF5CA2FC;
 	__dt__Q2_4sead9IDisposerFv = 0xf5ca384;
 
+	/* sead::Matrix34CalcCommon<f32> */
+	__CPR161__makeRTIdx__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J14J19Policies__tm__4_Z1Z9Mtx34BaseRCQ2_J14J17Vector3__tm__3_UiRCQ3_J14JJ59J8Vec3Base_v = 0xebfc1c8;
+	__CPR128__makeQ__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J10J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J10JJ55J8QuatBase_v = 0xEC1A79C;
+	__CPR131__makeST__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J11J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J11JJ56J8Vec3BaseT2_v = 0xEDE2A88;
+	__CPR133__makeSRT__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J12J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J12JJ57J8Vec3BaseN22_v = 0xF0C8424;
+	__CPR137__setTranslation__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J19J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J19JJ64J8Vec3Base_v = 0xEC06174;
+
 	/* sead::PrimitiveRenderer */
-	instance__Q2_4sead17PrimitiveRenderer = 0x106EA210;
+	sInstance__Q2_4sead17PrimitiveRenderer = 0x106EA210;
 	setCamera__Q2_4sead17PrimitiveRendererFRCQ2_4sead6Camera = 0xF5C83D0;
 	setProjection__Q2_4sead17PrimitiveRendererFRCQ2_4sead10Projection = 0xF5C83E4;
 	begin__Q2_4sead17PrimitiveRendererFv = 0xF5C8408;
@@ -104,11 +129,22 @@ SECTIONS {
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead10ProjectionSFv = 0x106EBD74;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead10ProjectionSFv = 0x106ECA08;
 
+	/* sead::QuatCalcCommon<f32> */
+	__CPR138__makeVectorRotation__Q2_4sead23QuatCalcCommon__tm__2_fSFRQ3_J23J19Policies__tm__4_Z1Z8QuatBaseRCQ3_J23JJ64J8Vec3BaseT2_b = 0xEC1A660;
+
 	/* sead::Resource */
+	__vtbl__Q2_4sead8Resource = 0x106A5C50;
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8ResourceSFv = 0x106EBDB4;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8ResourceSFv = 0x106EC114;
 
+	/* sead::ResourceMgr */
+	sInstance__Q2_4sead11ResourceMgr = 0x106EA274;
+	unregisterDecompressor__Q2_4sead11ResourceMgrFPQ2_4sead12Decompressor = 0xF5D3FA8;
+
 	/* sead::SZSDecompressor */
+	__vtbl__Q2_4sead15SZSDecompressor = 0x106A5F68;
+	__vtbl__42Q2_4sead9IDisposer__Q2_4sead12Decompressor__Q2_4sead15SZSDecompressor = 0x106A5F80;
+	__dt__Q2_4sead15SZSDecompressorFv = 0xF5D5FA8;
 	getDecompSize__Q2_4sead15SZSDecompressorSFPCv = 0xF5D54CC;
 	getDecompAlignment__Q2_4sead15SZSDecompressorSFPCv = 0xF5D5AA0;
 	decomp__Q2_4sead15SZSDecompressorSFPvUiPCvT2 = 0xF5D5654;
@@ -120,6 +156,12 @@ SECTIONS {
 	/* sead::UnitHeap */
 	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8UnitHeapSFv */
 	/* typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8UnitHeapSFv */
+
+	/* sead::Vector3CalcCommon<f32> */
+	normalize__Q2_4sead26Vector3CalcCommon__tm__2_fSFRQ3_4sead19Policies__tm__4_Z1Z8Vec3Base_Z1Z = 0xEC1A5F4;
+
+	/* sead::Vector4<f32> */
+	zero__S__Q2_4sead16Vector4__tm__2_f = 0x10AEC99C;
 
 	/* Profile */
 	profilesOriginal__7Profile = 0x106EFADC;
@@ -157,9 +199,9 @@ SECTIONS {
 	directionToActorH__5ActorFRC5Actor = 0xEBCC800;
 	distanceToPlayer__5ActorFR4Vec2 = 0xebc05a4;
 	deleteActorWhenOutOfView__5ActorFUi = 0xEBC07A0;
-	actorAcCallback0__5ActorFP14ActiveColliderP4Vec2 = 0xED5E7E8;
-	actorAcCallback2__5ActorFP14ActiveColliderP4Vec2 = 0xED5E8A4;
-	actorCbCallback0__5ActorFP12ColliderBaseP4Vec2 = 0xED5E8B8;
+	actorAcCallback0__5ActorFP14ActiveColliderPQ2_4sead16Vector2__tm__2_f = 0xED5E7E8;
+	actorAcCallback2__5ActorFP14ActiveColliderPQ2_4sead16Vector2__tm__2_f = 0xED5E8A4;
+	actorCbCallback0__5ActorFP12ColliderBasePQ2_4sead16Vector2__tm__2_f = 0xED5E8B8;
 	checkDerivedRuntimeTypeInfo__5ActorCFPCQ3_4sead15RuntimeTypeInfo9Interface = 0xebc2a38;
 	getRuntimeTypeInfo__5ActorCFv = __deleted_virtual_called;
 	__dt__5ActorFv = 0xebc0f18;
@@ -170,10 +212,10 @@ SECTIONS {
 	removeActiveColliders__5ActorFv = 0xebc02cc;
 	addActiveColliders__5ActorFv = 0xebc0328;
 	killAtGoal__5ActorFv = 0xebc2ad8;
-	splashWater__5ActorFP4Vec3 = 0xebc2adc;
-	splashLava__5ActorFP4Vec3 = 0xebc2ae0;
-	splashLavaWave__5ActorFP4Vec3 = 0xebc0960;
-	splashPoison__5ActorFP4Vec3 = 0xebc2ae4;
+	splashWater__5ActorFPQ2_4sead16Vector3__tm__2_f = 0xebc2adc;
+	splashLava__5ActorFPQ2_4sead16Vector3__tm__2_f = 0xebc2ae0;
+	splashLavaWave__5ActorFPQ2_4sead16Vector3__tm__2_f = 0xebc0960;
+	splashPoison__5ActorFPQ2_4sead16Vector3__tm__2_f = 0xebc2ae4;
 	isOffScreen__5ActorFv = 0xebc1254;
 
 	/* StageActor */
@@ -327,7 +369,7 @@ SECTIONS {
 	typeInfo__L0__getRuntimeTypeInfoStatic__12ColliderBaseSFv = 0x106EC1A4;
 
 	/* ShapedCollider */
-	__ct__14ShapedColliderFiP4Vec2PQ2_12ColliderBase4NodeT3 = 0xED67904;
+	__ct__14ShapedColliderFiPQ2_4sead16Vector2__tm__2_fPQ2_12ColliderBase4NodeT3 = 0xED67904;
 	init__14ShapedColliderFP5ActorRCQ2_14ShapedCollider4Info = 0xed6d3bc;
 	execute__14ShapedColliderFv = 0xED6871C;
 	__dt__14ShapedColliderFv = 0xED67A04;
@@ -353,7 +395,7 @@ SECTIONS {
 	typeInfo__L0__getRuntimeTypeInfoStatic__16CircularColliderSFv = 0x106EC598;
 
 	/* ColliderMgr */
-	instance__11ColliderMgr = 0x106CB560;
+	sInstance__11ColliderMgr = 0x106CB560;
 	add__11ColliderMgrFP12ColliderBase = 0xED5269C;
 	remove__11ColliderMgrFP12ColliderBase = 0xED5282C;
 
@@ -379,7 +421,7 @@ SECTIONS {
 	/* typeInfo__L0__getRuntimeTypeInfoStatic__17ActorCollisionMgrSFv */
 
 	/* EventMgr */
-	instance__8EventMgr = 0x106dd26c;
+	sInstance__8EventMgr = 0x106dd26c;
 
 	/* MusicPlayer */
 	shouldHurryUp__11MusicPlayerFv = 0xF5783D8;
@@ -396,20 +438,15 @@ SECTIONS {
 	setup__12ModelWrapperFP10ResArchivePvPQ2_4sead4Heap = 0xf0949a0;
 	updateModel__12ModelWrapperFv = 0xf094e84;
 
-	/* Mtx34 */
-	rotateAndTranslate__5Mtx34FRC5Vec3uRC4Vec3 = 0xebfc1c8;
-	makeST__5Mtx34SFR5Mtx34RC4Vec3T2 = 0xEDE2A88;
-	makeSRT__5Mtx34SFR5Mtx34RC4Vec3N22 = 0xF0C8424;
-
 	/* DrawMgr */
 	instance__7DrawMgr = 0x106d4f88;
 	drawModel__7DrawMgrFP5Model = 0xf0bab58;
 	drawModel__7DrawMgrFP12ModelWrapper = 0xf0bac98;
-	drawTile__7DrawMgrFUsRC4Vec3RCUiT2 = 0xf0bad28;
+	drawTile__7DrawMgrFUsRCQ2_4sead16Vector3__tm__2_fRCUiT2 = 0xf0bad28;
 
 	/* MovementHandler */
 	__ct__15MovementHandlerFv = 0xF409C40;
-	link__15MovementHandlerFRC4Vec3UiUc = 0xF40B6F4;
+	link__15MovementHandlerFRCQ2_4sead16Vector3__tm__2_fUiUc = 0xF40B6F4;
 	getMaskForMovementType__15MovementHandlerFUi = 0xF40A37C;
 	execute__15MovementHandlerFv = 0xF40B8C4;
 
@@ -424,38 +461,35 @@ SECTIONS {
 	getDelayParam__7AudioFxFv = 0xF572FE0;
 
 	/* Level */
-	instance__5Level = 0x106dd248;
+	sInstance__5Level = 0x106dd248;
 	getArea__5LevelFUi = 0xf25a2dc;
 
 	/* Level::Area */
 	getSprite__Q2_5Level4AreaFUiPv = 0xF259C08;
-	getLocation__Q2_5Level4AreaFP4RectUc = 0xf25a020;
+	getLocation__Q2_5Level4AreaFPQ2_4sead18BoundBox2__tm__2_fUc = 0xf25a020;
 	getPath__Q2_5Level4AreaFUc = 0xf25a0a8;
 	getPathNodes__Q2_5Level4AreaFUi = 0xf25a0f4;
 
 	/* LevelInfo */
-	instance__9LevelInfo = 0x106D3AEC;
+	sInstance__9LevelInfo = 0x106D3AEC;
 
 	/* TileMgr */
 	getTilePtrCurrentArea__7TileMgrSFUsT1UcPUi = 0xF245000;
 
 	/* PlayerMgr */
-	instance__9PlayerMgr = 0x106E8B94;
+	sInstance__9PlayerMgr = 0x106E8B94;
 
 	/* AreaTask */
 	drawLayer3D__8AreaTaskFRCQ3_3agl3lyr10RenderInfo = 0xF0784A8;
-
-	/* Rect */
-	zero__4Rect = 0x10AEC99C;
 
 	/* TwoWayPlatform */
 	cbCallback4__14TwoWayPlatformSFP5Actor = 0xF3FFBAC;
 	cbCallback5__14TwoWayPlatformSFP5Actor = 0xF3FFBE0;
 	cbCallback6__14TwoWayPlatformSFP5ActorUiT2 = 0xF3FFC14;
-	twoWayPlatformCbCallback2__14TwoWayPlatformFP12ColliderBaseP4Vec2 = 0xF40184C;
+	twoWayPlatformCbCallback2__14TwoWayPlatformFP12ColliderBasePQ2_4sead16Vector2__tm__2_f = 0xF40184C;
 
 	/* PtclMgr */
-	instance__7PtclMgr = 0x106CF5A8;
+	sInstance__7PtclMgr = 0x106CF5A8;
 	getEmitterSetGroupID__7PtclMgrCFiUi = 0xEE6CE58;
 
 	/* PlayerInput */
@@ -484,7 +518,6 @@ SECTIONS {
 	typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC1A0;
 
 	/* Misc */
-	ASM_MTXConcat = 0xF6B98A0;
 	BLOSDynLoad_Acquire = 0xF65EF58;
 	BOSDynLoad_FindExport = 0xF65F418;
 	PlayerJumpArc = 0x1066CA00;

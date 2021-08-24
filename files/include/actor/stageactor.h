@@ -74,34 +74,8 @@ public:
 
     virtual void getRect(Rect& rect)
     {
-        f32 XPos1 = position.x - 16.0f;
-        f32 XPos2 = position.x + 16.0f;
-        f32 YPos1 = position.y;
-        f32 YPos2 = position.y + 32.0f;
-
-        if (XPos1 > XPos2)
-        {
-            rect.right = XPos1;
-            rect.left = XPos2;
-        }
-
-        else
-        {
-            rect.right = XPos2;
-            rect.left = XPos1;
-        }
-
-        if (YPos1 > YPos2)
-        {
-            rect.top = YPos1;
-            rect.bottom = YPos2;
-        }
-
-        else
-        {
-            rect.top = YPos2;
-            rect.bottom = YPos1;
-        }
+        rect.set(position.x - 16.0f, position.y,
+                 position.x + 16.0f, position.y + 32.0f);
     }
 
     void handleGravity();

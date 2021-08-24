@@ -6,7 +6,7 @@
 #include "collider.h"
 #include "movementhandler.h"
 #include "level.h"
-#include "math.h"
+//#include "math.h"
 #include "tile.h"
 
 /*
@@ -45,7 +45,7 @@ public:
     SolidOnTopCollider solidOnTopCollider;
 };
 
-const ActorInfo magicPlatformActorInfo = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ActorInfo::FlagIgnoreSpawnRange | ActorInfo::FlagUnknown };
+const ActorInfo magicPlatformActorInfo = { Vec2i(0, 0), Vec2i(0, 0), Vec2i(0, 0), 0, 0, 0, 0, ActorInfo::FlagIgnoreSpawnRange | ActorInfo::FlagUnknown };
 const Profile magicPlatformProfile(&MagicPlatform::build, ProfileId::MagicPlatform, "MagicPlatform", &magicPlatformActorInfo, 0);
 
 // Ugh
@@ -83,7 +83,7 @@ Base* MagicPlatform::build(const ActorBuildInfo* buildInfo)
 
 u32 MagicPlatform::onCreate()
 {
-    Level::Area* area = Level::instance->getArea(LevelInfo::instance->area);
+    Level::Area* area = Level::instance()->getArea(LevelInfo::instance()->area);
     Level::Area::Location* location = area->getLocation(nullptr, settings1 & 0xFF);
 
     if (!location)
@@ -136,7 +136,7 @@ u32 MagicPlatform::onCreate()
         if ((settings1 >> 8) & 1)
             rectCollider.setSurfaceType(colliderSurfaceType);
 
-        ColliderMgr::instance->add(&rectCollider);
+        ColliderMgr::instance()->add(&rectCollider);
     }
     else if (collisionType == 1)
     {
@@ -147,7 +147,7 @@ u32 MagicPlatform::onCreate()
         if ((settings1 >> 8) & 1)
             solidOnTopCollider.setSurfaceType(colliderSurfaceType);
 
-        ColliderMgr::instance->add(&solidOnTopCollider);
+        ColliderMgr::instance()->add(&solidOnTopCollider);
     }
 
     u32 movementMask = movementHandler.getMaskForMovementType(settings2 & 0xFF);

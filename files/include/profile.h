@@ -1,6 +1,7 @@
 #pragma once
 
-#include "sead.h"
+#include <prim/seadSafeString.h>
+
 #include "preprocessor.h"
 #include "profileid.h"
 

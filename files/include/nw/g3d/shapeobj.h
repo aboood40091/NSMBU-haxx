@@ -1,12 +1,12 @@
 #pragma once
 
-#include "util/vec3.h"
+#include <nw/math/math_VEC3.h>
 
 namespace nw { namespace g3d {
 
 struct Sphere
 {
-    Vec3 center;
+    math::VEC3 center;
     f32 radius;
 };
 

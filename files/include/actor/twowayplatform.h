@@ -2,9 +2,6 @@
 
 #include "actor.h"
 
-class ColliderBase;
-class Vec2;
-
 class TwoWayPlatform : public Actor
 {
  public:

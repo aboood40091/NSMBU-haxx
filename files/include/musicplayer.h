@@ -1,9 +1,11 @@
 #pragma once
 
-#include "sead.h"
+#include <heap/seadDisposer.h>
 
-class MusicPlayer : public sead::IDisposer
+class MusicPlayer
 {
+    SEAD_SINGLETON_DISPOSER(MusicPlayer)
+
 public:
     MusicPlayer();
     ~MusicPlayer();

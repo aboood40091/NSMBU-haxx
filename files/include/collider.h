@@ -1,8 +1,12 @@
 #pragma once
 
-#include "sead.h"
+#include <container/seadBuffer.h>
+#include <heap/seadDisposer.h>
+#include <heap/seadHeap.h>
+#include <prim/seadRuntimeTypeInfo.h>
+
 #include "util/rect.h"
-#include "util/vec2.h"
+#include "util/vec.h"
 
 class Actor;
 class CollisionMgr;
@@ -371,13 +375,13 @@ public:
 };
 
 
-class ColliderMgr : public sead::IDisposer    // size: 0x64
+class ColliderMgr    // size: 0x64
 {
+    SEAD_SINGLETON_DISPOSER(ColliderMgr)
+
 public:
     void add(ColliderBase* collider);
     void remove(ColliderBase* collider);
-
-    static ColliderMgr* instance;
 
     ColliderBase::List lists[7];    // 10
 };
