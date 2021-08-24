@@ -1,6 +1,4 @@
 
-.include "asm_setup.S"
-
 .global DistantViewMgr_AddBGOffset
 
 .rodata

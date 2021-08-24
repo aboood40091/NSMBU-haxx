@@ -1,6 +1,4 @@
 
-.include "asm_setup.S"
-
 .global SpriteToProfileList_r3
 .global SpriteToProfileList_r3_2
 .global SpriteToProfileList_r19

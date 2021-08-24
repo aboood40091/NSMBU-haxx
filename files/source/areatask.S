@@ -1,6 +1,4 @@
 
-.include "asm_setup.S"
-
 .global AreaTask_setDrawDebug
 
 AreaTask_setDrawDebug:
