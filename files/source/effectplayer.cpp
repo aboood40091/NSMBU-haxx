@@ -139,14 +139,19 @@ failure:
         player1 = PlayerMgr::instance()->players[0];
 
     if (player1 == nullptr)
-        goto update;
+    {
+        if (currentEmitterSetID == -1)
+            return 1;
+
+        else
+            goto update;
+    }
 
     if (nextEffect(player1->input))
     {
         currentEmitterSetID = (currentEmitterSetID + 1) % numEmitterSet;
         LOG("Proceeding to next: %d", currentEmitterSetID)
     }
-
     else if (prevEffect(player1->input))
     {
         currentEmitterSetID = (currentEmitterSetID - 1) % numEmitterSet;
@@ -154,16 +159,18 @@ failure:
             currentEmitterSetID += numEmitterSet;
         LOG("Going to previous: %d", currentEmitterSetID)
     }
-
-    else if (currentEmitterSetID == -1)
-        return 1;
-
     else
-        goto update;
+    {
+        if (currentEmitterSetID == -1)
+            return 1;
+
+        else
+            goto update;
+    }
 
     killEffect();
 
-    if (!PtclMgr::instance()->system->CreateEmitterSetID(&effectHandle, nw::math::MTX34::Identity(), currentEmitterSetID, 0, PtclMgr::instance()->getEmitterSetGroupID(currentEmitterSetID, 0), 0xFFFFFFFF))
+    if (!PtclMgr::instance()->system->CreateEmitterSetID(&effectHandle, nw::math::MTX34::Identity(), currentEmitterSetID, 0, PtclMgr::instance()->getEmitterSetGroupID(currentEmitterSetID)))
         goto failure;
 
     LOG("Create succeeded")
