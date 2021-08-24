@@ -14,7 +14,7 @@ class Shader
 public:
     enum VertexFormat
     {
-        VertexFormat_U32 = GX2_ATTRIB_FORMAT_32_UINT,
+        VertexFormat_U32  = GX2_ATTRIB_FORMAT_32_UINT,
         VertexFormat_VEC3 = GX2_ATTRIB_FORMAT_32_32_32_FLOAT,
         VertexFormat_VEC4 = GX2_ATTRIB_FORMAT_32_32_32_32_FLOAT,
     };
@@ -60,10 +60,10 @@ class UniformBlock
 public:
     enum ShaderStage
     {
-        ShaderStage_Vertex = 0,
+        ShaderStage_Vertex   = 0,
         ShaderStage_Fragment = 1,
         ShaderStage_Geometry = 2,
-        ShaderStage_Max = 3
+        ShaderStage_Max      = 3
     };
 
 public:

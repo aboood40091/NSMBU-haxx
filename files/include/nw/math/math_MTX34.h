@@ -193,34 +193,32 @@ MTX34* MTX34::MakeVectorRotation(MTX34* dst, const VEC3* a, const VEC3* b)
 
 MTX34* MTX34::MakeQ(MTX34* dst, const VEC4* q)
 {
-    f32 v = 2.0f / (q->x * q->x + q->y * q->y + q->z * q->z + q->w * q->w);
+    // The quaternion "q" can be unnormalized
 
-    f32 v1  = q->x * v;
-    f32 v2  = q->y * v;
-    f32 v3  = q->z * v;
-    f32 v4  = q->w * v1;
-    f32 v5  = q->w * v2;
-    f32 v6  = q->w * v3;
-    f32 v7  = q->x * v1;
-    f32 v8  = q->x * v2;
-    f32 v9  = q->x * v3;
-    f32 v10 = q->y * v2;
-    f32 v11 = q->y * v3;
-    f32 v12 = q->z * v3;
+    const f32 v = 2.0f / q->MagnitudeSquare();
+    const f32 yy = v * q->y * q->y;
+    const f32 zz = v * q->z * q->z;
+    const f32 xx = v * q->x * q->x;
+    const f32 xy = v * q->x * q->y;
+    const f32 xz = v * q->x * q->z;
+    const f32 yz = v * q->y * q->z;
+    const f32 wz = v * q->w * q->z;
+    const f32 wx = v * q->w * q->x;
+    const f32 wy = v * q->w * q->y;
 
-    dst->m[0][0] = 1.0f - (v10 + v12);
-    dst->m[0][1] = v8 - v6;
-    dst->m[0][2] = v9 + v5;
+    dst->m[0][0] = 1.0f - (yy + zz);
+    dst->m[0][1] = xy - wz;
+    dst->m[0][2] = xz + wy;
     dst->m[0][3] = 0.0f;
 
-    dst->m[1][0] = v8 + v6;
-    dst->m[1][1] = 1.0f - (v7 + v12);
-    dst->m[1][2] = v11 - v4;
+    dst->m[1][0] = xy + wz;
+    dst->m[1][1] = 1.0f - (xx + zz);
+    dst->m[1][2] = yz - wx;
     dst->m[1][3] = 0.0f;
 
-    dst->m[2][0] = v9 - v5;
-    dst->m[2][1] = v11 + v4;
-    dst->m[2][2] = 1.0f - (v7 + v10);
+    dst->m[2][0] = xz - wy;
+    dst->m[2][1] = yz + wx;
+    dst->m[2][2] = 1.0f - (xx + yy);
     dst->m[2][3] = 0.0f;
 
     return dst;

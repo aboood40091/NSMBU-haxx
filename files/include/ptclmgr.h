@@ -13,7 +13,7 @@ class PtclMgr
     SEAD_SINGLETON_DISPOSER(PtclMgr)
 
 public:
-    u8 getEmitterSetGroupID(s32 emitterSetID, u32 resourceID) const;
+    u8 getEmitterSetGroupID(s32 emitterSetID, u32 resourceID = 0) const;
 
     nw::eft::System* system;   // 10, sead::ptcl::PtclSystem*
     // ...

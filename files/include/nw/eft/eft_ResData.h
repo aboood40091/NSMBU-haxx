@@ -37,6 +37,28 @@ struct TextureRes
 };
 static_assert(sizeof(TextureRes) == 0x114, "TextureRes size mismatch");
 
+struct KeyFrameAnimArray
+{
+    char magic[4];
+    u32 numAnim;
+};
+static_assert(sizeof(KeyFrameAnimArray) == 8, "KeyFrameAnimArray size mismatch");
+
+struct EmitterKeyAnimArray
+{
+    KeyFrameAnimArray* ptr;
+    u32 offset;
+    u32 size;
+};
+static_assert(sizeof(EmitterKeyAnimArray) == 0xC, "EmitterKeyAnimArray size mismatch");
+
+struct EmitterPrimitive
+{
+    u8 _unusedPad[8];
+    u32 idx;
+};
+static_assert(sizeof(EmitterPrimitive) == 0xC, "EmitterPrimitive size mismatch");
+
 struct EmitterData // Actual name not known
 {
     EmitterType type;
@@ -48,11 +70,8 @@ struct EmitterData // Actual name not known
     u32 nameOffs;
     const char* name;
     TextureRes textures[2];
-    void* keyAnimArray;
-    u32 keyAnimArrayOffs;
-    u32 keyAnimArraySize;
-    u8 _unusedPad1[8];
-    u32 primitiveIdx;
+    EmitterKeyAnimArray keyAnimArray;
+    EmitterPrimitive primitive;
 };
 static_assert(sizeof(EmitterData) == 0x280, "EmitterData size mismatch");
 
@@ -224,8 +243,7 @@ struct ChildData
     f32 allDirVel;
     math::VEC3 diffusionVel;
     f32 ptclPosRandom;
-    u8 _unusedPad0[8];
-    u32 primitiveIdx;
+    EmitterPrimitive primitive;
     f32 momentumRandom;
     BlendType blendType;
     MeshType meshType;
@@ -235,7 +253,7 @@ struct ChildData
     DisplaySideType displaySideType;
     math::VEC3 ptclColor0;
     math::VEC3 ptclColor1;
-    u8 _unusedPad1[4];
+    u8 _unusedPad0[4];
     FragmentComposite primitiveColorBlend;
     FragmentComposite primitiveAlphaBlend;
     f32 ptclAlphaMid;
@@ -277,7 +295,7 @@ struct ChildData
     char userMacro2[16];
     u32 shaderUserFlag;
     u32 shaderUserSwitchFlag;
-    u8 _unusedPad2[0x2FC - 0x27C];
+    u8 _unusedPad1[0x2FC - 0x27C];
 };
 static_assert(sizeof(ChildData) == 0x2FC, "ChildData size mismatch");
 
@@ -299,7 +317,7 @@ static_assert(sizeof(FieldMagnetData) == 0x14, "FieldMagnetData size mismatch");
 struct FieldSpinData
 {
     s32 angle;
-    u32 axis;
+    s32 axis;
     f32 diffusionVel;
 };
 static_assert(sizeof(FieldSpinData) == 0xC, "FieldSpinData size mismatch");
@@ -309,7 +327,7 @@ struct FieldCollisionData
     u16 collisionType;
     u16 coordSystem;
     f32 y;
-    f32 friction;
+    f32 bounceRate;
 };
 static_assert(sizeof(FieldCollisionData) == 0xC, "FieldCollisionData size mismatch");
 
@@ -416,12 +434,6 @@ struct PrimitiveTable // Actual name not known
 };
 static_assert(sizeof(PrimitiveTable) == 0xC, "PrimitiveTable size mismatch");
 
-struct KeyFrameAnimArray
-{
-    char magic[4];
-    u32 numAnim;
-};
-
 struct KeyFrameAnim
 {
     u32 numKeys;
@@ -431,12 +443,14 @@ struct KeyFrameAnim
     u32 nextOffs;
     u8 _unusedPad[4];
 };
+static_assert(sizeof(KeyFrameAnim) == 0x18, "KeyFrameAnim size mismatch");
 
 struct KeyFrameAnimKey
 {
     f32 time;
     f32 value;
 };
+static_assert(sizeof(KeyFrameAnimKey) == 8, "KeyFrameAnimKey size mismatch");
 
 } } // namespace nw::eft
 
