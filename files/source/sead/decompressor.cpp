@@ -18,7 +18,7 @@ SZSDecompressor::tryDecompFromDevice(
 {
     Heap* heap = arg.load_data_heap;
     if (heap == NULL)
-        heap = HeapMgr::sInstancePtr->getCurrentHeap();
+        heap = HeapMgr::instance()->getCurrentHeap();
 
     FileHandle handle;
     FileDevice* device;

@@ -1,7 +1,7 @@
 #ifndef SEAD_PRIMITIVE_RENDERER_CAFE_H_
 #define SEAD_PRIMITIVE_RENDERER_CAFE_H_
 
-#include <dynamic_libs/gx2_types.h>
+#include <cafe.h>
 
 #include <gfx/seadPrimitiveRenderer.h>
 #include <gfx/seadPrimitiveRendererUtil.h>

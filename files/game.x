@@ -12,6 +12,7 @@ SECTIONS {
 
 	/* new/delete */
 	__nw__FUi = 0xF5B1594;
+	__nw__FUiPQ2_4sead4Heapi = 0xF5B1858;
 	__nwa__FUi = 0xf5b1630;
 	__nwa__FUiPQ2_4sead4Heapi = 0xF5B18DC;
 	__dl__FPv = 0xF5B1748;
@@ -48,6 +49,8 @@ SECTIONS {
 	a__L0__Init__Q3_2nw3eft6RandomFUi = 0x106EDE7C;
 
 	/* nw::eft::System */
+	__vtbl__Q3_2nw3eft6System = 0x106B3C78;
+	Initialize__Q3_2nw3eft6SystemFPQ3_2nw3eft4HeapRCQ3_2nw3eft6Config = 0xF636F94;
 	CreateEmitterSetID__Q3_2nw3eft6SystemFPQ3_2nw3eft6HandleRCQ3_2nw4math5MTX34iUiUcT4 = 0xF63F57C;
 
 	/* nw::math */
@@ -97,6 +100,7 @@ SECTIONS {
 
 	/* sead::FileHandle */
 	read__Q2_4sead10FileHandleFPUcUi = 0xF5B81D0;
+	tryRead__Q2_4sead10FileHandleFPUiPUcUi = 0xF5B8230;
 
 	/* sead::Heap */
 	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead4HeapSFv */
@@ -104,7 +108,7 @@ SECTIONS {
 
 	/* sead::HeapMgr */
 	sInstancePtr__Q2_4sead7HeapMgr = 0x106EA240;
-	getCurrentHeap__Q2_4sead7HeapMgrFv = 0xF5CD554;
+	getCurrentHeap__Q2_4sead7HeapMgrCFv = 0xF5CD554;
 
 	/* sead::IDisposer */
 	__vtbl__Q2_4sead9IDisposer = 0x106931A8;

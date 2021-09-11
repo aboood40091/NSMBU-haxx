@@ -1,7 +1,7 @@
 #ifndef SEAD_CRITICAL_SECTION_H_
 #define SEAD_CRITICAL_SECTION_H_
 
-#include <dynamic_libs/os_types.h>
+#include <cafe.h>
 
 #include <heap/seadDisposer.h>
 
@@ -11,13 +11,20 @@ class CriticalSection : public IDisposer
 {
 public:
     CriticalSection();
+
+private:
+    CriticalSection(const CriticalSection&);
+    const CriticalSection& operator=(const CriticalSection&);
+
+public:
     virtual ~CriticalSection();
 
     void lock();
     bool tryLock();
     void unlock();
 
-    OSMutex mCriticalSectionInner;
+protected:
+    OSMutex mMutexInner;
 };
 
 } // namespace sead

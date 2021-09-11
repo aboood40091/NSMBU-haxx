@@ -1,7 +1,7 @@
 #ifndef SEAD_TEXTURE_CAFE_GX2_H_
 #define SEAD_TEXTURE_CAFE_GX2_H_
 
-#include <dynamic_libs/gx2_types.h>
+#include <cafe.h>
 
 #include <gfx/seadTexture.h>
 #include <prim/seadRuntimeTypeInfo.h>

@@ -206,38 +206,32 @@ public:
 
     inline void playSklAnim(const sead::SafeString& identifier, u32 idx)
     {
-        if (idx < sklAnims.mSize)
-            sklAnims[idx]->play(archive, identifier);
+        sklAnims[idx]->play(archive, identifier);
     }
 
     inline void playTexPatternAnim(const sead::SafeString& identifier, u32 idx)
     {
-        if (idx < texAnims.mSize)
-            texAnims[idx]->play(archive, identifier);
+        texAnims[idx]->play(archive, identifier);
     }
 
     inline void playColorAnim(const sead::SafeString& identifier, u32 idx)
     {
-        if (idx < shuAnims.mSize)
-            shuAnims[idx]->playColorAnim(archive, identifier);
+        shuAnims[idx]->playColorAnim(archive, identifier);
     }
 
     inline void playTexSrtAnim(const sead::SafeString& identifier, u32 idx)
     {
-        if (idx < shuAnims.mSize)
-            shuAnims[idx]->playTexSrtAnim(archive, identifier);
+        shuAnims[idx]->playTexSrtAnim(archive, identifier);
     }
 
     inline void playBoneVisAnim(const sead::SafeString& identifier, u32 idx)
     {
-        if (idx < visAnims.mSize)
-            visAnims[idx]->play(archive, identifier);
+        visAnims[idx]->play(archive, identifier);
     }
 
     inline void playShapeAnim(const sead::SafeString& identifier, u32 idx)
     {
-        if (idx < shaAnims.mSize)
-            shaAnims[idx]->play(archive, identifier);
+        shaAnims[idx]->play(archive, identifier);
     }
 
     static inline ModelWrapper* create(const sead::SafeString& archiveIdentifier, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, bool unk2 = false)
