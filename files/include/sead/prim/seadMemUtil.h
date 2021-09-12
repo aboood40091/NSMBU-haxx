@@ -24,11 +24,7 @@ public:
 
 #ifdef __cplusplus
 
-#ifdef cafe
 #include <prim/cafe/seadMemUtilCafe.hpp>
-#else
-#error "Unknown platform"
-#endif // cafe
 
 #endif // __cplusplus
 
