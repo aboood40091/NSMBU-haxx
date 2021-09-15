@@ -8,7 +8,7 @@ SECTIONS {
 	cosf = 0xf6be528;
 	atan2f = 0xf6be670;
 	powf = 0xF6BDEA8;
-	sqrtf = 0xF6BDCCC;
+	sqrtf = 0xF6BDCCC; // <-- Do not use this. Use sead::Mathf::sqrt. (and sead::Mathf::rsqrt in place of 1/sqrt)
 
 	/* new/delete */
 	__nw__FUi = 0xF5B1594;
@@ -238,6 +238,11 @@ SECTIONS {
 	vf144__10StageActorFb = 0xebc375c;
 	vf14C__10StageActorFP5Actor = 0xebc3760;
 
+	/* ActorState */
+	__vtbl__10ActorState = 0x105030c8;
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__10ActorStateSFv = 0x106EBEDC;
+	typeInfo__L0__getRuntimeTypeInfoStatic__10ActorStateSFv = 0x106EBEE0;
+
 	/* ActorMultiState */
 	__vtbl__15ActorMultiState = 0x10503248;
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__15ActorMultiStateSFv = 0x106EBEE4;
@@ -373,13 +378,13 @@ SECTIONS {
 	typeInfo__L0__getRuntimeTypeInfoStatic__12ColliderBaseSFv = 0x106EC1A4;
 
 	/* ShapedCollider */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__14ShapedColliderSFv = 0x106EBF30;
+	typeInfo__L0__getRuntimeTypeInfoStatic__14ShapedColliderSFv = 0x106EC1B4;
 	__ct__14ShapedColliderFiPQ2_4sead16Vector2__tm__2_fPQ2_12ColliderBase4NodeT3 = 0xED67904;
 	init__14ShapedColliderFP5ActorRCQ2_14ShapedCollider4Info = 0xed6d3bc;
 	execute__14ShapedColliderFv = 0xED6871C;
 	__dt__14ShapedColliderFv = 0xED67A04;
 	setRect__14ShapedColliderFP4Vec2T1 = 0xed6d25c;
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__14ShapedColliderSFv = 0x106EBF30;
-	typeInfo__L0__getRuntimeTypeInfoStatic__14ShapedColliderSFv = 0x106EC1B4;
 
 	/* RectCollider */
 	__vtbl__12RectCollider = 0x105FDA20;
@@ -387,12 +392,12 @@ SECTIONS {
 	typeInfo__L0__getRuntimeTypeInfoStatic__12RectColliderSFv = 0x106EC1BC;
 
 	/* SolidOnTopCollider */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__18SolidOnTopColliderSFv = 0x106EBF48;
+	typeInfo__L0__getRuntimeTypeInfoStatic__18SolidOnTopColliderSFv = 0x106EC1A8;
 	__ct__18SolidOnTopColliderFv = 0xED61D38;
 	__CPR79__init__18SolidOnTopColliderFP5ActorRCQ2_J6J4InfoiPQ2_4sead4Heap = 0xED62378;
 	execute__18SolidOnTopColliderFv = 0xED62E0C;
 	__dt__18SolidOnTopColliderFv = 0xED61F18;
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__18SolidOnTopColliderSFv = 0x106EBF48;
-	typeInfo__L0__getRuntimeTypeInfoStatic__18SolidOnTopColliderSFv = 0x106EC1A8;
 
 	/* CircularCollider */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__16CircularColliderSFv = 0x106EC188;
@@ -437,9 +442,15 @@ SECTIONS {
 	instance__13ResArchiveMgr = 0x106d4f50;
 	get__13ResArchiveMgrFRCQ2_4sead23SafeStringBase__tm__2_c = 0xf0b60ec;
 
+	/* Model */
+	__vtbl__5Model = 0x105bf130;
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC178;
+	typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC1A0;
+
 	/* ModelWrapper */
 	__ct__12ModelWrapperFP5ModelUiN42 = 0xf094798;
 	setup__12ModelWrapperFP10ResArchivePvPQ2_4sead4Heap = 0xf0949a0;
+	updateAnimations__12ModelWrapperFv = 0xf094d20;
 	updateModel__12ModelWrapperFv = 0xf094e84;
 
 	/* DrawMgr */
@@ -516,10 +527,6 @@ SECTIONS {
 	/* RenderObjLayer::Node */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EBF08;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EC19C;
-
-	/* Model */
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC178;
-	typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC1A0;
 
 	/* Misc */
 	BLOSDynLoad_Acquire = 0xF65EF58;

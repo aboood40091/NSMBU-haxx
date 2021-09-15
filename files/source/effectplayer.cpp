@@ -189,7 +189,7 @@ void EffectPlayer::drawLine(const Vec2& position, const f32 rotation, const floa
 {
     Vec3 scale(lineLength / 16.0f, lineThickness / 16.0f, 1.0f / 16.0f);
     nw::math::VEC3 rot = (nw::math::VEC3){ 0.0f, 0.0f, rotation };
-    nw::math::VEC3 pos = (nw::math::VEC3){ position.x + (lineLength * cosf(rotation)) / 2, position.y + (lineLength * sinf(rotation)) / 2, 4000.f };
+    nw::math::VEC3 pos = (nw::math::VEC3){ position.x + (lineLength * sead::Mathf::cos(rotation)) / 2, position.y + (lineLength * sead::Mathf::sin(rotation)) / 2, 4000.f };
 
     Mtx34 mtx;
     nw::math::MTX34::MakeRT((nw::math::MTX34*)&mtx, &rot, &pos);
@@ -205,11 +205,11 @@ void EffectPlayer::drawLine(const Vec2& point1, const Vec2& point2, const float 
 {
     const f32 diffX = point1.x - point2.x;
     const f32 diffY = point1.y - point2.y;
-    f32 length = sqrtf(diffX*diffX + diffY*diffY);
+    f32 length = sead::Mathf::sqrt(diffX*diffX + diffY*diffY);
 
     const Vec2& leftPoint = (point1.x < point2.x) ? point1 : point2;
     const Vec2& rightPoint = (&leftPoint == &point1) ? point2 : point1;
-    f32 angle = atan2f(rightPoint.y - leftPoint.y, rightPoint.x - leftPoint.x);
+    f32 angle = sead::Mathf::atan2(rightPoint.y - leftPoint.y, rightPoint.x - leftPoint.x);
 
     drawLine(leftPoint, angle, length, lineThickness, digit, modelIdx);
 }

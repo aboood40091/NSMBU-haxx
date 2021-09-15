@@ -177,7 +177,7 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
     while (node != nullptr)
     {
         ColliderBase* colliderBase = node->owner;
-        if (sead::IsDerivedFrom<CircularCollider, ColliderBase>(colliderBase))
+        if (sead::IsDerivedTypes<CircularCollider, ColliderBase>(colliderBase))
         {
             CircularCollider* collider = static_cast<CircularCollider*>(colliderBase);
 
@@ -187,30 +187,30 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
             );
         }
 
-        else if (sead::IsDerivedFrom<SolidOnTopCollider, ColliderBase>(colliderBase))
+        else if (sead::IsDerivedTypes<SolidOnTopCollider, ColliderBase>(colliderBase))
         {
             SolidOnTopCollider* collider = static_cast<SolidOnTopCollider*>(colliderBase);
-            if (collider->points.mSize < 2)
+            if (collider->points.getSize() < 2)
                 continue;
 
             const Vec2 center = *(const Vec2*)collider->ownerInfo.position + collider->distToCenter;
 
-            for (int i = 0; i < collider->nodes1.mSize; i++)
+            for (int i = 0; i < collider->nodes1.getSize(); i++)
             {
                 const ColliderBase::Node& node = collider->nodes1[i];
                 drawLine(center + node.sensor.p1, center + node.sensor.p2, colorGreen, 1.0f);
             }
         }
 
-        else if (sead::IsDerivedFrom<ShapedCollider, ColliderBase>(colliderBase))
+        else if (sead::IsDerivedTypes<ShapedCollider, ColliderBase>(colliderBase))
         {
             ShapedCollider* collider = static_cast<ShapedCollider*>(colliderBase);
-            if (collider->points.mSize < 2)
+            if (collider->points.getSize() < 2)
                 continue;
 
             const Vec2 center = *(const Vec2*)collider->ownerInfo.position + collider->distToCenter;
 
-            for (int i = 0; i < collider->nodes1.mSize; i++)
+            for (int i = 0; i < collider->nodes1.getSize(); i++)
             {
                 const ColliderBase::Node& node = collider->nodes1[i];
                 drawLine(center + node.sensor.p1, center + node.sensor.p2, colorBlue, 1.0f);
@@ -218,10 +218,10 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
 
 #if COLLISION_DRAW_DIAGONAL
             // If it's a rectangle, draw a diagonal line
-            if (collider->points.mSize >= 4 && !(collider->points.mSize & 1))
+            if (collider->points.getSize() >= 4 && !(collider->points.getSize() & 1))
             {
                 const ColliderBase::Node& node1 = collider->nodes1[0];
-                const ColliderBase::Node& node2 = collider->nodes1[collider->points.mSize / 2 - 1];
+                const ColliderBase::Node& node2 = collider->nodes1[collider->points.getSize() / 2 - 1];
                 drawLine(center + node1.sensor.p1, center + node2.sensor.p2, colorBlue, 1.0f);
             }
 #endif // COLLISION_DRAW_DIAGONAL
@@ -236,7 +236,7 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
     }
 
     ActorBuffer* actors = &ActorMgr::instance->actors;
-    for (int i = 0; i < actors->buffer.mSize; i++)
+    for (int i = 0; i < actors->buffer.getSize(); i++)
     {
         Actor* actor = sead::DynamicCast<Actor, Base>(actors->buffer[i]);
         if (actor == NULL || !actor->isVisible || actor->isDeleted)

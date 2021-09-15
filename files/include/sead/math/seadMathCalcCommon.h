@@ -58,7 +58,7 @@ public:
     static T asin(T);
     static T acos(T);
     static T atan(T);
-    static T atan2(T, T);
+    static T atan2(T y, T x);
     static T sinIdx(u32 idx);
     static T cosIdx(u32);
     static T tanIdx(u32);

@@ -50,6 +50,13 @@ MathCalcCommon<T>::sin(T t)
 
 template <typename T>
 inline T
+MathCalcCommon<T>::atan2(T y, T x)
+{
+    return std::atan2(y, x);
+}
+
+template <typename T>
+inline T
 MathCalcCommon<T>::sqrt(T x)
 {
     return rsqrt(x) * x;
