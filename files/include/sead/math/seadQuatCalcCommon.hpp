@@ -1,6 +1,5 @@
 #pragma once
 
-#include <math/seadMathCalcCommon.h>
 #include <math/seadQuat.h>
 
 namespace sead {
