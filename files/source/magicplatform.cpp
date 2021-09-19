@@ -178,9 +178,8 @@ u32 MagicPlatform::onExecute()
 
 u32 MagicPlatform::onDraw()
 {
-    f32 angle = (static_cast<f32>(rotation.z) / 0x80000000) * M_PI;
-    f32 angleCos = sead::Mathf::cos(angle);
-    f32 angleSin = sead::Mathf::sin(angle);
+    f32 angleSin, angleCos;
+    sead::Mathf::sinCosIdx(&angleSin, &angleCos, rotation.z);
 
     for (s32 y = 0; y < tileH; y++)
     {

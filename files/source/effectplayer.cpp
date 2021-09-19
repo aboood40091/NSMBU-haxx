@@ -28,7 +28,7 @@ public:
     u32 onExecute() override;
     u32 onDraw() override;
 
-    forceinline void drawLine(const Vec2& position, const f32 rotation, const float lineLength, const float lineThickness, const u32 digit, const u32 modelIdx);
+    forceinline void drawLine(const Vec2& position, const u32 rotation, const float lineLength, const float lineThickness, const u32 digit, const u32 modelIdx);
     forceinline void drawLine(const Vec2& point1, const Vec2& point2, const float lineThickness, const u32 digit, const u32 modelIdx);
 
     bool nextEffect(const PlayerInput& player1Input);
@@ -98,15 +98,15 @@ u32 EffectPlayer::onCreate()
     nw::math::VEC3 rotate;
     if (settings1 & 1)
     {
-        rotate.x = nw::math::Idx2Rad(rotation.x + 0x20000000);
-        rotate.y = nw::math::Idx2Rad(rotation.y + 0x20000000);
+        rotate.x = sead::Mathf::idx2rad(rotation.x + 0x20000000);
+        rotate.y = sead::Mathf::idx2rad(rotation.y + 0x20000000);
     }
     else
     {
-        rotate.x = nw::math::Idx2Rad(rotation.x);
-        rotate.y = nw::math::Idx2Rad(rotation.y);
+        rotate.x = sead::Mathf::idx2rad(rotation.x);
+        rotate.y = sead::Mathf::idx2rad(rotation.y);
     }
-    rotate.z = nw::math::Idx2Rad(rotation.z);
+    rotate.z = sead::Mathf::idx2rad(rotation.z);
 
     nw::math::VEC3 translate;
     translate.x = (position.x += 8.0f);
@@ -185,33 +185,42 @@ update:
     return 1;
 }
 
-void EffectPlayer::drawLine(const Vec2& position, const f32 rotation, const float lineLength, const float lineThickness, const u32 digit, const u32 modelIdx)
+void EffectPlayer::drawLine(const Vec2& position, const u32 rotation, const float lineLength, const float lineThickness, const u32 digit, const u32 modelIdx)
 {
-    Vec3 scale(lineLength / 16.0f, lineThickness / 16.0f, 1.0f / 16.0f);
-    nw::math::VEC3 rot = (nw::math::VEC3){ 0.0f, 0.0f, rotation };
-    nw::math::VEC3 pos = (nw::math::VEC3){ position.x + (lineLength * sead::Mathf::cos(rotation)) / 2, position.y + (lineLength * sead::Mathf::sin(rotation)) / 2, 4000.f };
+    f32 sinRZ, cosRZ;
+    sead::Mathf::sinCosIdx(&sinRZ, &cosRZ, rotation);
 
-    Mtx34 mtx;
-    nw::math::MTX34::MakeRT((nw::math::MTX34*)&mtx, &rot, &pos);
+    Vec3 scale(lineLength / 16, lineThickness / 16, 1.f / 16);
+
+    //Vec3u rot(0, 0, rotation);
+    //Vec3  pos(position.x + (lineLength * cosRZ) / 2,
+    //          position.y + (lineLength * sinRZ) / 2,
+    //          4000);
+    //Mtx34 mtxRT; mtxRT.makeRTIdx(rot, pos);
+
+    Mtx34 mtxRT(cosRZ, -sinRZ, 0, position.x + (lineLength * cosRZ) / 2,
+                sinRZ,  cosRZ, 0, position.y + (lineLength * sinRZ) / 2,
+                0, 0, 1, 4000);
 
     ModelWrapper* model = models[digit][modelIdx];
     model->setScale(scale);
-    model->setMtx(mtx);
+    model->setMtx(mtxRT);
     model->updateModel();
     DrawMgr::instance->drawModel(model);
 }
 
 void EffectPlayer::drawLine(const Vec2& point1, const Vec2& point2, const float lineThickness, const u32 digit, const u32 modelIdx)
 {
-    const f32 diffX = point1.x - point2.x;
-    const f32 diffY = point1.y - point2.y;
-    f32 length = sead::Mathf::sqrt(diffX*diffX + diffY*diffY);
-
     const Vec2& leftPoint = (point1.x < point2.x) ? point1 : point2;
     const Vec2& rightPoint = (&leftPoint == &point1) ? point2 : point1;
-    f32 angle = sead::Mathf::atan2(rightPoint.y - leftPoint.y, rightPoint.x - leftPoint.x);
 
-    drawLine(leftPoint, angle, length, lineThickness, digit, modelIdx);
+    const f32 diffX = rightPoint.x - leftPoint.x;
+    const f32 diffY = rightPoint.y - leftPoint.y;
+
+    drawLine(leftPoint,
+             sead::Mathf::atan2Idx(diffY, diffX),
+             sead::Mathf::sqrt(diffX*diffX + diffY*diffY),
+             lineThickness, digit, modelIdx);
 }
 
 u32 EffectPlayer::onDraw()

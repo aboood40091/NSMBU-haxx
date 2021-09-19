@@ -4,9 +4,9 @@
 SECTIONS {
 
 	/* Math */
-	sinf = 0xf6bdd40;
-	cosf = 0xf6be528;
-	atan2f = 0xf6be670;
+	sinf = 0xf6bdd40;   // <-- If applicable, use sead::Mathf::sinIdx. (or sead::Mathf::sinCosIdx)
+	cosf = 0xf6be528;   // <-- If applicable, use sead::Mathf::cosIdx. (or sead::Mathf::sinCosIdx)
+	atan2f = 0xf6be670; // <-- If applicable, use sead::Mathf::atan2Idx.
 	powf = 0xF6BDEA8;
 	sqrtf = 0xF6BDCCC; // <-- Do not use this. Use sead::Mathf::sqrt. (and sead::Mathf::rsqrt in place of 1/sqrt)
 
@@ -114,6 +114,10 @@ SECTIONS {
 	__vtbl__Q2_4sead9IDisposer = 0x106931A8;
 	__ct__Q2_4sead9IDisposerFv = 0xF5CA2FC;
 	__dt__Q2_4sead9IDisposerFv = 0xf5ca384;
+
+	/* sead::MathCalcCommon<f32> */
+	cSinCosTbl__S__Q2_4sead23MathCalcCommon__tm__2_f = 0x10693738;
+	atanIdx___S__Q2_4sead23MathCalcCommon__tm__2_fSFZ1Z_Ui = 0xF5CE124;
 
 	/* sead::Matrix34CalcCommon<f32> */
 	__CPR161__makeRTIdx__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J14J19Policies__tm__4_Z1Z9Mtx34BaseRCQ2_J14J17Vector3__tm__3_UiRCQ3_J14JJ59J8Vec3Base_v = 0xebfc1c8;
