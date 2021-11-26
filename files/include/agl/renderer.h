@@ -14,10 +14,10 @@ namespace agl { namespace lyr {
 
 enum DisplayType
 {
-    DISPLAY_TYPE_TOP_TV     = 0,
-    DISPLAY_TYPE_BOTTOM_DRC = 1,
-    DISPLAY_TYPE_MAX        = 2,
-    DISPLAY_TYPE_INVALID    = 0xFFFFFFFF
+    cDisplayType_Top_TV     = 0,
+    cDisplayType_Bottom_DRC = 1,
+    cDisplayType_Max        = 2,
+    cDisplayType_Invalid    = 0xFFFFFFFF
 };
 
 class Renderer
@@ -36,15 +36,15 @@ public:
 
     u32 isDisplayList;
     u32 multiSampleType; // agl::MultiSampleType
-    u8 renderDisplays[DISPLAY_TYPE_MAX][0x6C4]; // agl::lyr::RenderDisplay[DISPLAY_TYPE_MAX]
-    agl::RenderBuffer* renderBuffers[DISPLAY_TYPE_MAX];
+    u8 renderDisplays[cDisplayType_Max][0x6C4]; // agl::lyr::RenderDisplay[cDisplayType_Max]
+    agl::RenderBuffer* renderBuffers[cDisplayType_Max];
     sead::Buffer<agl::lyr::Layer*> layers;
     mutable sead::BitFlag16 flags;
     f32 _DB4;
     u8 _DB8[16];
     sead::CriticalSection cs;
     u8 jobQueues[2][0x64]; // sead::FixedSizeJQ[2]
-    sead::PtrArrayImpl renderDisplayJobs[DISPLAY_TYPE_MAX]; // sead::PtrArray<agl::lyr::RenderDisplay::Job>[DISPLAY_TYPE_MAX]
+    sead::PtrArrayImpl renderDisplayJobs[cDisplayType_Max]; // sead::PtrArray<agl::lyr::RenderDisplay::Job>[cDisplayType_Max]
     u32 _EE4;
     u32 _EE8;
     s32 _EEC;

@@ -12,7 +12,7 @@ bool Renderer::drawTVHaxx(DisplayType display_type) const
 
     if (flags.isOffBit(4) && flags.isOffBit(0))
     {
-        agl::RenderBuffer* tvBuffer = renderBuffers[DISPLAY_TYPE_TOP_TV];
+        agl::RenderBuffer* tvBuffer = renderBuffers[cDisplayType_Top_TV];
         if (tvBuffer != NULL)
         {
             u32 clearFlags = 1;
@@ -43,7 +43,7 @@ bool Renderer::drawDRCHaxx(DisplayType display_type) const
 
     if (flags.isOffBit(4) && flags.isOffBit(0))
     {
-        agl::RenderBuffer* drcBuffer = renderBuffers[DISPLAY_TYPE_BOTTOM_DRC];
+        agl::RenderBuffer* drcBuffer = renderBuffers[cDisplayType_Bottom_DRC];
         if (drcBuffer != NULL)
         {
             u32 clearFlags = 1;
