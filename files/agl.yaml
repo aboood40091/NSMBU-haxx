@@ -1,0 +1,16 @@
+
+---
+Files:
+  - source/agl/aglRenderer.cpp
+Hooks:
+  # agl::lyr::Renderer::draw hack (Clear framebuffer to black)
+  ## TV
+  - type: branch
+    instr: bl
+    addr: 0F0A1114
+    func: drawTVHaxx__Q3_3agl3lyr8RendererCFQ3_3agl3lyr11DisplayType
+  ## DRC
+  - type: branch
+    instr: bl
+    addr: 0F0A11A8
+    func: drawDRCHaxx__Q3_3agl3lyr8RendererCFQ3_3agl3lyr11DisplayType

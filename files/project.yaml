@@ -4,6 +4,7 @@ Name: NSMBU Haxx
 Include: ../files/include/sead
 Modules:
   - aa.yaml
+  - agl.yaml
   - areatask.yaml
   - ctors.yaml
   - customactors.yaml

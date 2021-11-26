@@ -5,6 +5,7 @@
 namespace sead {
 
 class Camera;
+class FrameBuffer;
 class Projection;
 class Viewport;
 
@@ -13,7 +14,6 @@ class Viewport;
 namespace agl {
 
 class DisplayList;
-class RenderBuffer;
 
 namespace lyr {
 
@@ -24,7 +24,7 @@ class RenderInfo
 public:
     u32 renderStepIdx;
     u32 displayType;
-    RenderBuffer* frameBuffer;
+    sead::FrameBuffer* frameBuffer;
     u32 _C;
     Layer* parentLayer;
     sead::Camera* camera;

@@ -25,6 +25,7 @@ SECTIONS {
 
 	/* GHS C FUNCTIONS */
 	_f_ftoll = 0xF6BEBFC;
+	__gh_float_printf = 0xF6BABA8;
 
 	/* GFD */
 	GFDGetVertexShaderCount = 0xF6B8C04;
@@ -40,6 +41,9 @@ SECTIONS {
 	ASM_MTXConcat = 0xF6B98A0;
 	ASM_VECMag = 0xF6B96C4;
 	ASM_MTXScale = 0xF6B9B64;
+
+	/* agl::lyr::Renderer */
+	draw__Q3_3agl3lyr8RendererCFQ3_3agl3lyr11DisplayType = 0xF5FAB90;
 
 	/* nw::eft::EmitterSet */
 	SetMtx__Q3_2nw3eft10EmitterSetFRCQ3_2nw4math5MTX34 = 0xF62AD00;
@@ -101,6 +105,9 @@ SECTIONS {
 	/* sead::FileHandle */
 	read__Q2_4sead10FileHandleFPUcUi = 0xF5B81D0;
 	tryRead__Q2_4sead10FileHandleFPUiPUcUi = 0xF5B8230;
+
+	/* sead::FrameBuffer */
+	bind__Q2_4sead11FrameBufferCFv = 0xF5C58F0;
 
 	/* sead::Heap */
 	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead4HeapSFv */
@@ -170,6 +177,10 @@ SECTIONS {
 
 	/* sead::Vector4<f32> */
 	zero__S__Q2_4sead16Vector4__tm__2_f = 0x10AEC99C;
+
+	/* sead::Viewport */
+	__ct__Q2_4sead8ViewportFRCQ2_4sead18LogicalFrameBuffer = 0xF5C74C8;
+	apply__Q2_4sead8ViewportCFRCQ2_4sead18LogicalFrameBuffer = 0xF5C783C;
 
 	/* Profile */
 	profilesOriginal__7Profile = 0x106EFADC;
