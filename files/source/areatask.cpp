@@ -39,6 +39,7 @@ void AreaTask::readHaxxOptions()
 
 #define COLLISION_DRAW_DIAGONAL 0
 
+#include <gfx/seadGraphicsContext.h>
 #include <gfx/seadPrimitiveRenderer.h>
 
 #include "agl/renderinfo.h"
@@ -65,6 +66,14 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
     drawLayer3D(renderInfo);
 
 #if COLLISION_DRAW
+    sead::GraphicsContext context;
+    context.setDepthTestEnable(true);
+    context.setDepthWriteEnable(true);
+    context.setDepthFunc(sead::Graphics::cDepthFunc_LessEqual);
+    context.setCullingMode(sead::Graphics::cCullingMode_None);
+    context.setBlendEnable(false);
+    context.apply();
+
     sead::PrimitiveRenderer::instance()->setCamera(*renderInfo.camera);
     sead::PrimitiveRenderer::instance()->setProjection(*renderInfo.projection);
     sead::PrimitiveRenderer::instance()->begin();

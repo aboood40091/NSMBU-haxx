@@ -109,6 +109,10 @@ SECTIONS {
 	/* sead::FrameBuffer */
 	bind__Q2_4sead11FrameBufferCFv = 0xF5C58F0;
 
+	/* sead::GraphicsContext */
+	__ct__Q2_4sead15GraphicsContextFv = 0xF5C7BBC;
+	apply__Q2_4sead15GraphicsContextCFv = 0xF5C7CB0;
+
 	/* sead::Heap */
 	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead4HeapSFv */
 	/* typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead4HeapSFv */
