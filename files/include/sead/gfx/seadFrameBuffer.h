@@ -14,15 +14,21 @@ class LogicalFrameBuffer
 
 public:
     LogicalFrameBuffer(const Vector2f& virtual_size, const BoundBox2f& physical_area)
+        : mVirtualSize(virtual_size)
+        , mPhysicalArea(physical_area)
     {
-        setVirtualSize(virtual_size);
-        setPhysicalArea(physical_area);
     }
 
     LogicalFrameBuffer(const Vector2f& virtual_size, f32 physical_x, f32 physical_y, f32 physical_w, f32 physical_h)
+        : mVirtualSize(virtual_size)
+        , mPhysicalArea(physical_x, physical_y, physical_x + physical_w, physical_y + physical_h)
     {
-        setVirtualSize(virtual_size);
-        setPhysicalArea(physical_x, physical_y, physical_w, physical_h);
+    }
+
+    LogicalFrameBuffer(const Vector2f& virtual_size, f32 physical_x, f32 physical_y, u32 physical_w, u32 physical_h)
+        : mVirtualSize(virtual_size)
+        , mPhysicalArea(physical_x, physical_y, physical_x + physical_w, physical_y + physical_h)
+    {
     }
 
     virtual ~LogicalFrameBuffer()
@@ -51,7 +57,12 @@ public:
 
     void setPhysicalArea(f32 x, f32 y, f32 w, f32 h)
     {
-        mPhysicalArea.setFromCornerAndXY(x, y, w, h);
+        mPhysicalArea.set(x, y, x + w, y + h);
+    }
+
+    void setPhysicalArea(f32 x, f32 y, u32 w, u32 h)
+    {
+        mPhysicalArea.set(x, y, x + w, y + h);
     }
 
 protected:
@@ -77,21 +88,18 @@ public:
     {
     }
 
+    FrameBuffer(const Vector2f& virtual_size, f32 physical_x, f32 physical_y, u32 physical_w, u32 physical_h)
+        : LogicalFrameBuffer(virtual_size, physical_x, physical_y, physical_w, physical_h)
+    {
+    }
+
     virtual void copyToDisplayBuffer(const DisplayBuffer* display_buffer) const
     {
     }
 
-    virtual void clear(u32 clr_flag, const Color4f& color, f32 depth, u32 stencil) const
-    {
-    }
-
-    virtual void clearMRT(u32 target, const Color4f& color) const
-    {
-    }
-
-    virtual void bindImpl_() const
-    {
-    }
+    virtual void clear(u32 clr_flag, const Color4f& color, f32 depth, u32 stencil) const = 0;
+    virtual void clearMRT(u32 target, const Color4f& color) const;
+    virtual void bindImpl_() const = 0;
 
     void bind() const;
 };

@@ -387,6 +387,20 @@ MathCalcCommon<u32>::abs(u32 t)
     return t;
 }
 
+template <>
+inline f32
+MathCalcCommon<f32>::abs(f32 t)
+{
+    return std::fabs(t);
+}
+
+template <>
+inline f64
+MathCalcCommon<f64>::abs(f64 t)
+{
+    return std::fabs(t);
+}
+
 template <typename T>
 inline s32
 MathCalcCommon<T>::roundOff(T val)

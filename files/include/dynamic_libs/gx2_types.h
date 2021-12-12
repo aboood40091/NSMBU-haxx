@@ -106,6 +106,7 @@ extern "C" {
 #define GX2_LOGIC_OP_REVOR                              0xDD
 #define GX2_LOGIC_OP_OR                                 0xEE
 #define GX2_LOGIC_OP_SET                                0xFF
+#define GX2_LOGIC_OP_NONE                               GX2_LOGIC_OP_COPY
 
 //!-----------------------------------------------------------------------------------------------------------------------
 //! GX2 blend combination functions
@@ -119,10 +120,21 @@ extern "C" {
 //!-----------------------------------------------------------------------------------------------------------------------
 //! GX2 blend functions
 //!-----------------------------------------------------------------------------------------------------------------------
-#define GX2_BLEND_ZERO                                  0x00
-#define GX2_BLEND_ONE                                   0x01
-#define GX2_BLEND_SRC_ALPHA                             0x04
-#define GX2_BLEND_ONE_MINUS_SRC_ALPHA                   0x05
+#define GX2_BLEND_ZERO                                  0
+#define GX2_BLEND_ONE                                   1
+#define GX2_BLEND_SRC_COLOR                             2
+#define GX2_BLEND_ONE_MINUS_SRC_COLOR                   3
+#define GX2_BLEND_SRC_ALPHA                             4
+#define GX2_BLEND_ONE_MINUS_SRC_ALPHA                   5
+#define GX2_BLEND_DST_ALPHA                             6
+#define GX2_BLEND_ONE_MINUS_DST_ALPHA                   7
+#define GX2_BLEND_DST_COLOR                             8
+#define GX2_BLEND_ONE_MINUS_DST_COLOR                   9
+#define GX2_BLEND_SRC_ALPHA_SATURATE                    10
+#define GX2_BLEND_CONSTANT_COLOR                        13
+#define GX2_BLEND_ONE_MINUS_CONSTANT_COLOR              14
+#define GX2_BLEND_CONSTANT_ALPHA                        19
+#define GX2_BLEND_ONE_MINUS_CONSTANT_ALPHA              20
 
 //!-----------------------------------------------------------------------------------------------------------------------
 //! GX2 render targets
