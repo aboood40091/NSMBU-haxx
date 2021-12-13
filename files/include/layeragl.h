@@ -10,7 +10,7 @@ public:
         SEAD_RTTI_BASE(Node)
 
     public:
-        virtual void Calc() = 0;
+        virtual void calc() = 0;
     };
 
 public:

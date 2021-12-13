@@ -14,33 +14,33 @@ public:
 
 public:
     // Calculates the drawing resources for skeleton matrices, shapes and materials
-    void Calc() override;
+    void calc() override;
 
-    // Calculates the drawing resources for the view
-    void CalcView(s32 viewIndex, const Mtx34& cameraMtx, const Mtx44& deviceProjectionMtx, ObjLayerRenderer* renderer) override;
+    // Updates buffers for the GPU
+    void calcGPU(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
+
+    // Calculates the drawing resources for the view (does nothing)
+    void calcView(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override; // always a nullsub
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Notes:
-    // 1. Shadow-only or reflection-only shapes are always invisible
+    // 1. Shadow-only shapes and reflection-only shapes are always invisible
     // 2. Shadow casting for a shape is automatically enabled if "shadow_cast" is not present in its material's render info
 
-    void vf2C(s32 viewIndex, const Mtx34& cameraMtx, const Mtx44& deviceProjectionMtx, ObjLayerRenderer* renderer) override; // always a nullsub
+    void drawOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
+    void drawXlu(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
 
-    // These two do not draw shadow-only or reflection-only shapes
-    void drawAllShapes1(s32 viewIndex, const Mtx34& cameraMtx, const Mtx44& deviceProjectionMtx, ObjLayerRenderer* renderer) override;
-    void drawAllShapes2(s32 viewIndex, const Mtx34& cameraMtx, const Mtx44& deviceProjectionMtx, ObjLayerRenderer* renderer) override;
+    // This draws the shadow of shadow-casting shapes
+    void drawShadowOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
 
-    // I think this just draws the shadow of shadow-casting shapes
-    void drawShadowCastShapes(s32 viewIndex, const Mtx34& cameraMtx, const Mtx44& deviceProjectionMtx, ObjLayerRenderer* renderer) override;
-
-    // These two do not draw reflection-only shapes
-    void drawReflectionShapes1(s32 viewIndex, const Mtx34& cameraMtx, const Mtx44& deviceProjectionMtx, ObjLayerRenderer* renderer) override;
-    void drawReflectionShapes2(s32 viewIndex, const Mtx34& cameraMtx, const Mtx44& deviceProjectionMtx, ObjLayerRenderer* renderer) override;
+    // These draws the reflection on shapes
+    void drawReflectionOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
+    void drawReflectionXlu(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    bool hasShadowCastShapes() const override;
+    bool hasShadow() const override;
 
     virtual ~Model();
 
@@ -54,10 +54,10 @@ public:
     void setScale(const Vec3& scale) override;
     const Vec3& getScale() const override;
 
-    // Determines if there are any shapes that can be drawn by draw*Shapes1()
-    bool hasShapesFlag1() const override;
-    // Determines if there are any shapes that can be drawn by draw*Shapes2()
-    bool hasShapesFlag2() const override;
+    // Determines if there are any shapes that can be drawn by draw*Opa()
+    bool hasOpa() const override;
+    // Determines if there are any shapes that can be drawn by draw*Xlu()
+    bool hasXlu() const override;
 
     s32 getBoneIdx(const sead::SafeString& name) const override;
     const char* getBoneName(u32 idx) const override;
