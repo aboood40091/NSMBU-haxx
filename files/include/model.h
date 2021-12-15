@@ -19,8 +19,8 @@ public:
     // Updates buffers for the GPU
     void calcGPU(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
 
-    // Calculates the drawing resources for the view (does nothing)
-    void calcView(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override; // always a nullsub
+    // (Does nothing)
+    void updateView(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
