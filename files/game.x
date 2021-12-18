@@ -81,6 +81,24 @@ SECTIONS {
 	__LSG__zero__L0__Zero__Q3_2nw4math4VEC3SFv = 0x106EB9F0;
 	zero__L0__Zero__Q3_2nw4math4VEC3SFv = 0x106ED104;
 
+	/* sead::CalculateTask */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead13CalculateTaskSFv = 0x106EBC9C;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead13CalculateTaskSFv = 0x106EC964;
+	__ct__Q2_4sead13CalculateTaskFRCQ2_4sead16TaskConstructArgPCc = 0xF5BC508;
+	__dt__Q2_4sead13CalculateTaskFv = 0xF5BC2F0;
+	pauseCalc__Q2_4sead13CalculateTaskFb = 0xF5BC444;
+	pauseDraw__Q2_4sead13CalculateTaskFb = 0xF5BC85C;
+	pauseCalcRec__Q2_4sead13CalculateTaskFb = __deleted_virtual_called;
+	pauseDrawRec__Q2_4sead13CalculateTaskFb = __deleted_virtual_called;
+	pauseCalcChild__Q2_4sead13CalculateTaskFb = __deleted_virtual_called;
+	pauseDrawChild__Q2_4sead13CalculateTaskFb = __deleted_virtual_called;
+	attachCalcImpl__Q2_4sead13CalculateTaskFv = 0xF5BC384;
+	attachDrawImpl__Q2_4sead13CalculateTaskFv = 0xF5BC854;
+	detachCalcImpl__Q2_4sead13CalculateTaskFv = 0xF5BC43C;
+	detachDrawImpl__Q2_4sead13CalculateTaskFv = 0xF5BC858;
+	getCorrespondingMethodTreeMgrTypeInfo__Q2_4sead13CalculateTaskCFv = __deleted_virtual_called;
+	getMethodTreeNode__Q2_4sead13CalculateTaskFi = 0xF5BC4F0;
+
 	/* sead::Camera */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead6CameraSFv = 0x106EBD88;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead6CameraSFv = 0x106EDE10;
@@ -139,6 +157,10 @@ SECTIONS {
 	__CPR137__setTranslation__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J19J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J19JJ64J8Vec3Base_v = 0xEC06174;
 	__CPR131__setBase__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J12J19Policies__tm__4_Z1Z9Mtx34BaseiRCQ3_J12JJ57J8Vec3Base_v = 0xEC06150;
 
+	/* sead::MethodTreeNode */
+	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14MethodTreeNodeSFv */
+	/* typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14MethodTreeNodeSFv */
+
 	/* sead::PrimitiveRenderer */
 	sInstance__Q2_4sead17PrimitiveRenderer = 0x106EA210;
 	setCamera__Q2_4sead17PrimitiveRendererFRCQ2_4sead6Camera = 0xF5C83D0;
@@ -176,6 +198,17 @@ SECTIONS {
 
 	/* sead::SZSDecompressor::DecompContext */
 	__ct__Q3_4sead15SZSDecompressor13DecompContextFPv = 0xF5D5AF4;
+
+	/* sead::TaskBase */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8TaskBaseSFv = 0x106EBC98;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8TaskBaseSFv = 0x106EC968;
+	enterCommon__Q2_4sead8TaskBaseFv = 0xF5BF818;
+	onEvent__Q2_4sead8TaskBaseFRCQ2_4sead9TaskEvent = 0xF5BFF78;
+	onDestroy__Q2_4sead8TaskBaseFv = __deleted_virtual_called;
+	doneDestroy__Q2_4sead8TaskBaseFv = __deleted_virtual_called;
+
+	/* sead::TaskMgr */
+	destroyTaskSync__Q2_4sead7TaskMgrFPQ2_4sead8TaskBase = 0xF5C0D98;
 
 	/* sead::UnitHeap */
 	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8UnitHeapSFv */
