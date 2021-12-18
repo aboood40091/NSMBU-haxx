@@ -1,36 +1,52 @@
 #ifndef SEAD_HEAP_POLICIES_H_
 #define SEAD_HEAP_POLICIES_H_
 
-#include <basis/seadTypes.h>
+#include <heap/seadHeapMgr.h>
 
 namespace sead {
-
-class Heap;
 
 class HeapArray
 {
 public:
-    HeapArray(HeapArray& other)
+    HeapArray()
+        : mPrimaryIndex(0)
     {
-        mHeaps[0] = other.mHeaps[0];
-        mHeaps[1] = other.mHeaps[1];
-        mHeaps[2] = other.mHeaps[2];
-        mHeaps[3] = other.mHeaps[3];
-        *reinterpret_cast<u32*>(mAdjusted) = *reinterpret_cast<u32*>(other.mAdjusted);
-        mPrimaryIndex = other.mPrimaryIndex;
+        for (u32 i = 0; i < 4; i++)
+            mAdjusted[i] = false;
     }
 
-    const Heap* getHeap(s32) const;
+    Heap* getHeap(s32 idx) const
+    {
+        if (idx < HeapMgr::getRootHeapNum())
+            return mHeaps[idx];
 
+        //SEAD_ASSERT_MSG(false, "illegal idx: %d", idx);
+        return mHeaps[0];
+    }
+
+private:
     Heap* mHeaps[4];
     bool mAdjusted[4];
     s32 mPrimaryIndex;
-};
 
-class HeapPolicy
+    friend class TaskMgr;
+};
+#ifdef cafe
+static_assert(sizeof(HeapArray) == 0x18, "sead::HeapArray size mismatch");
+#endif // cafe
+
+struct HeapPolicy
 {
-public:
-    HeapPolicy();
+    HeapPolicy()
+        : parent(NULL)
+        , size(0)
+        , create_slack(0)
+        , adjust_slack(0)
+        , adjust(0)
+        , temporary(0)
+        , dont_create(0)
+    {
+    }
 
     Heap* parent;
     u32 size;
@@ -40,13 +56,24 @@ public:
     u8 temporary;
     u8 dont_create;
 };
+#ifdef cafe
+static_assert(sizeof(HeapPolicy) == 0x14, "sead::HeapPolicy size mismatch");
+#endif // cafe
 
 class HeapPolicies
 {
 public:
+    HeapPolicies()
+        : mPrimaryIndex(0)
+    {
+    }
+
     HeapPolicy mPolicies[4];
     s32 mPrimaryIndex;
 };
+#ifdef cafe
+static_assert(sizeof(HeapPolicies) == 0x54, "sead::HeapPolicies size mismatch");
+#endif // cafe
 
 } // namespace sead
 

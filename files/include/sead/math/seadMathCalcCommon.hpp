@@ -1,6 +1,8 @@
 #pragma once
 
+#ifdef cafe
 #include <math/cafe/seadMathCalcCommonCafe.h>
+#endif // cafe
 
 #include <cmath>
 #include <limits>
@@ -21,6 +23,8 @@ MathCalcCommon<T>::rsqrt(T t)
     return 1 / std::sqrt(t);
 }
 
+#ifdef cafe
+
 template <>
 inline f32
 MathCalcCommon<f32>::sqrt(f32 t)
@@ -34,6 +38,8 @@ MathCalcCommon<f32>::rsqrt(f32 t)
 {
     return MathCafe<f32>::rsqrt(t);
 }
+
+#endif // cafe
 
 template <typename T>
 inline T
@@ -387,6 +393,8 @@ MathCalcCommon<u32>::abs(u32 t)
     return t;
 }
 
+#ifdef cafe
+
 template <>
 inline f32
 MathCalcCommon<f32>::abs(f32 t)
@@ -400,6 +408,8 @@ MathCalcCommon<f64>::abs(f64 t)
 {
     return std::fabs(t);
 }
+
+#endif // cafe
 
 template <typename T>
 inline s32

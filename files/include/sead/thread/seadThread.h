@@ -1,7 +1,8 @@
 #ifndef SEAD_THREAD_H_
 #define SEAD_THREAD_H_
 
-#include <thread/seadThread.h>
+#include <heap/seadDisposer.h>
+#include <prim/seadNamable.h>
 
 namespace sead {
 
@@ -18,7 +19,12 @@ public:
     virtual void waitDone();
     virtual void quitAndDestroySingleThread(bool is_jam);
     //...
+
+    u8 _18[0x90 - 0x18];
 };
+#ifdef cafe
+static_assert(sizeof(Thread) == 0x90, "sead::Thread size mismatch");
+#endif // cafe
 
 } // namespace sead
 

@@ -41,6 +41,7 @@ SECTIONS {
 	ASM_MTXConcat = 0xF6B98A0;
 	ASM_VECMag = 0xF6B96C4;
 	ASM_MTXScale = 0xF6B9B64;
+	ASM_VECCrossProduct = 0xF6B9660;
 
 	/* agl::lyr::Renderer */
 	draw__Q3_3agl3lyr8RendererCFQ3_3agl3lyr11DisplayType = 0xF5FAB90;
@@ -136,6 +137,7 @@ SECTIONS {
 	__CPR131__makeST__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J11J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J11JJ56J8Vec3BaseT2_v = 0xEDE2A88;
 	__CPR133__makeSRT__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J12J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J12JJ57J8Vec3BaseN22_v = 0xF0C8424;
 	__CPR137__setTranslation__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J19J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J19JJ64J8Vec3Base_v = 0xEC06174;
+	__CPR131__setBase__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J12J19Policies__tm__4_Z1Z9Mtx34BaseiRCQ3_J12JJ57J8Vec3Base_v = 0xEC06150;
 
 	/* sead::PrimitiveRenderer */
 	sInstance__Q2_4sead17PrimitiveRenderer = 0x106EA210;
@@ -147,6 +149,9 @@ SECTIONS {
 	/* sead::Projection */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead10ProjectionSFv = 0x106EBD74;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead10ProjectionSFv = 0x106ECA08;
+
+	/* sead::Quat<f32> */
+	unit__S__Q2_4sead13Quat__tm__2_f = 0x10AEC798;
 
 	/* sead::QuatCalcCommon<f32> */
 	__CPR138__makeVectorRotation__Q2_4sead23QuatCalcCommon__tm__2_fSFRQ3_J23J19Policies__tm__4_Z1Z8QuatBaseRCQ3_J23JJ64J8Vec3BaseT2_b = 0xEC1A660;

@@ -1,7 +1,9 @@
 #ifndef SEAD_FILEDEVICEMGR_H_
 #define SEAD_FILEDEVICEMGR_H_
 
+#ifdef cafe
 #include <cafe.h>
+#endif // cafe
 
 #include <container/seadTList.h>
 #include <filedevice/seadFileDevice.h>
@@ -91,6 +93,7 @@ protected:
     FileDevice* mDefaultFileDevice;
     MainFileDevice* mMainFileDevice;
 
+#ifdef cafe
 public:
     FSClient* getFSClient_() const { return const_cast<FSClient*>(&mFSClient); }
 
@@ -111,7 +114,13 @@ protected:
     char mFSHFIOMountPath[FS_MAX_MOUNTPATH_SIZE];
     char mFSSDMountPath[FS_MAX_MOUNTPATH_SIZE];
     u32 mFSSDMountCount;
+#else
+    #error "Unknown platform"
+#endif // cafe
 };
+#ifdef cafe
+static_assert(sizeof(FileDeviceMgr) == 0x182C, "sead::FileDeviceMgr size mismatch");
+#endif // cafe
 
 } // namespace sead
 
