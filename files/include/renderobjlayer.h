@@ -75,6 +75,12 @@ public:
     RenderObjLayer();
     virtual ~RenderObjLayer();
 
+    u32 getRenderStepNum() const override;
+    void getRenderStepName(sead::SafeString* name, s32 idx) const override;
+    void doInitialize(sead::Heap* heap) override;
+    u32 vf54() override;
+    void vf64(s32) override;
+
     // ...
 
     u8 _42C[0x478 - 0x42C];

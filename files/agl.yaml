@@ -1,7 +1,8 @@
 
 ---
 Files:
-  - source/agl/aglRenderer.cpp
+  - source/agl/lyr/aglRenderer.cpp
+  - source/agl/lyr/aglRenderer.S
 Hooks:
   # agl::lyr::Renderer::draw hack (Clear framebuffer to black)
   ## TV
@@ -14,3 +15,9 @@ Hooks:
     instr: bl
     addr: 0F0A11A8
     func: drawDRCHaxx__Q3_3agl3lyr8RendererCFQ3_3agl3lyr11DisplayType
+
+  # agl::lyr::Renderer::initLayer_ hack (Restore layer name)
+  - type: branch
+    instr: b
+    addr: 0F5FAEE8
+    func: initLayerHaxx__Q3_3agl3lyr8RendererFPQ3_3agl3lyr5LayeriRCQ2_4sead23SafeStringBase__tm__2_cQ3_3agl3lyr11DisplayTypePQ2_4sead4Heap

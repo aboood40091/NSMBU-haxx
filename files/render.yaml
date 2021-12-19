@@ -1,0 +1,7 @@
+
+---
+Files:
+  - source/render/shader.cpp
+  - source/render/texture.cpp
+  - source/render/vbo.cpp
+Hooks: []

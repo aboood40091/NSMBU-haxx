@@ -10,6 +10,7 @@ Modules:
   - distantviewmgr.yaml
   - dynamic_libs.yaml
   - profile.yaml
+  - render.yaml
   - sead.yaml
   - sound.yaml
   - tasks.yaml

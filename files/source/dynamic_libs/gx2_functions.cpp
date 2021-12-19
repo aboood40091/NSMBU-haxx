@@ -62,6 +62,7 @@ EXPORT_DECL(void, GX2SetDepthBuffer, const GX2DepthBuffer *depthBuffer);
 EXPORT_DECL(void, GX2SetAttribBuffer, u32 attr_index, u32 attr_size, u32 stride, const void* attr);
 EXPORT_DECL(void, GX2InitTextureRegs, GX2Texture *texture);
 EXPORT_DECL(void, GX2InitSampler, GX2Sampler *sampler, s32 tex_clamp, s32 min_mag_filter);
+EXPORT_DECL(void, GX2SetShaderModeEx, u32 mode, u32 num_vs_gpr, u32 num_vs_stack_entries, u32 num_gs_gpr, u32 num_gs_stack_entries, u32 num_ps_gpr, u32 num_ps_stack_entries);
 EXPORT_DECL(u32, GX2CalcFetchShaderSizeEx, u32 num_attrib, s32 fetch_shader_type, s32 tessellation_mode);
 EXPORT_DECL(void, GX2InitFetchShaderEx, GX2FetchShader* fs, void* fs_buffer, u32 count, const GX2AttribStream* attribs, s32 fetch_shader_type, s32 tessellation_mode);
 EXPORT_DECL(void, GX2SetFetchShader, const GX2FetchShader* fs);
@@ -156,6 +157,7 @@ extern "C" void InitGX2FunctionPointers(void) {
     OS_FIND_EXPORT(gx2_handle, GX2SetAttribBuffer);
     OS_FIND_EXPORT(gx2_handle, GX2InitTextureRegs);
     OS_FIND_EXPORT(gx2_handle, GX2InitSampler);
+    OS_FIND_EXPORT(gx2_handle, GX2SetShaderModeEx);
     OS_FIND_EXPORT(gx2_handle, GX2CalcFetchShaderSizeEx);
     OS_FIND_EXPORT(gx2_handle, GX2InitFetchShaderEx);
     OS_FIND_EXPORT(gx2_handle, GX2SetFetchShader);

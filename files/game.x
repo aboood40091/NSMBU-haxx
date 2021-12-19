@@ -36,6 +36,9 @@ SECTIONS {
 	GFDGetPixelShaderHeaderSize = 0xF6B8D10;
 	GFDGetPixelShaderProgramSize = 0xF6B8D40;
 	GFDGetPixelShader = 0xF6B8FC0;
+	_GFDCheckHeaderVersions = 0xF6B8A18;
+	_GFDCheckBlockHeaderMagicVersions = 0xF6B8ABC;
+	_GFDRelocateBlock = 0xF6B8E04;
 
 	/* MTX Library */
 	ASM_MTXConcat = 0xF6B98A0;
@@ -43,8 +46,34 @@ SECTIONS {
 	ASM_MTXScale = 0xF6B9B64;
 	ASM_VECCrossProduct = 0xF6B9660;
 
+	/* agl::lyr::DrawMethod */
+	__vtbl__Q3_3agl3lyr10DrawMethod = 0x106AA254;
+	__dt__Q3_3agl3lyr10DrawMethodFv = 0xF5F760C;
+
 	/* agl::lyr::Renderer */
+	sInstance__Q3_3agl3lyr8Renderer = 0x106EAC2C;
 	draw__Q3_3agl3lyr8RendererCFQ3_3agl3lyr11DisplayType = 0xF5FAB90;
+	initLayer__4__Q3_3agl3lyr8RendererFPQ3_3agl3lyr5LayeriRCQ2_4sead23SafeStringBase__tm__2_cQ3_3agl3lyr11DisplayTypePQ2_4sead4Heap = 0xF5FAEEC;
+
+	/* agl::lyr::Renderer::createLayer<T> */
+	createLayer__tm__30_Q2_16CourseSelectTask7Layer2D__Q3_3agl3lyr8RendererFiRCQ2_4sead23SafeStringBase__tm__2_cQ3_3agl3lyr11DisplayTypePQ2_4sead4Heap_PZ1Z = 0xEDAF0F0;
+
+	/* agl::lyr::Layer */
+	pushBackDrawMethod__Q3_3agl3lyr5LayerFUiPQ3_3agl3lyr10DrawMethod = 0xF5F76B8;
+
+	/* agl::TextureData */
+	__ct__Q2_3agl11TextureDataFv = 0xF5E49A0;
+	__dt__Q2_3agl11TextureDataFv = __deleted_virtual_called;
+	invalidateGPUCache__Q2_3agl11TextureDataFv = 0xF5E4A64;
+
+	/* agl::TextureDataInitializerGTX */
+	initialize__Q2_3agl25TextureDataInitializerGTXSFPQ2_3agl11TextureDataPvUi = 0xF5E4F38;
+
+	/* agl::TextureSampler */
+	__ct__Q2_3agl14TextureSamplerFv = 0xF5E587C;
+	__dt__Q2_3agl14TextureSamplerFv = 0xF5E5C60;
+	applyTextureData___Q2_3agl14TextureSamplerFRCQ2_3agl11TextureData = 0xF5E5990;
+	activate__Q2_3agl14TextureSamplerCFRCQ2_3agl15SamplerLocationi = 0xF5E5F18;
 
 	/* nw::eft::EmitterSet */
 	SetMtx__Q3_2nw3eft10EmitterSetFRCQ3_2nw4math5MTX34 = 0xF62AD00;
@@ -100,8 +129,12 @@ SECTIONS {
 	getMethodTreeNode__Q2_4sead13CalculateTaskFi = 0xF5BC4F0;
 
 	/* sead::Camera */
+	__vtbl__Q2_4sead6Camera = 0x10692A24;
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead6CameraSFv = 0x106EBD88;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead6CameraSFv = 0x106EDE10;
+
+	/* sead::Color4f */
+	cWhite__Q2_4sead7Color4f = 0x10AEC2A0;
 
 	/* sead::DirectResource */
 	__vtbl__Q2_4sead14DirectResource = 0x106A5C78;
@@ -124,6 +157,7 @@ SECTIONS {
 	/* sead::FileHandle */
 	read__Q2_4sead10FileHandleFPUcUi = 0xF5B81D0;
 	tryRead__Q2_4sead10FileHandleFPUiPUcUi = 0xF5B8230;
+	getFileSize__Q2_4sead10FileHandleFv = 0xF5B8368;
 
 	/* sead::FrameBuffer */
 	bind__Q2_4sead11FrameBufferCFv = 0xF5C58F0;
@@ -145,9 +179,17 @@ SECTIONS {
 	__ct__Q2_4sead9IDisposerFv = 0xF5CA2FC;
 	__dt__Q2_4sead9IDisposerFv = 0xf5ca384;
 
+	/* sead::LookAtCamera */
+	__vtbl__Q2_4sead12LookAtCamera = 0x10692A4C;
+	__dt__Q2_4sead12LookAtCameraFv = 0xF5C4B94;
+	doUpdateMatrix__Q2_4sead12LookAtCameraCFPQ2_4sead17Matrix34__tm__2_f = 0xF5C4BE8;
+
 	/* sead::MathCalcCommon<f32> */
 	cSinCosTbl__S__Q2_4sead23MathCalcCommon__tm__2_f = 0x10693738;
 	atanIdx___S__Q2_4sead23MathCalcCommon__tm__2_fSFZ1Z_Ui = 0xF5CE124;
+
+	/* sead::Matrix34<f32> */
+	ident__S__Q2_4sead17Matrix34__tm__2_f = 0x10AEC458;
 
 	/* sead::Matrix34CalcCommon<f32> */
 	__CPR161__makeRTIdx__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J14J19Policies__tm__4_Z1Z9Mtx34BaseRCQ2_J14J17Vector3__tm__3_UiRCQ3_J14JJ59J8Vec3Base_v = 0xebfc1c8;
@@ -165,12 +207,23 @@ SECTIONS {
 	sInstance__Q2_4sead17PrimitiveRenderer = 0x106EA210;
 	setCamera__Q2_4sead17PrimitiveRendererFRCQ2_4sead6Camera = 0xF5C83D0;
 	setProjection__Q2_4sead17PrimitiveRendererFRCQ2_4sead10Projection = 0xF5C83E4;
+	setModelMatrix__Q2_4sead17PrimitiveRendererFRCQ2_4sead17Matrix34__tm__2_f = 0xF5C83F8;
 	begin__Q2_4sead17PrimitiveRendererFv = 0xF5C8408;
 	end__Q2_4sead17PrimitiveRendererFv = 0xF5C841C;
+	__CPR75__drawQuad__Q2_4sead17PrimitiveRendererFRCQ3_J13JJ18J7QuadArg = 0xF5C8430;
+
+	/* sead::PrimitiveRenderer::QuadArg */
+	setColor__Q3_4sead17PrimitiveRenderer7QuadArgFRCQ2_4sead7Color4fT1 = 0xF5C8628;
 
 	/* sead::Projection */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead10ProjectionSFv = 0x106EBD74;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead10ProjectionSFv = 0x106ECA08;
+	getDeviceProjectionMatrix__Q2_4sead10ProjectionCFv = 0xF5C5A9C;
+
+	/* sead::PerspectiveProjection */
+	__ct__Q2_4sead21PerspectiveProjectionFv = 0xF5C6108;
+	__dt__Q2_4sead21PerspectiveProjectionFv = 0xF5C6298;
+	set__Q2_4sead21PerspectiveProjectionFfN31 = 0xF5C62EC;
 
 	/* sead::Quat<f32> */
 	unit__S__Q2_4sead13Quat__tm__2_f = 0x10AEC798;
@@ -186,6 +239,9 @@ SECTIONS {
 	/* sead::ResourceMgr */
 	sInstance__Q2_4sead11ResourceMgr = 0x106EA274;
 	unregisterDecompressor__Q2_4sead11ResourceMgrFPQ2_4sead12Decompressor = 0xF5D3FA8;
+
+	/* sead::SafeStringBase<char> */
+	cNullChar__S__Q2_4sead23SafeStringBase__tm__2_c = 0x10502244;
 
 	/* sead::SZSDecompressor */
 	__vtbl__Q2_4sead15SZSDecompressor = 0x106A5F68;
@@ -213,6 +269,10 @@ SECTIONS {
 	/* sead::UnitHeap */
 	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8UnitHeapSFv */
 	/* typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead8UnitHeapSFv */
+
+	/* sead::Vector3<f32> */
+	zero__S__Q2_4sead16Vector3__tm__2_f = 0x10AEC960;
+	ones__S__Q2_4sead16Vector3__tm__2_f = 0x10AEC990;
 
 	/* sead::Vector3CalcCommon<f32> */
 	normalize__Q2_4sead26Vector3CalcCommon__tm__2_fSFRQ3_4sead19Policies__tm__4_Z1Z8Vec3Base_Z1Z = 0xEC1A5F4;

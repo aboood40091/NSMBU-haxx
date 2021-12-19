@@ -1,14 +1,16 @@
 #pragma once
 
+#include <agl/aglRenderBuffer.h>
+#include <agl/lyr/aglLayer.h>
+
 #include <container/seadBuffer.h>
 #include <container/seadPtrArray.h>
 #include <heap/seadDisposer.h>
+#include <heap/seadHeap.h>
 #include <math/seadVector.h>
 #include <prim/seadBitFlag.h>
+#include <prim/seadSafeString.h>
 #include <thread/seadCriticalSection.h>
-
-#include "layer.h"
-#include "renderbuffer.h"
 
 namespace agl { namespace lyr {
 
@@ -32,13 +34,19 @@ public:
     bool drawTVHaxx(DisplayType display_type) const;
     bool drawDRCHaxx(DisplayType display_type) const;
 
+    void initLayer_(Layer* layer, s32 layer_idx, const sead::SafeString& name, DisplayType display_type, sead::Heap* heap);
+    void initLayerHaxx(Layer* layer, s32 layer_idx, const sead::SafeString& name, DisplayType display_type, sead::Heap* heap);
+
+    template <typename T>
+    T* createLayer(s32 layer_idx, const sead::SafeString& name, DisplayType display_type, sead::Heap* heap);
+
     // ...
 
     u32 isDisplayList;
     u32 multiSampleType; // agl::MultiSampleType
     u8 renderDisplays[cDisplayType_Max][0x6C4]; // agl::lyr::RenderDisplay[cDisplayType_Max]
-    agl::RenderBuffer* renderBuffers[cDisplayType_Max];
-    sead::Buffer<agl::lyr::Layer*> layers;
+    RenderBuffer* renderBuffers[cDisplayType_Max];
+    sead::Buffer<Layer*> layers;
     mutable sead::BitFlag16 flags;
     f32 _DB4;
     u8 _DB8[16];

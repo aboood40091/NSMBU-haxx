@@ -27,6 +27,8 @@ public:
     ObjLayer();
     virtual ~ObjLayer();
 
+    virtual void vf64(s32) { }
+
     // ...
 
     u8 _420[0x42C - 0x420];

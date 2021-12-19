@@ -1,5 +1,7 @@
-#include <agl/renderer.h>
+#include <agl/lyr/aglRenderer.h>
 #include <gfx/seadViewport.h>
+
+//#include <log.h>
 
 namespace agl { namespace lyr {
 
@@ -65,6 +67,18 @@ bool Renderer::drawDRCHaxx(DisplayType display_type) const
 
     // This must return true
     return draw(display_type);
+}
+
+/* Save the Layer's name */
+
+void Renderer::initLayerHaxx(Layer* layer, s32 layer_idx, const sead::SafeString& name,
+                             DisplayType display_type, sead::Heap* heap)
+{
+    const char* c_name = name.cstr();
+    initLayer_(layer, layer_idx, name, display_type, heap);
+    //SEAD_ASSERT(layer->name == NULL);
+    layer->name = c_name;
+    //LOG("Restored agl::lyr::Layer name for %s", c_name);
 }
 
 } }
