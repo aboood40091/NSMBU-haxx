@@ -26,6 +26,7 @@ SECTIONS {
 	/* GHS C FUNCTIONS */
 	_f_ftoll = 0xF6BEBFC;
 	__gh_float_printf = 0xF6BABA8;
+	__memzero = 0xF6BA55C;
 
 	/* GFD */
 	GFDGetVertexShaderCount = 0xF6B8C04;
@@ -633,6 +634,9 @@ SECTIONS {
 	isRightHeld__11PlayerInputCFv = 0xF4D5F9C;
 	isLeftHeld__11PlayerInputCFv = 0xF4D5F90;
 
+	/* LayerAgl */
+	__ct__8LayerAglFv = 0xF0B9290;
+
 	/* LayerAgl::Node */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8LayerAgl4NodeSFv = 0x106EBF00;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8LayerAgl4NodeSFv = 0x106EC194;
@@ -644,6 +648,9 @@ SECTIONS {
 	/* RenderObjLayer::Node */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EBF08;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EC19C;
+
+	/* CourseSelectTask::Layer2D */
+	__vtbl__Q2_16CourseSelectTask7Layer2D = 0x10549218;
 
 	/* Misc */
 	BLOSDynLoad_Acquire = 0xF65EF58;

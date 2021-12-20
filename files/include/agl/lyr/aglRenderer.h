@@ -3,6 +3,7 @@
 #include <agl/aglRenderBuffer.h>
 #include <agl/lyr/aglLayer.h>
 
+#include <basis/seadNew.h>
 #include <container/seadBuffer.h>
 #include <container/seadPtrArray.h>
 #include <heap/seadDisposer.h>
@@ -69,5 +70,13 @@ public:
     f32 _F70;
 };
 static_assert(sizeof(Renderer) == 0xF78, "agl::lyr::Renderer size mismatch");
+
+template <typename T>
+T* Renderer::createLayer(s32 layer_idx, const sead::SafeString& name, DisplayType display_type, sead::Heap* heap)
+{
+    T* layer = new (heap) T();
+    initLayerHaxx(layer, layer_idx, name, display_type, heap);
+    return layer;
+}
 
 } }

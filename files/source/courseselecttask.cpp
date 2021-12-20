@@ -26,9 +26,7 @@ class CourseSelectTask : public sead::CalculateTask
 public:
     class Layer2D : public LayerAgl
     {
-        Layer2D();
-        virtual ~Layer2D();
-
+    public:
         u32 getRenderStepNum() const override;
         void getRenderStepName(sead::SafeString* name, s32 idx) const override;
     };
