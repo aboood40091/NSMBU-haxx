@@ -55,6 +55,8 @@ private:
     sead::LookAtCamera mCamera;
     sead::PerspectiveProjection mProjection;
     Vec3u mCubeRotations[10];
+    f32 mScale;
+    Mtx34 mScaleMtx;
 };
 
 SEAD_TASK_SINGLETON_DISPOSER_IMPL(CourseSelectTask)
@@ -66,9 +68,11 @@ CourseSelectTask::CourseSelectTask(const sead::TaskConstructArg& arg)
     , mVBO(nullptr)
     , mTexture1(nullptr)
     , mTexture2(nullptr)
+    , mScale(16.0f)
 {
-    mCamera.getPos() = Vec3(0.0f, 0.0f, 3.0f);
-    mCamera.getAt() = Vec3(0.0f, 0.0f, 2.0f);
+    mScaleMtx.makeS(Vec3(mScale, mScale, mScale));
+
+    mCamera.getPos() = Vec3(0.0f, 0.0f, mScale * 3.0f);
     mCamera.doUpdateMatrix(&mCamera.getMatrix());
 }
 
@@ -241,7 +245,7 @@ void CourseSelectTask::prepare()
         mSamplerLoc2.loc.ps = 1;
     }
 
-    mProjection.set(0.1f, 100.0f, sead::Mathf::deg2rad(45), 1280.0f / 720.0f);
+    mProjection.set(mScale * 0.1f, mScale * 100.0f, sead::Mathf::deg2rad(45), 1280.0f / 720.0f);
 
     for (u32 i = 0; i < 10; i++)
     {
@@ -331,6 +335,7 @@ void CourseSelectTask::render(const agl::lyr::RenderInfo& render_info)
     for (u32 i = 0; i < 10; i++)
     {
         mModelMtx.makeRTIdx(mCubeRotations[i], cubePositions[i]);
+        mModelMtx.setMul(mScaleMtx, mModelMtx);
         mShader->setMat4("model", mModelMtx);
 
         GX2DrawEx(GX2_PRIMITIVE_TRIANGLES, 36, 0, 1);
@@ -338,7 +343,7 @@ void CourseSelectTask::render(const agl::lyr::RenderInfo& render_info)
 
     sead::PrimitiveRenderer::instance()->setProjection(mProjection);
     sead::PrimitiveRenderer::instance()->setCamera(mCamera);
-    sead::PrimitiveRenderer::instance()->setModelMatrix(Mtx34::ident);
+    sead::PrimitiveRenderer::instance()->setModelMatrix(mScaleMtx);
     sead::PrimitiveRenderer::instance()->begin();
 
     sead::PrimitiveRenderer::QuadArg arg;
