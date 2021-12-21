@@ -652,6 +652,11 @@ SECTIONS {
 	/* CourseSelectTask::Layer2D */
 	__vtbl__Q2_16CourseSelectTask7Layer2D = 0x10549218;
 
+	/* ControllerWrapper */
+	__ct__17ControllerWrapperFv = 0xF0D4150;
+	__dt__17ControllerWrapperFv = 0xF0D40E8;
+	registerWith__17ControllerWrapperFQ2_14GameController2Id = 0xF0D41B0;
+
 	/* Misc */
 	BLOSDynLoad_Acquire = 0xF65EF58;
 	BOSDynLoad_FindExport = 0xF65F418;

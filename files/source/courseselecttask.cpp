@@ -9,6 +9,7 @@
 #include <gfx/seadPrimitiveRenderer.h>
 #include <gfx/seadProjection.h>
 #include <util/vec.h>
+#include <controllerwrapper.h>
 #include <layeragl.h>
 
 #include "render/shader.h"
@@ -57,6 +58,7 @@ private:
     Vec3u mCubeRotations[10];
     f32 mScale;
     Mtx34 mScaleMtx;
+    ControllerWrapper mController;
 };
 
 SEAD_TASK_SINGLETON_DISPOSER_IMPL(CourseSelectTask)
@@ -266,6 +268,8 @@ void CourseSelectTask::enter()
     if (!mInitialized)
         return;
 
+    mController.registerWith(GameController::cId_CafeDRC);
+
     mDrawMethod.bind(this, &CourseSelectTask::render, "CourseSelect");
     agl::lyr::Renderer::instance()->layers[6]->pushBackDrawMethod(0, &mDrawMethod);
 }
@@ -313,6 +317,51 @@ void CourseSelectTask::calc()
         }
     }
 #endif // COURSE_SELECT_DEBUG
+
+    Vec3& cameraPos = mCamera.getPos();
+    Vec3& cameraUp = mCamera.getUp();
+    Vec3& cameraAt = mCamera.getAt();
+    const Vec3 cameraFront = Vec3(0.0f, 0.0f, -1.0f);
+    const f32 cameraSpeed = mScale * (5.0f / 120.0f);
+    bool changed = false;
+
+    // Down
+    if (mController.mPadHold.isOnBit(4))
+    {
+        cameraPos += cameraFront * cameraSpeed;
+        changed = true;
+    }
+    // Up
+    if (mController.mPadHold.isOnBit(5))
+    {
+        cameraPos -= cameraFront * cameraSpeed;
+        changed = true;
+    }
+    // Left
+    if (mController.mPadHold.isOnBit(6))
+    {
+        Vec3 cameraRight;
+        cameraRight.setCross(cameraFront, cameraUp);
+        cameraRight.normalize();
+
+        cameraPos -= cameraRight * cameraSpeed;
+        changed = true;
+    }
+    //Right
+    if (mController.mPadHold.isOnBit(7))
+    {
+        Vec3 cameraRight;
+        cameraRight.setCross(cameraFront, cameraUp);
+        cameraRight.normalize();
+        cameraPos += cameraRight * cameraSpeed;
+        changed = true;
+    }
+
+    if (changed)
+    {
+        cameraAt = cameraPos + cameraFront;
+        mCamera.doUpdateMatrix(&mCamera.getMatrix());
+    }
 }
 
 void CourseSelectTask::render(const agl::lyr::RenderInfo& render_info)
