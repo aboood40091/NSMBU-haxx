@@ -10,7 +10,10 @@
 #include <gfx/seadProjection.h>
 #include <util/vec.h>
 #include <controllerwrapper.h>
-#include <layeragl.h>
+#include <drawmgr.h>
+#include <model.h>
+#include <objlayerrenderer.h>
+#include <renderobjlayer.h>
 
 #include "render/shader.h"
 #include "render/texture.h"
@@ -41,11 +44,13 @@ public:
     void exit() override;
     void calc() override;
 
+    void gather();
     void render(const agl::lyr::RenderInfo& render_info);
 
 private:
     bool mInitialized;
-    agl::lyr::DrawMethod mDrawMethod;
+    agl::lyr::DrawMethod mGatherDrawMethod;
+    agl::lyr::DrawMethod mRenderDrawMethod;
     ShaderUR* mShader;
     VBO* mVBO;
     Texture* mTexture1;
@@ -59,6 +64,7 @@ private:
     f32 mScale;
     Mtx34 mScaleMtx;
     ControllerWrapper mController;
+    ModelWrapper* mTestModel;
 };
 
 SEAD_TASK_SINGLETON_DISPOSER_IMPL(CourseSelectTask)
@@ -71,6 +77,7 @@ CourseSelectTask::CourseSelectTask(const sead::TaskConstructArg& arg)
     , mTexture1(nullptr)
     , mTexture2(nullptr)
     , mScale(16.0f)
+    , mTestModel(nullptr)
 {
     mScaleMtx.makeS(Vec3(mScale, mScale, mScale));
 
@@ -175,10 +182,19 @@ void CourseSelectTask::prepare()
     agl::lyr::Renderer::instance()->createLayer<Layer2D>(6,  "CourseSelect",     agl::lyr::cDisplayType_Top_TV,     nullptr);
   //agl::lyr::Renderer::instance()->createLayer<Layer2D>(24, "CourseSelect_DRC", agl::lyr::cDisplayType_Bottom_DRC, nullptr);
 
+    ObjLayerRenderer* renderer = new ((sead::Heap*)nullptr) ObjLayerRenderer("CourseSelect");
+    renderer->init(/* 2 */ 1, 0x300, 5, 5, nullptr);
+
+    RenderObjLayer* layer_renderobj     = agl::lyr::Renderer::instance()->createLayer<RenderObjLayer>(7,  "CourseSelect_RenderObj",     agl::lyr::cDisplayType_Top_TV,     nullptr);
+  //RenderObjLayer* layer_renderobj_drc = agl::lyr::Renderer::instance()->createLayer<RenderObjLayer>(25, "CourseSelect_RenderObj_DRC", agl::lyr::cDisplayType_Bottom_DRC, nullptr);
+
+    layer_renderobj->setParentRenderer(renderer);
+  //layer_renderobj_drc->setParentRenderer(renderer);
+
     mShader = new ShaderUR("res/7.2.camera.gsh");
     if (!mShader->isInitialized())
     {
-        LOG("Shader loading failed.");
+        LOG("Shader loading failed.")
         delete mShader;
         mShader = nullptr;
         return;
@@ -188,7 +204,7 @@ void CourseSelectTask::prepare()
     if (!mVBO->setVertexAttrib(0, 0,               VBO::VAR_TYPE_VEC3) || // position
         !mVBO->setVertexAttrib(1, 3 * sizeof(f32), VBO::VAR_TYPE_VEC2))   // texcoord
     {
-        LOG("Vertex Attributes setup failed.");
+        LOG("Vertex Attributes setup failed.")
         delete mVBO;
         mVBO = nullptr;
         return;
@@ -201,7 +217,7 @@ void CourseSelectTask::prepare()
         mTexture1 = new Texture("res/container.gtx");
         if (!mTexture1->isInitialized())
         {
-            LOG("Texture 1 loading failed.");
+            LOG("Texture 1 loading failed.")
             delete mTexture1;
             mTexture1 = nullptr;
             return;
@@ -226,7 +242,7 @@ void CourseSelectTask::prepare()
         mTexture2 = new Texture("res/awesomeface.gtx");
         if (!mTexture2->isInitialized())
         {
-            LOG("Texture 2 loading failed.");
+            LOG("Texture 2 loading failed.")
             delete mTexture2;
             mTexture2 = nullptr;
             return;
@@ -256,6 +272,13 @@ void CourseSelectTask::prepare()
         mCubeRotations[i].z = i * 0x19999999u; // sead::GlobalRandom::instance()->randU32()
     }
 
+    mTestModel = ModelWrapper::create(ResArchiveMgr::instance->get("MarioMdl"), "MB_model");
+    if (mTestModel == NULL)
+    {
+        LOG("Test model loading failed.")
+        return;
+    }
+
     mInitialized = true;
 
     LOG("CourseSelectTask::prepare end")
@@ -263,15 +286,34 @@ void CourseSelectTask::prepare()
 
 void CourseSelectTask::enter()
 {
-    LOG("CourseSelectTask::enter")
+    LOG("CourseSelectTask::enter start")
 
     if (!mInitialized)
+    {
+        LOG("CourseSelectTask::enter uninitialized")
         return;
+    }
 
     mController.registerWith(GameController::cId_CafeDRC);
 
-    mDrawMethod.bind(this, &CourseSelectTask::render, "CourseSelect");
-    agl::lyr::Renderer::instance()->layers[6]->pushBackDrawMethod(0, &mDrawMethod);
+    mGatherDrawMethod.bind(this, &CourseSelectTask::gather, "CourseSelect_Gather");
+    agl::lyr::Renderer::instance()->layers[0]->pushBackDrawMethod(&mGatherDrawMethod);
+
+    mRenderDrawMethod.bind(this, &CourseSelectTask::render, "CourseSelect");
+    agl::lyr::Renderer::instance()->layers[6]->pushBackDrawMethod(0, &mRenderDrawMethod);
+
+    agl::lyr::Layer* layer_main = agl::lyr::Renderer::instance()->layers[6];
+    layer_main->renderCamera = &mCamera;
+    layer_main->renderProjection = &mProjection;
+
+    agl::lyr::Layer* layer_renderobj = agl::lyr::Renderer::instance()->layers[7];
+    layer_renderobj->renderCamera = &mCamera;
+    layer_renderobj->renderProjection = &mProjection;
+
+    mTestModel->setMtx(Mtx34::ident);
+    mTestModel->updateModel();
+
+    LOG("CourseSelectTask::enter end")
 }
 
 void CourseSelectTask::exit()
@@ -308,11 +350,11 @@ void CourseSelectTask::calc()
             const char* name = (layer->name != NULL) ? layer->name
                                                      : "{no-name}";
 
-            LOG("Layer %d, Name: %s, vtbl addr: 0x%08X", i, name, getLyrVtbl(layer));
+            LOG("Layer %d, Name: %s, vtbl addr: 0x%08X", i, name, getLyrVtbl(layer))
             for (s32 j = 0; j < layer->getRenderStepNum(); j++)
             {
                 layer->getRenderStepName(&render_step_name, j);
-                LOG(" - Render Step %d: %s", j, render_step_name.cstr());
+                LOG(" - Render Step %d: %s", j, render_step_name.cstr())
             }
         }
     }
@@ -362,6 +404,19 @@ void CourseSelectTask::calc()
         cameraAt = cameraPos + cameraFront;
         mCamera.doUpdateMatrix(&mCamera.getMatrix());
     }
+
+    mTestModel->updateModel();
+}
+
+void CourseSelectTask::gather()
+{
+    ObjLayer* layer_renderobj = sead::DynamicCast<ObjLayer>(agl::lyr::Renderer::instance()->layers[7]);
+    DrawMgr::instance->setTargetLayer(layer_renderobj, 1);
+
+    // Schedule test model for rendering
+    DrawMgr::instance->drawModel(mTestModel);
+
+    DrawMgr::instance->resetTargetLayer();
 }
 
 void CourseSelectTask::render(const agl::lyr::RenderInfo& render_info)
@@ -381,7 +436,7 @@ void CourseSelectTask::render(const agl::lyr::RenderInfo& render_info)
     mShader->setMat4("projection", mProjection.getDeviceProjectionMatrix());
     mShader->setMat4("view", mCamera.getMatrix());
 
-    for (u32 i = 0; i < 10; i++)
+    for (u32 i = 1; i < 10; i++) // Skip first cube
     {
         mModelMtx.makeRTIdx(mCubeRotations[i], cubePositions[i]);
         mModelMtx.setMul(mScaleMtx, mModelMtx);

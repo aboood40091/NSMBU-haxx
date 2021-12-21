@@ -1,5 +1,7 @@
 #pragma once
 
+#include <gfx/seadCamera.h>
+#include <gfx/seadProjection.h>
 #include <heap/seadDisposer.h>
 #include <heap/seadHeap.h>
 #include <prim/seadSafeString.h>
@@ -30,7 +32,12 @@ public:
     DrawMethod* pushBackDrawMethod(DrawMethod* draw_method);
     // ...
 
-    u8 _10[0x90 - 0x10];
+    u8 _10[0x44 - 0x10];
+
+    sead::Camera* renderCamera;
+    sead::Projection* renderProjection;
+
+    u8 _4c[0x90 - 0x4C];
 
     const char* name;     // This is not what the field actually is
                           // I just determined that it's unused and therefore am using it for myself

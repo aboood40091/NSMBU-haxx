@@ -58,9 +58,13 @@ SECTIONS {
 
 	/* agl::lyr::Renderer::createLayer<T> */
 	createLayer__tm__30_Q2_16CourseSelectTask7Layer2D__Q3_3agl3lyr8RendererFiRCQ2_4sead23SafeStringBase__tm__2_cQ3_3agl3lyr11DisplayTypePQ2_4sead4Heap_PZ1Z = 0xEDAF0F0;
+	createLayer__tm__17_14RenderObjLayer__Q3_3agl3lyr8RendererFiRCQ2_4sead23SafeStringBase__tm__2_cQ3_3agl3lyr11DisplayTypePQ2_4sead4Heap_PZ1Z = 0xEDAF180;
 
 	/* agl::lyr::Layer */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q3_3agl3lyr5LayerSFv = 0x106EBF20;
+	typeInfo__L0__getRuntimeTypeInfoStatic__Q3_3agl3lyr5LayerSFv = 0x106EC26C;
 	pushBackDrawMethod__Q3_3agl3lyr5LayerFUiPQ3_3agl3lyr10DrawMethod = 0xF5F76B8;
+	pushBackDrawMethod__Q3_3agl3lyr5LayerFPQ3_3agl3lyr10DrawMethod = 0xF5F7710;
 
 	/* agl::TextureData */
 	__ct__Q2_3agl11TextureDataFv = 0xF5E49A0;
@@ -576,6 +580,8 @@ SECTIONS {
 	drawModel__7DrawMgrFP5Model = 0xf0bab58;
 	drawModel__7DrawMgrFP12ModelWrapper = 0xf0bac98;
 	drawTile__7DrawMgrFUsRCQ2_4sead16Vector3__tm__2_fRCUiT2 = 0xf0bad28;
+	setTargetLayer__7DrawMgrFP8ObjLayerUi = 0xF0BAA50;
+	resetTargetLayer__7DrawMgrFv = 0xF0BAB4C;
 
 	/* MovementHandler */
 	__ct__15MovementHandlerFv = 0xF409C40;
@@ -635,15 +641,25 @@ SECTIONS {
 	isLeftHeld__11PlayerInputCFv = 0xF4D5F90;
 
 	/* LayerAgl */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__8LayerAglSFv = 0x106EC05C;
+	typeInfo__L0__getRuntimeTypeInfoStatic__8LayerAglSFv = 0x106EC270;
 	__ct__8LayerAglFv = 0xF0B9290;
 
 	/* LayerAgl::Node */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8LayerAgl4NodeSFv = 0x106EBF00;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8LayerAgl4NodeSFv = 0x106EC194;
 
+	/* ObjLayer */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__8ObjLayerSFv = 0x106EC060;
+	typeInfo__L0__getRuntimeTypeInfoStatic__8ObjLayerSFv = 0x106EC274;
+	setParentRenderer__8ObjLayerFP16ObjLayerRenderer = 0xF0BCA24;
+
 	/* ObjLayer::Node */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8ObjLayer4NodeSFv = 0x106EBF04;
 	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8ObjLayer4NodeSFv = 0x106EC198;
+
+	/* RenderObjLayer */
+	__ct__14RenderObjLayerFv = 0xF0BCA6C;
 
 	/* RenderObjLayer::Node */
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EBF08;
@@ -656,6 +672,10 @@ SECTIONS {
 	__ct__17ControllerWrapperFv = 0xF0D4150;
 	__dt__17ControllerWrapperFv = 0xF0D40E8;
 	registerWith__17ControllerWrapperFQ2_14GameController2Id = 0xF0D41B0;
+
+	/* ObjLayerRenderer */
+	__ct__16ObjLayerRendererFRCQ2_4sead23SafeStringBase__tm__2_c = 0xF0BAF58;
+	init__16ObjLayerRendererFUiN31PQ2_4sead4Heap = 0xF0BB128;
 
 	/* Misc */
 	BLOSDynLoad_Acquire = 0xF65EF58;
