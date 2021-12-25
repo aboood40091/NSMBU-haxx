@@ -1,15 +1,13 @@
 #pragma once
 
+#ifdef cafe
+
 #include <cstddef>
 
 // Workarounds to match newer standards
 #define nullptr NULL
 #define override
 #define forceinline __attribute__((always_inline))
-
-#ifndef cafe
-#define cafe
-#endif // cafe
 
 #ifndef static_assert
 
@@ -20,6 +18,8 @@
 #define static_assert(condition, ...) typedef int TOKENPASTE2(static_assert_, __LINE__)[(condition) ? 1 : -1]
 
 #endif // static_assert
+
+#endif // cafe
 
 typedef unsigned char       u8;
 typedef unsigned short      u16;
