@@ -5,6 +5,8 @@ Include: ../files/include/sead
 Modules:
   - aa.yaml
   - agl.yaml
+  - areatask.yaml
+  - courseselect.yaml
   - ctors.yaml
   - customactors.yaml
   - distantviewmgr.yaml
@@ -13,4 +15,3 @@ Modules:
   - render.yaml
   - sead.yaml
   - sound.yaml
-  - tasks.yaml

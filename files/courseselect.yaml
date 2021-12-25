@@ -1,0 +1,16 @@
+
+---
+Files:
+  - source/courseselect/task.cpp
+
+Hooks:
+  # CourseSelectTask
+  - type: branch
+    instr: b
+    addr: 0EE256C0
+    func: setInstance___16CourseSelectTaskSFPQ2_4sead8TaskBase
+
+  - type: branch
+    instr: b
+    addr: 0EE256E0
+    func: __ct__16CourseSelectTaskFRCQ2_4sead16TaskConstructArg

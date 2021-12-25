@@ -15,9 +15,9 @@
 #include <objlayerrenderer.h>
 #include <renderobjlayer.h>
 
-#include "render/shader.h"
-#include "render/texture.h"
-#include "render/vbo.h"
+#include "../render/shader.h"
+#include "../render/texture.h"
+#include "../render/vbo.h"
 
 #include <log.h>
 
