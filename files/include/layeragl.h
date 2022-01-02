@@ -1,9 +1,11 @@
 #pragma once
 
-#include "agl/layer.h"
+#include <agl/lyr/aglLayer.h>
 
 class LayerAgl : public agl::lyr::Layer // size: 0x420
 {
+    SEAD_RTTI_OVERRIDE(LayerAgl, agl::lyr::Layer)
+
 public:
     class Node
     {
@@ -16,6 +18,9 @@ public:
 public:
     LayerAgl();
     virtual ~LayerAgl();
+
+    void preDrawImpl(const agl::lyr::RenderInfo& render_info) const override;
+    void postDrawImpl(const agl::lyr::RenderInfo& render_info) const override;
 
     // ...
 

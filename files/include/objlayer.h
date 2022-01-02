@@ -7,6 +7,8 @@ class ObjLayerRenderer;
 
 class ObjLayer : public LayerAgl // size: 0x42C
 {
+    SEAD_RTTI_OVERRIDE(ObjLayer, LayerAgl)
+
 public:
     class Node : public LayerAgl::Node
     {
@@ -26,6 +28,10 @@ public:
 public:
     ObjLayer();
     virtual ~ObjLayer();
+
+    virtual void vf64(s32) { }
+
+    void setParentRenderer(ObjLayerRenderer* renderer);
 
     // ...
 

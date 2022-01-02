@@ -1,15 +1,11 @@
 #pragma once
 
-#include "types.h"
+#include <agl/lyr/aglRenderer.h>
 
-namespace sead {
-
-class Camera;
-class FrameBuffer;
-class Projection;
-class Viewport;
-
-}
+#include <gfx/seadCamera.h>
+#include <gfx/seadFrameBuffer.h>
+#include <gfx/seadProjection.h>
+#include <gfx/seadViewport.h>
 
 namespace agl {
 
@@ -17,15 +13,13 @@ class DisplayList;
 
 namespace lyr {
 
-class Layer;
-
 class RenderInfo
 {
 public:
-    u32 renderStepIdx;
-    u32 displayType;
+    s32 renderStepIdx;
+    DisplayType displayType;
     sead::FrameBuffer* frameBuffer;
-    u32 _C;
+    s32 layerIdx; // in agl::Renderer's layer buffer
     Layer* parentLayer;
     sead::Camera* camera;
     sead::Projection* projection;

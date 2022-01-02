@@ -25,7 +25,10 @@
 #define __GX2_FUNCTIONS_H_
 
 #ifdef __cplusplus
+#include <cstring>
 extern "C" {
+#else
+#include <string.h>
 #endif
 
 #include "os_types.h"
@@ -72,6 +75,7 @@ extern void (* GX2SetDepthBuffer)(const GX2DepthBuffer *depthBuffer);
 extern void (* GX2SetAttribBuffer)(u32 attr_index, u32 attr_size, u32 stride, const void* attr);
 extern void (* GX2InitTextureRegs)(GX2Texture *texture);
 extern void (* GX2InitSampler)(GX2Sampler *sampler, s32 tex_clamp, s32 min_mag_filter);
+extern void (*GX2SetShaderModeEx)(u32 mode, u32 num_vs_gpr, u32 num_vs_stack_entries, u32 num_gs_gpr, u32 num_gs_stack_entries, u32 num_ps_gpr, u32 num_ps_stack_entries);
 extern u32 (* GX2CalcFetchShaderSizeEx)(u32 num_attrib, s32 fetch_shader_type, s32 tessellation_mode);
 extern void (* GX2InitFetchShaderEx)(GX2FetchShader* fs, void* fs_buffer, u32 count, const GX2AttribStream* attribs, s32 fetch_shader_type, s32 tessellation_mode);
 extern void (* GX2SetFetchShader)(const GX2FetchShader* fs);
@@ -213,6 +217,46 @@ static inline void GX2InitTexture(GX2Texture *tex, u32 width, u32 height, u32 de
 
     GX2CalcSurfaceSizeAndAlignment(&tex->surface);
     GX2InitTextureRegs(tex);
+}
+
+static inline GX2UniformVar* GX2GetVertexUniformVar(const GX2VertexShader* shader, const char* name)
+{
+    for (u32 i = 0; i < shader->uniform_vars_count; i++)
+    {
+       if (strcmp(shader->uniform_var[i].name, name) == 0)
+           return &shader->uniform_var[i];
+    }
+
+    return NULL;
+}
+
+static inline s32 GX2GetVertexUniformVarOffset(const GX2VertexShader* shader, const char* name)
+{
+    GX2UniformVar* uniform_var = GX2GetVertexUniformVar(shader, name);
+    if (!uniform_var)
+        return -1;
+
+    return (s32)uniform_var->offset;
+}
+
+static inline GX2UniformVar* GX2GetPixelUniformVar(const GX2PixelShader* shader, const char* name)
+{
+    for (u32 i = 0; i < shader->uniform_vars_count; i++)
+    {
+       if (strcmp(shader->uniform_var[i].name, name) == 0)
+           return &shader->uniform_var[i];
+    }
+
+    return NULL;
+}
+
+static inline s32 GX2GetPixelUniformVarOffset(const GX2PixelShader* shader, const char* name)
+{
+    GX2UniformVar* uniform_var = GX2GetPixelUniformVar(shader, name);
+    if (!uniform_var)
+        return -1;
+
+    return (s32)uniform_var->offset;
 }
 
 #ifdef __cplusplus

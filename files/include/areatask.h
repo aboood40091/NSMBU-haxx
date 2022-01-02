@@ -1,6 +1,6 @@
 #pragma once
 
-#include "agl/renderinfo.h"
+#include <agl/lyr/aglRenderInfo.h>
 
 class AreaTask
 {
