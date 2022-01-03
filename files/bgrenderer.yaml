@@ -1,0 +1,8 @@
+
+---
+Files: [source/bgrenderer.cpp]
+Hooks:
+  - type: branch
+    instr: bl
+    addr: F251564
+    func: scheduleTileForDrawingHaxx__10BgRendererFUiRCQ2_4sead16Vector3__tm__2_fUs

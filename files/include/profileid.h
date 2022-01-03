@@ -10,6 +10,7 @@ enum ProfileIdType
     FlipBlock,
     MagicPlatform,
     EffectPlayer,
+    CoinKeeper,
 
     Num
 };

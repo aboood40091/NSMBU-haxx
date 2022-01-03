@@ -824,5 +824,6 @@ u32 Profile::spriteToProfileList[] =
     ProfileId::ActorSpawner,  // 724
     ProfileId::FlipBlock,     // 725
     ProfileId::MagicPlatform, // 726
-    ProfileId::EffectPlayer   // 727
+    ProfileId::EffectPlayer,  // 727
+    ProfileId::CoinKeeper     // 728
 };

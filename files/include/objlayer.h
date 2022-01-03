@@ -35,5 +35,8 @@ public:
 
     // ...
 
-    u8 _420[0x42C - 0x420];
+    ObjLayerRenderer* parentRenderer;
+    s32 parentRendererLayerIdx;
+    void* _428; // Something containing nw::g3d::ViewVolume
 };
+static_assert(sizeof(ObjLayer) == 0x42C, "ObjLayer size mismatch");

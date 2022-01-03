@@ -6,6 +6,7 @@ Modules:
   - aa.yaml
   - agl.yaml
   - areatask.yaml
+  - bgrenderer.yaml
   - ctors.yaml
   - customactors.yaml
   - distantviewmgr.yaml

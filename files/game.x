@@ -197,6 +197,7 @@ SECTIONS {
 	ident__S__Q2_4sead17Matrix34__tm__2_f = 0x10AEC458;
 
 	/* sead::Matrix34CalcCommon<f32> */
+	makeRzxyIdx__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_4sead19Policies__tm__4_Z1Z9Mtx34BaseUiN22_v = 0xEE6AED0;
 	__CPR161__makeRTIdx__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J14J19Policies__tm__4_Z1Z9Mtx34BaseRCQ2_J14J17Vector3__tm__3_UiRCQ3_J14JJ59J8Vec3Base_v = 0xebfc1c8;
 	__CPR128__makeQ__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J10J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J10JJ55J8QuatBase_v = 0xEC1A79C;
 	__CPR131__makeST__Q2_4sead27Matrix34CalcCommon__tm__2_fSFRQ3_J11J19Policies__tm__4_Z1Z9Mtx34BaseRCQ3_J11JJ56J8Vec3BaseT2_v = 0xEDE2A88;
@@ -307,9 +308,15 @@ SECTIONS {
 	__vtbl__4Base = 0x105028c0;
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__4BaseSFv = 0x106EBEC4;
 	typeInfo__L0__getRuntimeTypeInfoStatic__4BaseSFv = 0x106EBEC8;
+	__ct__4BaseFPC14ActorBuildInfo = 0xEBC2CE0;
+	__dt__4BaseFv = 0xEBC2E68;
 	beforeCreate__4BaseFv = 0xebc2f7c;
+	afterCreate__4BaseFUi = 0xEBC2F00;
+	beforeExecute__4BaseFv = 0xEBC2F04;
 	onExecute__4BaseFv = 0xebc2f8c;
+	afterExecute__4BaseFUi = 0xEBC2F34;
 	finalExecute__4BaseFv = 0xebc2f94;
+	beforeDraw__4BaseFv = 0xEBC2F98;
 	onDraw__4BaseFv = 0xebc2fa0;
 	afterDraw__4BaseFUi = 0xebc2f38;
 	beforeDelete__4BaseFv = 0xebc2fa8;
@@ -676,6 +683,12 @@ SECTIONS {
 	/* ObjLayerRenderer */
 	__ct__16ObjLayerRendererFRCQ2_4sead23SafeStringBase__tm__2_c = 0xF0BAF58;
 	init__16ObjLayerRendererFUiN31PQ2_4sead4Heap = 0xF0BB128;
+
+	/* CoinTileRenderer */
+	sInstance__16CoinTileRenderer = 0x106DD240;
+
+	/* BgRenderer */
+	scheduleTileForDrawing__10BgRendererFUiRCQ2_4sead16Vector3__tm__2_fUs = 0xF250888;
 
 	/* Misc */
 	BLOSDynLoad_Acquire = 0xF65EF58;
