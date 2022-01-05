@@ -53,8 +53,6 @@ void CoinKeeper::drawAt(Model& model, const Vec3& pos)
     // 1. This replaces BgRenderer's graphics context. Therefore, whenever a coin is rendered, all tileset tiles appear opaque.
     // 2. Only one coin can be drawn at a time. Reason unknown.
 
-    GX2DrawDone();
-
     mtxRT.setTranslation(pos);
     model.setMtx(mtxRT);
     model.updateModel();
@@ -66,13 +64,8 @@ void CoinKeeper::drawAt(Model& model, const Vec3& pos)
     ObjLayerRenderer* renderer = layer->parentRenderer;
     ObjLayerRenderInfo& layerRenderInfo = renderer->layerRenderInfos[layerIdx];
 
-    model.updateView(layerIdx, layerRenderInfo.viewMtx, layerRenderInfo.projMtx, renderer);
+    //model.updateView(layerIdx, layerRenderInfo.viewMtx, layerRenderInfo.projMtx, renderer); //<--- does nothing
     model.calcGPU(layerIdx, layerRenderInfo.viewMtx, layerRenderInfo.projMtx, renderer);
     model.drawOpa(layerIdx, layerRenderInfo.viewMtx, layerRenderInfo.projMtx, renderer);
-
-    GX2DrawDone();
-
-    model.drawXlu(layerIdx, layerRenderInfo.viewMtx, layerRenderInfo.projMtx, renderer); //<--- probably not needed
-
-    GX2DrawDone();
+    //model.drawXlu(layerIdx, layerRenderInfo.viewMtx, layerRenderInfo.projMtx, renderer); //<--- probably not needed
 }
