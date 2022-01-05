@@ -11,8 +11,9 @@ class Model;
 class ResArchive : public sead::IDisposer
 {
 public:
-    Model* getModel(const sead::SafeString& identifier, u32 unk1, u32 numSklAnims, u32 numTexAnims, u32 numShuAnims, u32 numVisAnims, u32 numShaAnims, bool unk2, sead::Heap* heap);
-    Model* getModel(const sead::SafeString& identifier, u32 numSklAnims, u32 numTexAnims, u32 numShuAnims, u32 numVisAnims, u32 numShaAnims, bool unk2, sead::Heap* heap);
+    // boundingType: 0 = no bounding, 1 = bounding sphere, 2 = bounding box
+    Model* getModel(const sead::SafeString& identifier, u32 numView, u32 numSklAnims, u32 numTexAnims, u32 numShuAnims, u32 numVisAnims, u32 numShaAnims, u32 boundingType, sead::Heap* heap);
+    Model* getModel(const sead::SafeString& identifier, u32 numSklAnims, u32 numTexAnims, u32 numShuAnims, u32 numVisAnims, u32 numShaAnims, u32 boundingType, sead::Heap* heap);
 
     nw::g3d::res::ResFile* res;
 };
@@ -25,4 +26,4 @@ public:
     ResArchive* get(const sead::SafeString& identifier);
 };
 
-bool loadActorResArchive(const sead::SafeString& name, sead::Heap* heap=nullptr);
+bool loadActorResArchive(const sead::SafeString& name, sead::Heap* heap = nullptr);

@@ -234,20 +234,19 @@ public:
         shaAnims[idx]->play(archive, identifier);
     }
 
-    static inline ModelWrapper* create(const sead::SafeString& archiveIdentifier, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, bool unk2 = false)
+    // boundingType: 0 = no bounding, 1 = bounding sphere, 2 = bounding box
+
+    static inline ModelWrapper* create(const sead::SafeString& archiveIdentifier, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, u32 boundingType = 0, sead::Heap* heap = nullptr)
     {
         ResArchive* archive = ResArchiveMgr::instance->get(archiveIdentifier);
-        Model* model = archive->getModel(modelIdentifier, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims, unk2, nullptr);
-        ModelWrapper* wrapper = new ModelWrapper(model, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims);
-        wrapper->setup(archive, nullptr, nullptr);
-        return wrapper;
+        return create(archive, modelIdentifier, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims, boundingType, heap);
     }
 
-    static inline ModelWrapper* create(ResArchive* archive, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, bool unk2 = false)
+    static inline ModelWrapper* create(ResArchive* archive, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, u32 boundingType = 0, sead::Heap* heap = nullptr)
     {
-        Model* model = archive->getModel(modelIdentifier, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims, unk2, nullptr);
-        ModelWrapper* wrapper = new ModelWrapper(model, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims);
-        wrapper->setup(archive, nullptr, nullptr);
+        Model* model = archive->getModel(modelIdentifier, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims, boundingType, heap);
+        ModelWrapper* wrapper = new (heap) ModelWrapper(model, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims);
+        wrapper->setup(archive, nullptr, heap);
         return wrapper;
     }
 

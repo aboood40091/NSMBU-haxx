@@ -558,7 +558,7 @@ SECTIONS {
 	shouldHurryUp__11MusicPlayerFv = 0xF5783D8;
 
 	/* ResArchive */
-	getModel__10ResArchiveFRCQ2_4sead23SafeStringBase__tm__2_cUiN42bPQ2_4sead4Heap = 0xf0ae440;
+	getModel__10ResArchiveFRCQ2_4sead23SafeStringBase__tm__2_cUiN52PQ2_4sead4Heap = 0xf0ae440;
 
 	/* ResArchiveMgr */
 	instance__13ResArchiveMgr = 0x106d4f50;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <prim/seadSafeString.h>
+#include <prim/seadNamable.h>
 
 namespace agl {
 
@@ -20,16 +20,14 @@ public:
 };
 static_assert(sizeof(ShaderLocation) == 6, "agl::ShaderLocation size mismatch");
 
-class SamplerLocation
+class SamplerLocation : public sead::INamable, ShaderLocation
 {
 public:
     SamplerLocation()
-        : loc()
+        : sead::INamable("Undefined")
+        , ShaderLocation()
     {
     }
-
-    sead::SafeString name;
-    agl::ShaderLocation loc;
 };
 static_assert(sizeof(SamplerLocation) == 0x10, "agl::SamplerLocation size mismatch");
 
