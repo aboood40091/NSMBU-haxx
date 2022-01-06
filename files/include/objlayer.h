@@ -23,6 +23,8 @@ public:
         virtual void drawReflectionOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) { }
         virtual void drawReflectionXlu(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) { }
         virtual bool hasShadow() const { return false; }
+
+        Vec3 position; // I think. Precisely used for z ordering.
     };
 
 public:

@@ -28,6 +28,8 @@ public:
        else: don't add to any of the lists */
     Base* create(ActorBuildInfo* buildInfo, u32 addToActive);
 
+    void createAdditionalHeap(/* sead::FrameHeap */ sead::Heap** ppHeap);
+
     static ActorMgr* instance;
 
     sead::IDisposer disposer;

@@ -92,6 +92,11 @@ SECTIONS {
 	Initialize__Q3_2nw3eft6SystemFPQ3_2nw3eft4HeapRCQ3_2nw3eft6Config = 0xF636F94;
 	CreateEmitterSetID__Q3_2nw3eft6SystemFPQ3_2nw3eft6HandleRCQ3_2nw4math5MTX34iUiUcT4 = 0xF63F57C;
 
+	/* nw::g3d::fnd::GfxBuffer */
+	GetData__Q4_2nw3g3d3fnd9GfxBufferFi = 0xF674D18;
+	SetData__Q4_2nw3g3d3fnd9GfxBufferFPvUii = 0xF674CF8;
+	DCFlush__Q4_2nw3g3d3fnd9GfxBufferCFi = 0xF674C00;
+
 	/* nw::math */
 	F_PI__Q2_2nw4math = 0x106B82FC;
 	I_HALF_ROUND_IDX__Q2_2nw4math = 0x106B8300;
@@ -303,6 +308,7 @@ SECTIONS {
 	/* ActorMgr */
 	instance__8ActorMgr = 0x106c52c8;
 	create__8ActorMgrFP14ActorBuildInfoUi = 0xebc9a58;
+	createAdditionalHeap__8ActorMgrFPPQ2_4sead4Heap = 0xEBC9648;
 
 	/* Base */
 	__vtbl__4Base = 0x105028c0;

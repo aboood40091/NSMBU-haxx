@@ -93,8 +93,10 @@ public:
     const VisibilityAnimation** getVisAnims() const override;
     const ShapeAnimation** getShaAnims() const override;
 
+    nw::g3d::ModelObj modelObj; // agl::g3d::ModelEx
     // ...
 };
+static_assert(sizeof(Model) == (0x28+0x34), "Model size mismatch"); // Incomplete
 
 
 struct Animation

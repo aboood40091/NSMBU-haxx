@@ -1,6 +1,7 @@
-#pragma once
+#ifndef G3D_RES_FILE_H_
+#define G3D_RES_FILE_H_
 
-#include "res_common.h"
+#include "g3d_ResCommon.h"
 
 namespace nw { namespace g3d { namespace res {
 
@@ -40,6 +41,15 @@ struct ResFileData
 
 class ResFile : public ResFileData
 {
+public:
+    static ResFile* ResCast(void* pData);
+
+    const char* GetName() const
+    {
+        return OffsetToPtr<char>(&ofsName);
+    }
 };
 
 } } }
+
+#endif // G3D_RES_FILE_H_
