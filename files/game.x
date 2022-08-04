@@ -141,6 +141,9 @@ SECTIONS {
 	/* sead::Color4f */
 	cWhite__Q2_4sead7Color4f = 0x10AEC2A0;
 
+	/* sead::ControllerMgr */
+	sInstance__Q2_4sead13ControllerMgr = 0x106EA0FC;
+
 	/* sead::DirectResource */
 	__vtbl__Q2_4sead14DirectResource = 0x106A5C78;
 	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_4sead14DirectResourceSFv = 0x106EBDB8;

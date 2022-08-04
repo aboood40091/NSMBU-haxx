@@ -1,7 +1,7 @@
 #ifndef SEAD_CONTROLLER_WRAPPER_BASE_H_
 #define SEAD_CONTROLLER_WRAPPER_BASE_H_
 
-#include <controller/seadControllerBase.h>
+#include <controller/seadController.h>
 #include <heap/seadDisposer.h>
 #include <prim/seadRuntimeTypeInfo.h>
 
@@ -17,20 +17,26 @@ public:
     ControllerWrapperBase();
     virtual ~ControllerWrapperBase();
 
-    virtual void calc(u32, bool) = 0;
+    virtual void calc(u32 prev_hold, bool prev_pointer_on) = 0;
     virtual void setIdle();
+
+protected:
     virtual bool isIdle_();
 
-    void registerWith(Controller* controller, bool copy_repeat);
+public:
+    void registerWith(Controller* controller, bool copy_repeat_setting);
     void unregister();
     void copyRepeatSetting(const Controller* controller);
     void setEnable(bool enable);
     void setEnableOtherWrappers(bool enable) const;
 
+protected:
     Controller* mController;
     bool mIsEnable;
     ListNode mListNode;
-    u8 mPadConfig[32];
+    u8 mPadConfig[cPadIdx_MaxBase];
+
+    friend class Controller;
 };
 #ifdef cafe
 static_assert(sizeof(ControllerWrapperBase) == 0x174, "sead::ControllerWrapperBase size mismatch");

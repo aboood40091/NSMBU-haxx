@@ -16,7 +16,7 @@ public:
     static const Vector2i cInvalidPointerS32;
 
 public:
-    ControllerBase(s32 pad_bit_max, s32 left_stick_cross_start_bit, s32 right_stick_cross_start_bit, s32 touch_key_bit);
+    ControllerBase(s32 padBitMax, s32 leftStickCrossStartBit, s32 rightStickCrossStartBit, s32 touchKeyBit);
 
     u32 getHoldMask() const { return mPadHold.getDirect(); }
     u32 getTrigMask() const { return mPadTrig.getDirect(); }
@@ -67,7 +67,7 @@ protected:
 
     enum
     {
-        cPadIdxMaxBase = 32
+        cPadIdx_MaxBase = 32
     };
 
     enum PointerFlagMask
@@ -78,15 +78,23 @@ protected:
         cPointerUnkFlag3 = 1 << 3
     };
 
+    enum
+    {
+        cCrossUp,
+        cCrossDown,
+        cCrossLeft,
+        cCrossRight
+    };
+
     BitFlag32 mPadTrig;
     BitFlag32 mPadRelease;
     BitFlag32 mPadRepeat;
     BitFlag32 mPointerFlag;
     Vector2i mPointerS32;
     BoundBox2f mPointerBound;
-    u32 mPadHoldCounts[cPadIdxMaxBase];
-    u8 mPadRepeatDelays[cPadIdxMaxBase];
-    u8 mPadRepeatPulses[cPadIdxMaxBase];
+    u32 mPadHoldCounts[cPadIdx_MaxBase];
+    u8 mPadRepeatDelays[cPadIdx_MaxBase];
+    u8 mPadRepeatPulses[cPadIdx_MaxBase];
     f32 mLeftStickHoldThreshold;
     f32 mRightStickHoldThreshold;
     f32 mLeftStickReleaseThreshold;

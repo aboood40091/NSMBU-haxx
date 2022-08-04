@@ -1,6 +1,7 @@
 
 ---
 Files:
+  - source/sead/controllermgr.cpp
   - source/sead/decompressor.cpp
   - source/sead/primitiverenderer.cpp
 Hooks:

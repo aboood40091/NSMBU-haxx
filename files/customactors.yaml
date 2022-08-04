@@ -4,5 +4,6 @@ Files:
   - source/actorspawner.cpp
   - source/effectplayer.cpp
   - source/flipblock.cpp
+  - source/keylogger.cpp
   - source/magicplatform.cpp
 Hooks: []
