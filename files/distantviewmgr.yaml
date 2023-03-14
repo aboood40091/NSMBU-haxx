@@ -7,3 +7,10 @@ Hooks:
     addr: EE67FD4
     func: DistantViewMgr_AddBGOffset
 
+  # - type: patch
+  #   addr: 0EE6768C
+  #   data: 9b 9f 14 56
+
+  - type: patch
+    addr: 01055A5B8
+    data: 41 20 00 00
