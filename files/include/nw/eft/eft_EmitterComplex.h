@@ -1,6 +1,7 @@
 #ifndef EFT_EMITTER_COMPLEX_H_
 #define EFT_EMITTER_COMPLEX_H_
 
+#include <nw/eft/eft_typeDef.h>
 #include <nw/eft/eft_EmitterSimple.h>
 
 namespace nw { namespace eft {
@@ -8,23 +9,47 @@ namespace nw { namespace eft {
 class EmitterComplexCalc : public EmitterSimpleCalc
 {
 public:
-    EmitterComplexCalc(System* system)
-        : EmitterSimpleCalc(system)
+    explicit EmitterComplexCalc(System* sys)
+        : EmitterSimpleCalc(sys)
     {
     }
 
-    virtual void CalcEmitter(EmitterInstance* emitter) { EmitterSimpleCalc::CalcEmitter(emitter); }
-    virtual PtclType GetPtclType() const { return PtclType_Complex; }
-    virtual u32 CalcParticle(EmitterInstance* emitter, CpuCore core, bool noCalcBehavior, bool noMakePtclAttributeBuffer);
-    virtual u32 CalcChildParticle(EmitterInstance* emitter, CpuCore core, bool noCalcBehavior, bool noMakePtclAttributeBuffer);
+    virtual void CalcEmitter(EmitterInstance* e);
+    virtual u32 CalcParticle(EmitterInstance* e, CpuCore core, bool skipBehavior, bool skipMakeAttribute);
+    virtual u32 CalcChildParticle(EmitterInstance* e, CpuCore core, bool skipBehavior, bool skipMakeAttribute);
 
-    static void EmitChildParticle(EmitterInstance* emitter, PtclInstance* ptcl);
+    static void EmitChildParticle(EmitterInstance* e, PtclInstance* p);
 
-    static inline void CalcStripe(EmitterInstance* emitter, PtclInstance* ptcl, const StripeData* stripeData, const ComplexEmitterData* data, CpuCore core);
-    static inline void EmitChildParticle(EmitterInstance* emitter, PtclInstance* ptcl, CpuCore core, const ChildData* childData);
-    static void CalcComplex(EmitterInstance* emitter, PtclInstance* ptcl, CpuCore core);
+    virtual PtclType GetPtclType() const
+    {
+        return EFT_PTCL_TYPE_COMPLEX;
+    }
+
+private:
+    static inline void AddChildPtclToList(EmitterInstance* e, PtclInstance* ptcl)
+    {
+        if (e->childHead == NULL)
+        {
+            e->childHead       = ptcl;
+            ptcl->prev         = ptcl->next = NULL;
+        }
+        else
+        {
+            e->childHead->prev = ptcl;
+            ptcl->next         = e->childHead;
+            e->childHead       = ptcl;
+            ptcl->prev         = NULL;
+        }
+
+        if (e->childTail == NULL)
+            e->childTail = ptcl;
+
+        e->childPtclNum++;
+    }
+
+    static void CalcComplex(EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, CpuCore core);
 };
-static_assert(sizeof(EmitterComplexCalc) == 4, "EmitterComplexCalc size mismatch");
+static_assert(sizeof(EmitterComplexCalc) == 4, "nw::eft::EmitterComplexCalc size mismatch");
 
 } } // namespace nw::eft
 

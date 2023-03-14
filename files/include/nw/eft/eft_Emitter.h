@@ -1,217 +1,346 @@
 #ifndef EFT_EMITTER_H_
 #define EFT_EMITTER_H_
 
-#include <nw/eft/eft_Particle.h>
+#include <nw/eft/eft_typeDef.h>
+#include <nw/eft/eft_Data.h>
 #include <nw/eft/eft_Random.h>
-#include <nw/eft/eft_ResData.h>
+#include <nw/eft/eft_AnimKeyFrame.h>
+#include <nw/eft/eft_Primitive.h>
+#include <nw/eft/eft_Shader.h>
+#include <nw/eft/eft_Particle.h>
 
 namespace nw { namespace eft {
 
-class EmitterCalc;
-class EmitterController;
+class  EmitterCalc;
+class  EmitterController;
 struct EmitterDynamicUniformBlock;
-class EmitterSet;
+class  EmitterSet;
 struct EmitterStaticUniformBlock;
-struct KeyFrameAnimArray;
-class ParticleShader;
-class Primitive;
 struct PtclAttributeBuffer;
-class StripeVertexBuffer;
+class  StripeVertexBuffer;
 
 struct EmitterInstance
 {
-    void Init(const SimpleEmitterData* data);
-    inline void UpdateEmitterStaticUniformBlock(EmitterStaticUniformBlock* uniformBlock, const SimpleEmitterData* data);
-    inline void UpdateChildStaticUniformBlock(EmitterStaticUniformBlock* uniformBlock, const ChildData* data);
+    f32                                         cnt;
+    f32                                         preCnt;
+    f32                                         emitCnt;
+    f32                                         preEmitCnt;
+    f32                                         emitSaving;
+    s32                                         ptclNum;
+    s32                                         childPtclNum;
+    s32                                         groupID;
+    EmitterSet*                                 emitterSet;
+    EmitterController*                          controller;
+    u32                                         emitterSetCreateID;
+    nw::math::MTX34                             emitterRT;
+    nw::math::MTX34                             emitterSRT;
+    PtclRandom                                  rnd;
+    s32                                         emissionInterval;
+    f32                                         fadeAlpha;
+    f32                                         frameRate;
+    nw::math::VEC3                              emitDistPrevPos;
+    bool                                        emitDistPrevPosSet;
+    f32                                         emitDistVessel;
+    nw::math::VEC3                              scaleRnd;
+    nw::math::VEC3                              rotatRnd;
+    nw::math::VEC3                              transRnd;
+    PtclFollowType                              followType;
+    EmitterInstance*                            prev;
+    EmitterInstance*                            next;
+    EmitterCalc*                                calc;
+    const SimpleEmitterData*                    res;
+    PtclInstance*                               ptclHead;
+    PtclInstance*                               childHead;
+    PtclInstance*                               ptclTail;
+    PtclInstance*                               childTail;
+    ParticleShader*                             shader[EFT_SHADER_TYPE_MAX];
+    ParticleShader*                             childShader[EFT_SHADER_TYPE_MAX];
+    Primitive*                                  primitive;
+    Primitive*                                  childPrimitive;
+    KeyFrameAnimArray*                          emitterAnimArray;
+    f32                                         emitAnimValue[EFT_ANIM_MAX];
+    nw::math::MTX34                             animEmitterRT;
+    nw::math::MTX34                             animEmitterSRT;
+    f32                                         emitVessel;
+    bool                                        isEmitted;
+    bool                                        isCalculated;
+    bool                                        stopDraw;
+    u32                                         behaviorFlag;
+    u32                                         shaderArrtFlag;
+    u32                                         childShaderArrtFlag;
+
+    mutable u32                                 entryNum;
+    mutable u32                                 childEntryNum;
+    mutable u32                                 stripeVertexNum;
+
+    PtclAttributeBuffer*                        ptclAttributeBuffer;
+    PtclAttributeBuffer*                        childPtclAttributeBuffer;
+    StripeVertexBuffer*                         stripeBuffer;
+    EmitterStaticUniformBlock*                  emitterStaticUniformBlock;
+    EmitterStaticUniformBlock*                  childEmitterStaticUniformBlock;
+    EmitterDynamicUniformBlock*                 emitterDynamicUniformBlock;
+    EmitterDynamicUniformBlock*                 childEmitterDynamicUniformBlock;
+
+    void Init(const SimpleEmitterData* resource);
     void UpdateResInfo();
+
+    void TransformWorldVec(nw::math::VEC3* pDst, nw::math::VEC3* pSrc, PtclInstance* pPtcl);
+    void TransformWorldVecNormal(nw::math::VEC3* pDst, nw::math::VEC3* pSrc, PtclInstance* pPtcl);
+    void TransformLocalVec(nw::math::VEC3* pDst, nw::math::VEC3* pSrc, PtclInstance* pPtcl);
+    void TransformLocalVecNormal(nw::math::VEC3* pDst, nw::math::VEC3* pSrc, PtclInstance* pPtcl);
+
+    EmitterType GetEmitterType() const
+    {
+        return res->type;
+    }
+
+    BillboardType GetBillboardType() const
+    {
+        return res->billboardType;
+    }
+
+    const SimpleEmitterData* GetSimpleEmitterData() const
+    {
+        return res;
+    }
+
+    u32 GetDrawPathFlag() const
+    {
+        return res->drawPath;
+    }
+
+    const char* GetEmitterName() const
+    {
+        return res->name;
+    }
+
+    BlendType GetBlendType() const
+    {
+        return res->blendType;
+    }
+
+    const EmitterSet* GetEmitterSet() const
+    {
+        return emitterSet;
+    }
 
     const ComplexEmitterData* GetComplexEmitterData() const
     {
-        if (data->type != EmitterType_Complex)
+        if (res->type != EFT_EMITTER_TYPE_COMPLEX)
             return NULL;
 
-        return static_cast<const ComplexEmitterData*>(data);
-    }
-
-    bool HasChild() const
-    {
-        return data->type != EmitterType_Simple && (static_cast<const ComplexEmitterData*>(data)->childFlags & 1);
+        return reinterpret_cast<const ComplexEmitterData*>(res);
     }
 
     const ChildData* GetChildData() const
     {
-        if (!HasChild())
+        if (res->type == EFT_EMITTER_TYPE_SIMPLE)
             return NULL;
 
-        return reinterpret_cast<const ChildData*>(static_cast<const ComplexEmitterData*>(data) + 1);
+        const ComplexEmitterData* cres = reinterpret_cast<const ComplexEmitterData*>(res);
+
+        if (cres->childFlg & EFT_CHILD_FLAG_ENABLE)
+            return reinterpret_cast<const ChildData*>(cres + 1);
+        else
+            return NULL;
     }
 
-    f32 counter;
-    f32 counter2;
-    f32 emitCounter;
-    f32 preCalcCounter;
-    f32 emitLostTime;
-    u32 numParticles;
-    u32 numChildParticles;
-    u32 groupID;
-    EmitterSet* emitterSet;
-    EmitterController* controller;
-    u32 emitterSetCreateID;
-    math::MTX34 matrixRT;
-    math::MTX34 matrixSRT;
-    PtclRandom random;
-    s32 emissionInterval;
-    f32 fadeAlpha;
-    f32 emissionSpeed;
-    math::VEC3 prevPos;   // Used for equidistant emission
-    bool prevPosSet;      // ^^
-    f32 emitLostDistance; // ^^
-    math::VEC3 scaleRandom;
-    math::VEC3 rotateRandom;
-    math::VEC3 translateRandom;
-    PtclFollowType ptclFollowType;
-    EmitterInstance* prev;
-    EmitterInstance* next;
-    EmitterCalc* calc;
-    const SimpleEmitterData* data;
-    PtclInstance* particleHead;
-    PtclInstance* childParticleHead;
-    PtclInstance* particleTail;
-    PtclInstance* childParticleTail;
-    ParticleShader* shader[ShaderType_Max];
-    ParticleShader* childShader[ShaderType_Max];
-    Primitive* primitive;
-    Primitive* childPrimitive;
-    KeyFrameAnimArray* animArray;
-    f32 anim[25];
-    math::MTX34 animMatrixRT;
-    math::MTX34 animMatrixSRT;
-    f32 emitLostRate;
-    bool isEmitted;
-    bool isCalculated;
-    u8 _unused;
-    u32 particleBehaviorFlg;
-    u32 shaderAvailableAttribFlg;
-    u32 childShaderAvailableAttribFlg;
-    u32 numDrawParticle;
-    u32 numDrawChildParticle;
-    u32 numDrawStripe;
-    PtclAttributeBuffer* ptclAttributeBuffer;
-    PtclAttributeBuffer* childPtclAttributeBuffer;
-    StripeVertexBuffer* stripeVertexBuffer;
-    EmitterStaticUniformBlock* emitterStaticUniformBlock;
-    EmitterStaticUniformBlock* childEmitterStaticUniformBlock;
-    EmitterDynamicUniformBlock* emitterDynamicUniformBlock;
-    EmitterDynamicUniformBlock* childEmitterDynamicUniformBlock;
+    const StripeData* GetStripeData() const
+    {
+        if (res->type == EFT_EMITTER_TYPE_SIMPLE)
+            return NULL;
+
+        const ComplexEmitterData* cres = reinterpret_cast<const ComplexEmitterData*>(res);
+
+        if (cres->billboardType == EFT_BILLBOARD_TYPE_STRIPE ||
+            cres->billboardType == EFT_BILLBOARD_TYPE_COMPLEX_STRIPE)
+        {
+            return reinterpret_cast<const StripeData*>((u32)cres + cres->stripeDataOffset);
+        }
+
+        return NULL;
+    }
+
+    bool IsHasChildParticle() const
+    {
+        if (res->type == EFT_EMITTER_TYPE_SIMPLE)
+            return false;
+
+        const ComplexEmitterData* cres = reinterpret_cast<const ComplexEmitterData*>(res);
+
+        if (cres->childFlg & EFT_CHILD_FLAG_ENABLE)
+            return true;
+        else
+            return false;
+    }
+
+    bool IsEnableUserDataFlag(nw::eft::UserDataFlag bit) const
+    {
+        return (res->userData & bit) ? true : false;
+    }
+
+    u8 GetUserDataU8Param0() const
+    {
+        return static_cast<u8>(res->userData);
+    }
+
+    u8 GetUserDataU8Param1() const
+    {
+        return static_cast<u8>(res->userData >> 8);
+    }
+
+    u8 GetUserDataU8Param2() const
+    {
+        return static_cast<u8>(res->userData2);
+    }
+
+    u8 GetUserDataU8Param3() const
+    {
+        return static_cast<u8>(res->userData2 >> 8);
+    }
+
+    u8 GetUserDataU8Param4() const
+    {
+        return static_cast<u8>(res->userData2 >> 16);
+    }
+
+    u8 GetUserDataU8Param5() const
+    {
+        return static_cast<u8>(res->userData2 >> 24);
+    }
+
+    f32 GetUserDataF32Param(nw::eft::UserDataParamIdx idx) const
+    {
+        return res->userDataF[idx];
+    }
 };
-static_assert(sizeof(EmitterInstance) == 0x220, "EmitterInstance size mismatch");
+static_assert(sizeof(EmitterInstance) == 0x220, "nw::eft::EmitterInstance size mismatch");
 
 class System;
 
 class EmitterCalc
 {
 public:
-    EmitterCalc(System* system)
+    explicit EmitterCalc(System* sys)
     {
-        mSys = system;
+        mSys = sys;
     }
 
-    virtual ~EmitterCalc() { } // deleted
+    virtual ~EmitterCalc() // deleted
+    {
+        mSys = NULL;
+    }
 
-    virtual void CalcEmitter(EmitterInstance* emitter) = 0;
+    virtual void CalcEmitter(EmitterInstance* e) = 0;
+
+    static void Initialize(Heap *heap)
+    {
+        InitializeFluctuation_(heap);
+    }
+
+    static void Finalize(Heap *heap)
+    {
+        FinalzieFluctuation_(heap);
+        mSys = NULL;
+    }
+
+    static void EmitParticle(EmitterInstance* __restrict e)
+    {
+        mEmitFunctions[e->res->volumeType](e);
+    }
+
+    static void RemoveParticle(EmitterInstance* e, PtclInstance* ptcl, CpuCore core);
+
     virtual PtclType GetPtclType() const = 0;
-    virtual u32 CalcParticle(EmitterInstance* emitter, CpuCore core, bool noCalcBehavior, bool noMakePtclAttributeBuffer) = 0;
-    virtual u32 CalcChildParticle(EmitterInstance* emitter, CpuCore core, bool noCalcBehavior, bool noMakePtclAttributeBuffer) = 0;
 
-    static void RemoveParticle(EmitterInstance* emitter, PtclInstance* ptcl, CpuCore core);
-    static inline void AddChildPtclToList(EmitterInstance* emitter, PtclInstance* childPtcl);
-    static inline void AddPtclToList(EmitterInstance* emitter, PtclInstance* ptcl);
-    static void EmitCommon(EmitterInstance* emitter, PtclInstance* ptcl);
+    virtual u32 CalcParticle(EmitterInstance* e, CpuCore core, bool skipBehavior, bool skipMakeAttribute)
+    {
+        return 0;
+    }
 
-    static const void* _ptclField_Random(EmitterInstance* emitter, PtclInstance* ptcl, const void* fieldData);
-    static const void* _ptclField_Magnet(EmitterInstance* emitter, PtclInstance* ptcl, const void* fieldData);
-    static const void* _ptclField_Spin(EmitterInstance* emitter, PtclInstance* ptcl, const void* fieldData);
-    static const void* _ptclField_Collision(EmitterInstance* emitter, PtclInstance* ptcl, const void* fieldData);
-    static const void* _ptclField_Convergence(EmitterInstance* emitter, PtclInstance* ptcl, const void* fieldData);
-    static const void* _ptclField_PosAdd(EmitterInstance* emitter, PtclInstance* ptcl, const void* fieldData);
+    virtual u32 CalcChildParticle(EmitterInstance* e, CpuCore core, bool skipBehavior, bool skipMakeAttribute)
+    {
+        return 0;
+    }
 
-    static void InitializeFluctuationTable(Heap* heap);
-    static void CalcFluctuation(EmitterInstance* emitter, PtclInstance* ptcl);
+    static u32 CalcSimpleParticleBehavior (EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, CpuCore core);
+    static u32 CalcComplexParticleBehavior(EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, CpuCore core);
+    static u32 CalcChildParticleBehavior  (EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, CpuCore core);
+    static void MakeParticleAttributeBuffer(PtclAttributeBuffer* __restrict attrBuffer, PtclInstance* __restrict ptcl, u32 shaderAttrFlag, f32 cameraOffset);
 
-    static u32 CalcSimpleParticleBehavior(EmitterInstance* emitter, PtclInstance* ptcl, CpuCore core);
-    static u32 CalcComplexParticleBehavior(EmitterInstance* emitter, PtclInstance* ptcl, CpuCore core);
-    static u32 CalcChildParticleBehavior(EmitterInstance* emitter, PtclInstance* ptcl);
-    static void MakeParticleAttributeBuffer(PtclAttributeBuffer* ptclAttributeBuffer, PtclInstance* ptcl, u32 shaderAvailableAttribFlg, f32 cameraOffset);
-
-    void ApplyAnim(EmitterInstance* emitter);
-    void UpdateEmitterInfoByEmit(EmitterInstance* emitter);
-
-    static PtclInstance* CalcEmitPoint(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitCircle(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitCircleSameDivide(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitFillCircle(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitSphere(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitSphereSameDivide(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitSphereSameDivide64(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitFillSphere(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitCylinder(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitFillCylinder(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitBox(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitFillBox(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitLine(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitLineSameDivide(EmitterInstance* emitter);
-    static PtclInstance* CalcEmitRectangle(EmitterInstance* emitter);
-
-    static f32* sFluctuationTbl;
+protected:
     static System* mSys;
 
-    typedef PtclInstance* (*EmitFunction)(EmitterInstance* emitter);
+    static PtclInstance* _emitPoint               (EmitterInstance* __restrict e);
+    static PtclInstance* _emitCircle              (EmitterInstance* __restrict e);
+    static PtclInstance* _emitCircleSameDivide    (EmitterInstance* __restrict e);
+    static PtclInstance* _emitFillCircle          (EmitterInstance* __restrict e);
+    static PtclInstance* _emitSphere              (EmitterInstance* __restrict e);
+    static PtclInstance* _emitSphereSameDivide    (EmitterInstance* __restrict e);
+    static PtclInstance* _emitSphereSameDivide64  (EmitterInstance* __restrict e);
+    static PtclInstance* _emitFillSphere          (EmitterInstance* __restrict e);
+    static PtclInstance* _emitCylinder            (EmitterInstance* __restrict e);
+    static PtclInstance* _emitFillCylinder        (EmitterInstance* __restrict e);
+    static PtclInstance* _emitBox                 (EmitterInstance* __restrict e);
+    static PtclInstance* _emitFillBox             (EmitterInstance* __restrict e);
+    static PtclInstance* _emitLine                (EmitterInstance* __restrict e);
+    static PtclInstance* _emitLineSameDivide      (EmitterInstance* __restrict e);
+    static PtclInstance* _emitRectangle           (EmitterInstance* __restrict e);
+
+    typedef PtclInstance* (*EmitFunction)(EmitterInstance* __restrict e);
     static EmitFunction mEmitFunctions[];
+
+    static const void* _ptclField_Random     (EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, const void* fieldData);
+    static const void* _ptclField_Magnet     (EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, const void* fieldData);
+    static const void* _ptclField_Spin       (EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, const void* fieldData);
+    static const void* _ptclField_Collision  (EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, const void* fieldData);
+    static const void* _ptclField_Convergence(EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, const void* fieldData);
+    static const void* _ptclField_PosAdd     (EmitterInstance* __restrict e, PtclInstance* __restrict ptcl, const void* fieldData);
+    static void _calcField(const ComplexEmitterData* __restrict res, EmitterInstance* __restrict e, PtclInstance* __restrict ptcl);
+
+    static f32* sFluctuationTbl;
+    static void InitializeFluctuation_(Heap* heap);
+    static void FinalzieFluctuation_(Heap* heap);
+    static void CalcFluctuation(EmitterInstance* __restrict e, PtclInstance* __restrict ptcl);
+
+    static void EmitCommon(EmitterInstance* __restrict e, PtclInstance* __restrict ptcl);
+
+    static inline void AddParticle(EmitterInstance* emitter, PtclInstance* ptcl);
 };
-static_assert(sizeof(EmitterCalc) == 4, "EmitterCalc size mismatch");
+static_assert(sizeof(EmitterCalc) == 4, "nw::eft::EmitterCalc size mismatch");
 
-void EmitterCalc::AddChildPtclToList(EmitterInstance* emitter, PtclInstance* childPtcl)
+inline void EmitterCalc::_calcField(const ComplexEmitterData* __restrict res, EmitterInstance* __restrict e, PtclInstance* __restrict ptcl)
 {
-    if (emitter->childParticleHead == NULL)
-    {
-        emitter->childParticleHead = childPtcl;
-        childPtcl->next = NULL;
-        childPtcl->prev = NULL;
-    }
-    else
-    {
-        emitter->childParticleHead->prev = childPtcl;
-        childPtcl->next = emitter->childParticleHead;
-        emitter->childParticleHead = childPtcl;
-        childPtcl->prev = NULL;
-    }
+    const void* __restrict fres = reinterpret_cast<const void*>((u32)res + res->fieldDataOffset);
 
-    if (emitter->childParticleTail == NULL)
-        emitter->childParticleTail = childPtcl;
-
-    emitter->numChildParticles++;
+    if ( res->fieldFlg & EFT_FIELD_MASK_RANDOM      ) fres = _ptclField_Random     (e, ptcl, fres);
+    if ( res->fieldFlg & EFT_FIELD_MASK_MAGNET      ) fres = _ptclField_Magnet     (e, ptcl, fres);
+    if ( res->fieldFlg & EFT_FIELD_MASK_SPIN        ) fres = _ptclField_Spin       (e, ptcl, fres);
+    if ( res->fieldFlg & EFT_FIELD_MASK_COLLISION   ) fres = _ptclField_Collision  (e, ptcl, fres);
+    if ( res->fieldFlg & EFT_FIELD_MASK_CONVERGENCE ) fres = _ptclField_Convergence(e, ptcl, fres);
+    if ( res->fieldFlg & EFT_FIELD_MASK_POSADD      ) fres = _ptclField_PosAdd     (e, ptcl, fres);
 }
 
-void EmitterCalc::AddPtclToList(EmitterInstance* emitter, PtclInstance* ptcl)
+void EmitterCalc::AddParticle(EmitterInstance* emitter, PtclInstance* ptcl)
 {
-    if (emitter->particleHead == NULL)
+    if (emitter->ptclHead == NULL)
     {
-        emitter->particleHead = ptcl;
-        ptcl->next = NULL;
-        ptcl->prev = NULL;
+        emitter->ptclHead       = ptcl;
+        ptcl->prev              = NULL;
+        ptcl->next              = NULL;
     }
     else
     {
-        emitter->particleHead->prev = ptcl;
-        ptcl->next = emitter->particleHead;
-        emitter->particleHead = ptcl;
-        ptcl->prev = NULL;
+        emitter->ptclHead->prev = ptcl;
+        ptcl->next              = emitter->ptclHead;
+        emitter->ptclHead       = ptcl;
+        ptcl->prev              = NULL;
     }
 
-    if (emitter->particleTail == NULL)
-        emitter->particleTail = ptcl;
+    if (emitter->ptclTail == NULL)
+        emitter->ptclTail = ptcl;
 
-    emitter->numParticles++;
+    emitter->ptclNum++;
 }
 
 } } // namespace nw::eft

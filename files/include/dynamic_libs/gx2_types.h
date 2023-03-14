@@ -299,16 +299,19 @@ extern "C" {
 //!-----------------------------------------------------------------------------------------------------------------------
 //! GX2 primitive types
 //!-----------------------------------------------------------------------------------------------------------------------
-#define GX2_PRIMITIVE_POINTS                            0x01
-#define GX2_PRIMITIVE_LINES                             0x02
-#define GX2_PRIMITIVE_LINE_STRIP                        0x03
-#define GX2_PRIMITIVE_TRIANGLES                         0x04
-#define GX2_PRIMITIVE_TRIANGLE_FAN                      0x05
-#define GX2_PRIMITIVE_TRIANGLE_STRIP                    0x06
-#define GX2_PRIMITIVE_RECTS                             0x11
-#define GX2_PRIMITIVE_LINE_LOOP                         0x12
-#define GX2_PRIMITIVE_QUADS                             0x13
-#define GX2_PRIMITIVE_QUAD_STRIP                        0x14
+typedef enum _GX2PrimitiveType
+{
+    GX2_PRIMITIVE_POINTS                              = 0x01,
+    GX2_PRIMITIVE_LINES                               = 0x02,
+    GX2_PRIMITIVE_LINE_STRIP                          = 0x03,
+    GX2_PRIMITIVE_TRIANGLES                           = 0x04,
+    GX2_PRIMITIVE_TRIANGLE_FAN                        = 0x05,
+    GX2_PRIMITIVE_TRIANGLE_STRIP                      = 0x06,
+    GX2_PRIMITIVE_RECTS                               = 0x11,
+    GX2_PRIMITIVE_LINE_LOOP                           = 0x12,
+    GX2_PRIMITIVE_QUADS                               = 0x13,
+    GX2_PRIMITIVE_QUAD_STRIP                          = 0x14
+} GX2PrimitiveType;
 
 //!-----------------------------------------------------------------------------------------------------------------------
 //! GX2 clear modes
@@ -397,8 +400,11 @@ extern "C" {
 //!-----------------------------------------------------------------------------------------------------------------------
 //! GX2 tile modes
 //!-----------------------------------------------------------------------------------------------------------------------
-#define GX2_TILE_MODE_DEFAULT                           0x00000000
-#define GX2_TILE_MODE_LINEAR_ALIGNED                    0x00000001
+typedef enum _GX2TileMode
+{
+    GX2_TILE_MODE_DEFAULT                             = 0x00000000,
+    GX2_TILE_MODE_LINEAR_ALIGNED                      = 0x00000001
+} GX2TileMode;
 
 //!-----------------------------------------------------------------------------------------------------------------------
 //! GX2 surface use

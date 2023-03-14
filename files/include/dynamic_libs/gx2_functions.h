@@ -259,6 +259,11 @@ static inline s32 GX2GetPixelUniformVarOffset(const GX2PixelShader* shader, cons
     return (s32)uniform_var->offset;
 }
 
+static inline void GX2Draw(GX2PrimitiveType primitive_type, u32 count)
+{
+    GX2DrawEx((s32)primitive_type, count, 0, 1);
+}
+
 #ifdef __cplusplus
 }
 #endif

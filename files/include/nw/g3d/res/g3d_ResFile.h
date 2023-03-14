@@ -1,6 +1,6 @@
 #pragma once
 
-#include "res_common.h"
+#include <nw/g3d/res/g3d_ResCommon.h>
 
 namespace nw { namespace g3d { namespace res {
 

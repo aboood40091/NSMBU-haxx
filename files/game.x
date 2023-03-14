@@ -90,7 +90,7 @@ SECTIONS {
 	/* nw::eft::System */
 	__vtbl__Q3_2nw3eft6System = 0x106B3C78;
 	Initialize__Q3_2nw3eft6SystemFPQ3_2nw3eft4HeapRCQ3_2nw3eft6Config = 0xF636F94;
-	CreateEmitterSetID__Q3_2nw3eft6SystemFPQ3_2nw3eft6HandleRCQ3_2nw4math5MTX34iUiUcT4 = 0xF63F57C;
+	CreateEmitterSetID__Q3_2nw3eft6SystemFPQ3_2nw3eft6HandleRCQ3_2nw4math5MTX34iT3UcUi = 0xF63F57C;
 
 	/* nw::math */
 	F_PI__Q2_2nw4math = 0x106B82FC;

@@ -2,11 +2,7 @@
 
 #include <heap/seadDisposer.h>
 
-namespace nw { namespace eft {
-
-class System;
-
-} }
+#include <nw/eft/eft_System.h>
 
 class PtclMgr
 {
