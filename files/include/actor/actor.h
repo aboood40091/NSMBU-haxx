@@ -1,16 +1,16 @@
 #pragma once
 
 #include "util/vec.h"
-#include "base.h"
+#include "actorbase.h"
 #include "activecollider.h"
 #include "eatdata.h"
 
 class ColliderBase;
 class CollisionMgr;
 
-class Actor : public Base
+class Actor : public ActorBase
 {
-    SEAD_RTTI_OVERRIDE(Actor, Base)
+    SEAD_RTTI_OVERRIDE(Actor, ActorBase)
 
 public:
     struct CallbackTable
@@ -132,7 +132,7 @@ public:
     f32 rectQ_1;                          // 200  Inited to 256.0 + actorInfo->_1A
     f32 destroyBoundDistanceLeft;         // 204  Inited to  80.0 + actorInfo->_1C
     f32 destroyBoundDistanceRight;        // 208  Inited to  80.0 + actorInfo->_1E
-    u8 zoneId;                            // 20C
+    u8 areaId;                            // 20C
     u8 type;                              // 20E  0: Actor, 1: Player, 2: Yoshi, 3: Enemy, 4: Unknown
     u8 isActive;                          // 20D  Inited to 1
     u8 isVisible;                         // 20F  Inited to 1

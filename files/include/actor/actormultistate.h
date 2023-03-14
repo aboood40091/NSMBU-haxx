@@ -1,11 +1,11 @@
 #pragma once
 
-#include "stageactor.h"
+#include "actorcollision.h"
 #include "states.h"
 
-class ActorMultiState : public StageActor
+class ActorMultiState : public ActorCollision
 {
-    SEAD_RTTI_OVERRIDE(ActorMultiState, StageActor)
+    SEAD_RTTI_OVERRIDE(ActorMultiState, ActorCollision)
 
 public:
     ActorMultiState(const ActorBuildInfo* buildInfo);

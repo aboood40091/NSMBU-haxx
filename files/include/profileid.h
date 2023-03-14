@@ -1,17 +1,13 @@
 #pragma once
 
-namespace ProfileId {
-
-enum ProfileIdType
+enum ProfileId
 {
-    NumOriginal = 913,
+    cProfileId_NumOriginal = 913,
 
-    ActorSpawner = NumOriginal,
-    FlipBlock,
-    MagicPlatform,
-    EffectPlayer,
+    cProfileId_ActorSpawner = cProfileId_NumOriginal,
+    cProfileId_FlipBlock,
+    cProfileId_MagicPlatform,
+    cProfileId_EffectPlayer,
 
-    Num
+    cProfileId_Num
 };
-
-}

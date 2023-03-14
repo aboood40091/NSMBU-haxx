@@ -10,6 +10,8 @@
 
 class Effect
 {
+    // NSMBW: mEf::effect_c
+
 public:
     Effect()
     {
@@ -34,17 +36,19 @@ public:
 };
 
 
-class EffectWrapper : public sead::IDisposer, public Effect, public sead::TListNode<EffectWrapper*>
+class LevelEffectBase : public sead::IDisposer, public Effect, public sead::TListNode<LevelEffectBase*>
 {
-public:
-    EffectWrapper();
+    // NSMBW: mEf::levelEffect_c
 
-    virtual ~EffectWrapper()
+public:
+    LevelEffectBase();
+
+    virtual ~LevelEffectBase()
     {
         destroy();
     }
 
-    SEAD_RTTI_BASE(EffectWrapper)
+    SEAD_RTTI_BASE(LevelEffectBase)
 
 public:
     void init(Effects effectId, const Mtx34* mtx, bool mtxHasScale);
@@ -59,17 +63,21 @@ public:
     bool isActive;     // 64
 };
 
-class ActorEffect : public EffectWrapper
+typedef Effect FollowEffect; // NSMBW: dEf::followEffect_c
+
+class LevelEffect : public LevelEffectBase
 {
-    SEAD_RTTI_OVERRIDE(ActorEffect, EffectWrapper)
+    // NSMBW: dEf::dLevelEffect_c
+
+    SEAD_RTTI_OVERRIDE(LevelEffect, LevelEffectBase)
 
 public:
-    ActorEffect()
-        : EffectWrapper()
+    LevelEffect()
+        : LevelEffectBase()
     {
     }
 
-    virtual ~ActorEffect()
+    virtual ~LevelEffect()
     {
     }
 };

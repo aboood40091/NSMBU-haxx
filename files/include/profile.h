@@ -5,15 +5,15 @@
 #include "preprocessor.h"
 #include "profileid.h"
 
-class ActorInfo;
+class ActorBase;
 struct ActorBuildInfo;
-class Base;
+class ActorInfo;
 struct ProfileResources;
 
 class Profile
 {
 public:
-    Profile(Base* (*buildFunc)(const ActorBuildInfo*), u32 id, const sead::SafeString& name, const ActorInfo* actorInfo, u32 flags);
+    Profile(ActorBase* (*buildFunc)(const ActorBuildInfo*), u32 id, const sead::SafeString& name, const ActorInfo* actorInfo, u32 flags);
 
     static Profile* get(u32 id);
     static s16 getPriority(u32 id);
@@ -25,15 +25,15 @@ public:
 
     static u32 spriteToProfileList[];
 
-    Base* (*buildFunc)(const ActorBuildInfo*);  // 0
-    u32 id;                                     // 4
-    const ActorInfo* actorInfo;                 // 8
-    u8 hasResourcesLoaded;                      // C
-    u32 flags;                                  // 10
+    ActorBase* (*buildFunc)(const ActorBuildInfo*); // 0
+    u32 id;                                         // 4
+    const ActorInfo* actorInfo;                     // 8
+    u8 hasResourcesLoaded;                          // C
+    u32 flags;                                      // 10
 
 private:
-    static const u32 NUM_PROFILES_ORIGINAL = ProfileId::NumOriginal;
-    static const u32 NUM_PROFILES          = ProfileId::Num;
+    static const u32 NUM_PROFILES_ORIGINAL = cProfileId_NumOriginal;
+    static const u32 NUM_PROFILES          = cProfileId_Num;
     static const u32 NUM_PROFILES_CUSTOM   = NUM_PROFILES - NUM_PROFILES_ORIGINAL;
 
     static Profile* profilesOriginal[NUM_PROFILES_ORIGINAL];

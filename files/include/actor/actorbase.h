@@ -49,13 +49,13 @@ struct ActorBuildInfo
 };
 
 
-class Base
+class ActorBase
 {
-    SEAD_RTTI_BASE(Base)
+    SEAD_RTTI_BASE(ActorBase)
 
 public:
-    Base(const ActorBuildInfo* buildInfo);
-    virtual ~Base();
+    ActorBase(const ActorBuildInfo* buildInfo);
+    virtual ~ActorBase();
 
     virtual u32 beforeCreate();
 
@@ -85,7 +85,7 @@ public:
     virtual u32 onDelete();
     virtual void afterDelete(u32);
 
-    typedef sead::OffsetList<Base> ActorList;
+    typedef sead::OffsetList<ActorBase> ActorList;
 
     sead::Heap* heap;             // 0
     u32 id;                       // 4
@@ -101,7 +101,7 @@ public:
     u8 initStateFlag;             // 1A
     ActorList childList;          // 1C
     sead::ListNode childNode;     // 2C
-    Base* parent;                 // 34
+    ActorBase* parent;            // 34
     sead::ListNode actorListNode; // 38
     sead::ListNode drawListNode;  // 40
     u32 flags;                    // 48

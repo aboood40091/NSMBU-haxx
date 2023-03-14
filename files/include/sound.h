@@ -3,21 +3,21 @@
 #include "nw/snd.h"
 
 
-class AudioFx
+class AudFxSocket
 {
 public:
     nw::snd::internal::FxReverbHiParam& getReverbHiParam();
     nw::snd::internal::FxDelayParam&    getDelayParam();
 };
 
-class SoundSystemBase
+class AudAudioMgr
 {
 public:
-    AudioFx* getAudioFx();
+    AudFxSocket* getFxSocket();
 };
 
-class SoundSystem : public SoundSystemBase
+class SndAudioMgr : public AudAudioMgr
 {
 public:
-    static SoundSystem* instance;
+    static SndAudioMgr* instance;
 };

@@ -303,18 +303,18 @@ SECTIONS {
 	instance__8ActorMgr = 0x106c52c8;
 	create__8ActorMgrFP14ActorBuildInfoUi = 0xebc9a58;
 
-	/* Base */
-	__vtbl__4Base = 0x105028c0;
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__4BaseSFv = 0x106EBEC4;
-	typeInfo__L0__getRuntimeTypeInfoStatic__4BaseSFv = 0x106EBEC8;
-	beforeCreate__4BaseFv = 0xebc2f7c;
-	onExecute__4BaseFv = 0xebc2f8c;
-	finalExecute__4BaseFv = 0xebc2f94;
-	onDraw__4BaseFv = 0xebc2fa0;
-	afterDraw__4BaseFUi = 0xebc2f38;
-	beforeDelete__4BaseFv = 0xebc2fa8;
-	onDelete__4BaseFv = 0xebc2fb0;
-	afterDelete__4BaseFUi = 0xebc2f3c;
+	/* ActorBase */
+	__vtbl__9ActorBase = 0x105028c0;
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__9ActorBaseSFv = 0x106EBEC4;
+	typeInfo__L0__getRuntimeTypeInfoStatic__9ActorBaseSFv = 0x106EBEC8;
+	beforeCreate__9ActorBaseFv = 0xebc2f7c;
+	onExecute__9ActorBaseFv = 0xebc2f8c;
+	finalExecute__9ActorBaseFv = 0xebc2f94;
+	onDraw__9ActorBaseFv = 0xebc2fa0;
+	afterDraw__9ActorBaseFUi = 0xebc2f38;
+	beforeDelete__9ActorBaseFv = 0xebc2fa8;
+	onDelete__9ActorBaseFv = 0xebc2fb0;
+	afterDelete__9ActorBaseFUi = 0xebc2f3c;
 
 	/* Actor */
 	__vtbl__5Actor = 0x10502468;
@@ -344,21 +344,21 @@ SECTIONS {
 	splashPoison__5ActorFPQ2_4sead16Vector3__tm__2_f = 0xebc2ae4;
 	isOffScreen__5ActorFv = 0xebc1254;
 
-	/* StageActor */
-	__vtbl__10StageActor = 0x10502a4c;
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__10StageActorSFv = 0x106EBED4;
-	typeInfo__L0__getRuntimeTypeInfoStatic__10StageActorSFv = 0x106EBED8;
-	handleGravity__10StageActorFv = 0xEBC39AC;
-	handleSpeed__10StageActorFv = 0xEBC3AE4;
-	afterCreate__10StageActorFUi = 0xebc354c;
-	beforeExecute__10StageActorFv = 0xebc35fc;
-	afterExecute__10StageActorFUi = 0xebc36d8;
-	onDelete__10StageActorFv = 0xebc3724;
-	vf114__10StageActorFv = __deleted_virtual_called;
-	vf134__10StageActorFv = __deleted_virtual_called;
-	vf13C__10StageActorFv = 0xebc4008;
-	vf144__10StageActorFb = 0xebc375c;
-	vf14C__10StageActorFP5Actor = 0xebc3760;
+	/* ActorCollision */
+	__vtbl__14ActorCollision = 0x10502a4c;
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__14ActorCollisionSFv = 0x106EBED4;
+	typeInfo__L0__getRuntimeTypeInfoStatic__14ActorCollisionSFv = 0x106EBED8;
+	handleGravity__14ActorCollisionFv = 0xEBC39AC;
+	handleSpeed__14ActorCollisionFv = 0xEBC3AE4;
+	afterCreate__14ActorCollisionFUi = 0xebc354c;
+	beforeExecute__14ActorCollisionFv = 0xebc35fc;
+	afterExecute__14ActorCollisionFUi = 0xebc36d8;
+	onDelete__14ActorCollisionFv = 0xebc3724;
+	vf114__14ActorCollisionFv = __deleted_virtual_called;
+	vf134__14ActorCollisionFv = __deleted_virtual_called;
+	vf13C__14ActorCollisionFv = 0xebc4008;
+	vf144__14ActorCollisionFb = 0xebc375c;
+	vf14C__14ActorCollisionFP5Actor = 0xebc3760;
 
 	/* ActorState */
 	__vtbl__10ActorState = 0x105030c8;
@@ -551,37 +551,37 @@ SECTIONS {
 	/* __LSG__typeInfo__L0__getRuntimeTypeInfoStatic__17ActorCollisionMgrSFv */
 	/* typeInfo__L0__getRuntimeTypeInfoStatic__17ActorCollisionMgrSFv */
 
-	/* EventMgr */
-	sInstance__8EventMgr = 0x106dd26c;
+	/* PSwitchMgr */
+	sInstance__10PSwitchMgr = 0x106dd26c;
 
-	/* MusicPlayer */
-	shouldHurryUp__11MusicPlayerFv = 0xF5783D8;
+	/* SndBgmMgr */
+	shouldHurryUp__9SndBgmMgrFv = 0xF5783D8;
 
-	/* ResArchive */
-	getModel__10ResArchiveFRCQ2_4sead23SafeStringBase__tm__2_cUiN52PQ2_4sead4Heap = 0xf0ae440;
+	/* ModelResource */
+	getModel__13ModelResourceFRCQ2_4sead23SafeStringBase__tm__2_cUiN52PQ2_4sead4Heap = 0xf0ae440;
 
-	/* ResArchiveMgr */
-	instance__13ResArchiveMgr = 0x106d4f50;
-	get__13ResArchiveMgrFRCQ2_4sead23SafeStringBase__tm__2_c = 0xf0b60ec;
+	/* ModelResourceMgr */
+	instance__16ModelResourceMgr = 0x106d4f50;
+	get__16ModelResourceMgrFRCQ2_4sead23SafeStringBase__tm__2_c = 0xf0b60ec;
 
-	/* Model */
-	__vtbl__5Model = 0x105bf130;
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC178;
-	typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC1A0;
+	/* ModelNW */
+	__vtbl__7ModelNW = 0x105bf130;
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__7ModelNWSFv = 0x106EC178;
+	typeInfo__L0__getRuntimeTypeInfoStatic__7ModelNWSFv = 0x106EC1A0;
 
-	/* ModelWrapper */
-	__ct__12ModelWrapperFP5ModelUiN42 = 0xf094798;
-	setup__12ModelWrapperFP10ResArchivePvPQ2_4sead4Heap = 0xf0949a0;
-	updateAnimations__12ModelWrapperFv = 0xf094d20;
-	updateModel__12ModelWrapperFv = 0xf094e84;
+	/* BasicModel */
+	__ct__10BasicModelFP7ModelNWUiN42 = 0xf094798;
+	setup__10BasicModelFP13ModelResourcePvPQ2_4sead4Heap = 0xf0949a0;
+	updateAnimations__10BasicModelFv = 0xf094d20;
+	updateModel__10BasicModelFv = 0xf094e84;
 
-	/* DrawMgr */
-	instance__7DrawMgr = 0x106d4f88;
-	drawModel__7DrawMgrFP5Model = 0xf0bab58;
-	drawModel__7DrawMgrFP12ModelWrapper = 0xf0bac98;
-	drawTile__7DrawMgrFUsRCQ2_4sead16Vector3__tm__2_fRCUiT2 = 0xf0bad28;
-	setTargetLayer__7DrawMgrFP8ObjLayerUi = 0xF0BAA50;
-	resetTargetLayer__7DrawMgrFv = 0xF0BAB4C;
+	/* Renderer */
+	instance__8Renderer = 0x106d4f88;
+	drawModel__8RendererFP5Model = 0xf0bab58;
+	drawModel__8RendererFP10BasicModel = 0xf0bac98;
+	drawTile__8RendererFUsRCQ2_4sead16Vector3__tm__2_fRCUiT2 = 0xf0bad28;
+	setTargetLayer__8RendererFP18RenderObjLayerBaseUi = 0xF0BAA50;
+	resetTargetLayer__8RendererFv = 0xF0BAB4C;
 
 	/* MovementHandler */
 	__ct__15MovementHandlerFv = 0xF409C40;
@@ -589,31 +589,31 @@ SECTIONS {
 	getMaskForMovementType__15MovementHandlerFUi = 0xF40A37C;
 	execute__15MovementHandlerFv = 0xF40B8C4;
 
-	/* SoundSystemBase */
-	getAudioFx__15SoundSystemBaseFv = 0xF571AA4;
+	/* AudAudioMgr */
+	getFxSocket__11AudAudioMgrFv = 0xF571AA4;
 
-	/* SoundSystem */
-	instance__11SoundSystem = 0x106E9E84;
+	/* SndAudioMgr */
+	instance__11SndAudioMgr = 0x106E9E84;
 
-	/* AudioFx */
-	getReverbHiParam__7AudioFxFv = 0xF572FD8;
-	getDelayParam__7AudioFxFv = 0xF572FE0;
+	/* AudFxSocket */
+	getReverbHiParam__11AudFxSocketFv = 0xF572FD8;
+	getDelayParam__11AudFxSocketFv = 0xF572FE0;
 
-	/* Level */
-	sInstance__5Level = 0x106dd248;
-	getArea__5LevelFUi = 0xf25a2dc;
+	/* CourseData */
+	sInstance__10CourseData = 0x106dd248;
+	getFile__10CourseDataFUi = 0xf25a2dc;
 
-	/* Level::Area */
-	getSprite__Q2_5Level4AreaFUiPv = 0xF259C08;
-	getLocation__Q2_5Level4AreaFPQ2_4sead18BoundBox2__tm__2_fUc = 0xf25a020;
-	getPath__Q2_5Level4AreaFUc = 0xf25a0a8;
-	getPathNodes__Q2_5Level4AreaFUi = 0xf25a0f4;
+	/* CourseDataFile */
+	getMapActor__14CourseDataFileFUiPv = 0xF259C08;
+	getLocation__14CourseDataFileFPQ2_4sead18BoundBox2__tm__2_fUc = 0xf25a020;
+	getRailInfo__14CourseDataFileFUc = 0xf25a0a8;
+	getRailPoint__14CourseDataFileFUi = 0xf25a0f4;
 
 	/* LevelInfo */
 	sInstance__9LevelInfo = 0x106D3AEC;
 
-	/* TileMgr */
-	getTilePtrCurrentArea__7TileMgrSFUsT1UcPUi = 0xF245000;
+	/* Bg */
+	getTilePtrCurrentCdFile__2BgSFUsT1UcPUi = 0xF245000;
 
 	/* PlayerMgr */
 	sInstance__9PlayerMgr = 0x106E8B94;
@@ -640,30 +640,30 @@ SECTIONS {
 	isRightHeld__11PlayerInputCFv = 0xF4D5F9C;
 	isLeftHeld__11PlayerInputCFv = 0xF4D5F90;
 
-	/* LayerAgl */
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__8LayerAglSFv = 0x106EC05C;
-	typeInfo__L0__getRuntimeTypeInfoStatic__8LayerAglSFv = 0x106EC270;
-	__ct__8LayerAglFv = 0xF0B9290;
+	/* Layer */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__5LayerSFv = 0x106EC05C;
+	typeInfo__L0__getRuntimeTypeInfoStatic__5LayerSFv = 0x106EC270;
+	__ct__5LayerFv = 0xF0B9290;
 
-	/* LayerAgl::Node */
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8LayerAgl4NodeSFv = 0x106EBF00;
-	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8LayerAgl4NodeSFv = 0x106EC194;
+	/* RenderObjBase */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__13RenderObjBaseSFv = 0x106EBF00;
+	typeInfo__L0__getRuntimeTypeInfoStatic__13RenderObjBaseSFv = 0x106EC194;
 
-	/* ObjLayer */
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__8ObjLayerSFv = 0x106EC060;
-	typeInfo__L0__getRuntimeTypeInfoStatic__8ObjLayerSFv = 0x106EC274;
-	setParentRenderer__8ObjLayerFP16ObjLayerRenderer = 0xF0BCA24;
+	/* RenderObjLayerBase */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__18RenderObjLayerBaseSFv = 0x106EC060;
+	typeInfo__L0__getRuntimeTypeInfoStatic__18RenderObjLayerBaseSFv = 0x106EC274;
+	setParentRenderer__18RenderObjLayerBaseFP9RenderMgr = 0xF0BCA24;
 
-	/* ObjLayer::Node */
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8ObjLayer4NodeSFv = 0x106EBF04;
-	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_8ObjLayer4NodeSFv = 0x106EC198;
+	/* RenderObj */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__9RenderObjSFv = 0x106EBF04;
+	typeInfo__L0__getRuntimeTypeInfoStatic__9RenderObjSFv = 0x106EC198;
 
 	/* RenderObjLayer */
 	__ct__14RenderObjLayerFv = 0xF0BCA6C;
 
-	/* RenderObjLayer::Node */
-	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EBF08;
-	typeInfo__L0__getRuntimeTypeInfoStatic__Q2_14RenderObjLayer4NodeSFv = 0x106EC19C;
+	/* Model */
+	__LSG__typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EBF08;
+	typeInfo__L0__getRuntimeTypeInfoStatic__5ModelSFv = 0x106EC19C;
 
 	/* CourseSelectTask::Layer2D */
 	__vtbl__Q2_16CourseSelectTask7Layer2D = 0x10549218;
@@ -673,9 +673,9 @@ SECTIONS {
 	__dt__17ControllerWrapperFv = 0xF0D40E8;
 	registerWith__17ControllerWrapperFQ2_14GameController2Id = 0xF0D41B0;
 
-	/* ObjLayerRenderer */
-	__ct__16ObjLayerRendererFRCQ2_4sead23SafeStringBase__tm__2_c = 0xF0BAF58;
-	init__16ObjLayerRendererFUiN31PQ2_4sead4Heap = 0xF0BB128;
+	/* RenderMgr */
+	__ct__9RenderMgrFRCQ2_4sead23SafeStringBase__tm__2_c = 0xF0BAF58;
+	init__9RenderMgrFUiN31PQ2_4sead4Heap = 0xF0BB128;
 
 	/* Misc */
 	BLOSDynLoad_Acquire = 0xF65EF58;

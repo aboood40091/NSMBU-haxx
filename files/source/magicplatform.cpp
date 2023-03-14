@@ -2,12 +2,12 @@
 #include "actor/twowayplatform.h"
 
 #include "model.h"
-#include "drawmgr.h"
+#include "renderer.h"
 #include "collider.h"
 #include "movementhandler.h"
-#include "level.h"
+#include "coursedata.h"
 //#include "math.h"
-#include "tile.h"
+#include "bg.h"
 
 /*
     TODO:
@@ -20,7 +20,7 @@ public:
     MagicPlatform(const ActorBuildInfo* buildInfo);
     virtual ~MagicPlatform() { }
 
-    static Base* build(const ActorBuildInfo* buildInfo);
+    static ActorBase* build(const ActorBuildInfo* buildInfo);
 
     u32 onCreate() override;
     u32 onExecute() override;
@@ -46,7 +46,7 @@ public:
 };
 
 const ActorInfo magicPlatformActorInfo = { Vec2i(0, 0), Vec2i(0, 0), Vec2i(0, 0), 0, 0, 0, 0, ActorInfo::FlagIgnoreSpawnRange | ActorInfo::FlagUnknown };
-const Profile magicPlatformProfile(&MagicPlatform::build, ProfileId::MagicPlatform, "MagicPlatform", &magicPlatformActorInfo, 0);
+const Profile magicPlatformProfile(&MagicPlatform::build, cProfileId_MagicPlatform, "MagicPlatform", &magicPlatformActorInfo, 0);
 
 // Ugh
 // Callback table, useful for squishing the player
@@ -75,7 +75,7 @@ MagicPlatform::MagicPlatform(const ActorBuildInfo* buildInfo)
 {
 }
 
-Base* MagicPlatform::build(const ActorBuildInfo* buildInfo)
+ActorBase* MagicPlatform::build(const ActorBuildInfo* buildInfo)
 {
     return new MagicPlatform(buildInfo);
 }
@@ -83,16 +83,16 @@ Base* MagicPlatform::build(const ActorBuildInfo* buildInfo)
 
 u32 MagicPlatform::onCreate()
 {
-    Level::Area* area = Level::instance()->getArea(LevelInfo::instance()->area);
-    Level::Area::Location* location = area->getLocation(nullptr, settings1 & 0xFF);
+    CourseDataFile* file = CourseData::instance()->getFile(LevelInfo::instance()->file);
+    Location* location = file->getLocation(nullptr, settings1 & 0xFF);
 
     if (!location)
         return 2;
 
-    u32 locX = location->x & ~0xF;
-    u32 locY = location->y & ~0xF;
-    tileW = (location->w + (location->x & 0xF) + 0xF) / 16;
-    tileH = (location->h + (location->y & 0xF) + 0xF) / 16;
+    u32 locX = location->offset.x & ~0xF;
+    u32 locY = location->offset.y & ~0xF;
+    tileW = (location->size.x + (location->size.x & 0xF) + 0xF) / 16;
+    tileH = (location->size.y + (location->size.y & 0xF) + 0xF) / 16;
 
     if (!tileW || !tileH)
         return 2;
@@ -103,7 +103,7 @@ u32 MagicPlatform::onCreate()
     {
         for (u32 x = 0; x < tileW; x++)
         {
-            u16* tilePtr = TileMgr::getTilePtrCurrentArea(locX + x*16, locY + y*16, 0);
+            u16* tilePtr = Bg::getTilePtrCurrentCdFile(locX + x*16, locY + y*16, 0);
             tileData[x + y*tileW] = tilePtr ? *tilePtr : 0;
         }
     }
@@ -193,7 +193,7 @@ u32 MagicPlatform::onDraw()
             f32 rotatedY = -offsetX * angleSin + offsetY * angleCos;
             Vec3 drawPos(position.x + rotatedX, position.y - rotatedY, position.z);
 
-            DrawMgr::instance->drawTile(tileData[y*tileW + x], drawPos, rotation.z, scale);
+            Renderer::instance->drawTile(tileData[y*tileW + x], drawPos, rotation.z, scale);
         }
     }
 

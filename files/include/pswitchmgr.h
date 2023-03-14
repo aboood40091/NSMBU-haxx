@@ -2,9 +2,9 @@
 
 #include <heap/seadDisposer.h>
 
-class EventMgr
+class PSwitchMgr
 {
-    SEAD_SINGLETON_DISPOSER(EventMgr)
+    SEAD_SINGLETON_DISPOSER(PSwitchMgr)
 
 public:
     void set(u32 id, u32 time, bool active, u32 unk1 = 0, u32 unk2 = 0, u32 unk3 = 0, u32 unk4 = 0);

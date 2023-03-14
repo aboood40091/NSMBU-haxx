@@ -5,16 +5,16 @@
 #include <heap/seadDisposer.h>
 #include <heap/seadUnitHeap.h>
 
-#include "actor/base.h"
+#include "actor/actorbase.h"
 
-class ActorBuffer
+class ActorObjBuffer
 {
 public:
-    Base* findActorWithId(u32* id);
+    ActorBase* findActorWithId(u32* id);
 
-    sead::Buffer<Base*> buffer;
+    sead::Buffer<ActorBase*> buffer;
     u32 usedCount;
-    Base** last;
+    ActorBase** last;
     u32 _10;
     u8 _14;
 };
@@ -26,7 +26,7 @@ public:
        0: add to actorsToCreate
        1: add to activeActors and drawableActors
        else: don't add to any of the lists */
-    Base* create(ActorBuildInfo* buildInfo, u32 addToActive);
+    ActorBase* create(ActorBuildInfo* buildInfo, u32 addToActive);
 
     static ActorMgr* instance;
 
@@ -34,12 +34,12 @@ public:
     sead::UnitHeap* playerUnitHeap;
     sead::UnitHeap* actorUnitHeap;
     u8 deferredActorCreations[0x5970]; // sead::FixedRingBuffer<ActorBuildInfo, 520>
-    Base::ActorList actorsToCreate;
-    Base::ActorList actorsToDelete;
-    Base::ActorList activeActors;
-    Base::ActorList drawableActors;
+    ActorBase::ActorList actorsToCreate;
+    ActorBase::ActorList actorsToDelete;
+    ActorBase::ActorList activeActors;
+    ActorBase::ActorList drawableActors;
     sead::FixedPtrArray<sead::Heap, 520> deletedActorHeaps;
-    sead::FixedPtrArray<Base, 520> finalExecuteList;
-    ActorBuffer actors;
+    sead::FixedPtrArray<ActorBase, 520> finalExecuteList;
+    ActorObjBuffer actors;
     // ...
 };

@@ -1,9 +1,9 @@
 #include "actor/blockbase.h"
 #include "actor/player.h"
 #include "activecollider.hpp"
-#include "drawmgr.h"
 #include "model.h"
 #include "playermgr.h"
+#include "renderer.h"
 
 /*
     Notes:
@@ -21,7 +21,7 @@ public:
     FlipBlock(const ActorBuildInfo* buildInfo);
     virtual ~FlipBlock() { }
 
-    static Base* build(const ActorBuildInfo* buildInfo);
+    static ActorBase* build(const ActorBuildInfo* buildInfo);
 
     u32 onCreate() override;
     u32 onExecute() override;
@@ -40,7 +40,7 @@ public:
     void updateModel();
     bool playerOverlaps();
 
-    ModelWrapper* model;
+    BasicModel* model;
     int flipsRemaining;
 
     static const ActiveCollider::Info colliderInfo;
@@ -51,8 +51,8 @@ public:
 CREATE_STATE(FlipBlock, Flipping);
 
 const ActorInfo FlipBlockActorInfo = { Vec2i(8, -16), Vec2i(8, -8), Vec2i(0x100, 0x100), 0, 0, 0, 0, ActorInfo::FlagUnknown };
-const Profile FlipBlockProfile(&FlipBlock::build, ProfileId::FlipBlock, "FlipBlock", &FlipBlockActorInfo, 0x1002);
-PROFILE_RESOURCES(ProfileId::FlipBlock, "block_snake");
+const Profile FlipBlockProfile(&FlipBlock::build, cProfileId_FlipBlock, "FlipBlock", &FlipBlockActorInfo, 0x1002);
+PROFILE_RESOURCES(cProfileId_FlipBlock, "block_snake");
 
 const ActiveCollider::Info FlipBlock::colliderInfo = { Vec2(0.0f, 8.0f), Vec2(8.0f, 8.0f), 0, 0, 0, 0, 0, 0, nullptr };
 
@@ -63,7 +63,7 @@ FlipBlock::FlipBlock(const ActorBuildInfo* buildInfo)
 {
 }
 
-Base* FlipBlock::build(const ActorBuildInfo* buildInfo)
+ActorBase* FlipBlock::build(const ActorBuildInfo* buildInfo)
 {
     return new FlipBlock(buildInfo);
 }
@@ -92,7 +92,7 @@ u32 FlipBlock::onCreate()
 
     registerColliderActiveInfo();
 
-    model = ModelWrapper::create("block_snake", "block_snake", 0, 1);
+    model = BasicModel::create("block_snake", "block_snake", 0, 1);
 
     aCollider.init(this, &colliderInfo, nullptr);
     addActiveColliders();
@@ -115,7 +115,7 @@ u32 FlipBlock::onExecute()
 
 u32 FlipBlock::onDraw()
 {
-    DrawMgr::instance->drawModel(model);
+    Renderer::instance->drawModel(model);
     return 1;
 }
 

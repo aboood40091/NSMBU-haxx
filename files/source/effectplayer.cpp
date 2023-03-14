@@ -1,5 +1,4 @@
 #include <actor/player.h>
-#include <drawmgr.h>
 #include <model.h>
 #include <playermgr.h>
 #include <ptclmgr.h>
@@ -25,7 +24,7 @@ class EffectPlayer : public Actor
 public:
     EffectPlayer(const ActorBuildInfo* buildInfo);
 
-    static Base* build(const ActorBuildInfo* buildInfo)
+    static ActorBase* build(const ActorBuildInfo* buildInfo)
     {
         return new EffectPlayer(buildInfo);
     }
@@ -57,7 +56,7 @@ private:
     s32             mDownHeldCnt;
     s32             mUpHeldCnt;
 
-    ModelWrapper*   mModel[4][7]; // 4 digits, each can use up to 7 lines
+    BasicModel*     mModel[4][7]; // 4 digits, each can use up to 7 lines
 };
 
 const Vec2 EffectPlayer::s_p1(-8.0f,  16.0f);
@@ -67,8 +66,8 @@ const Vec2 EffectPlayer::s_p4( 8.0f, -16.0f);
 const Vec2 EffectPlayer::s_p5(-8.0f, -16.0f);
 const Vec2 EffectPlayer::s_p6(-8.0f,   0.0f);
 
-const Profile effectPlayerProfile(&EffectPlayer::build, ProfileId::EffectPlayer, "EffectPlayer", nullptr, 0);
-PROFILE_RESOURCES(ProfileId::EffectPlayer, "block_snake");
+const Profile effectPlayerProfile(&EffectPlayer::build, cProfileId_EffectPlayer, "EffectPlayer", nullptr, 0);
+PROFILE_RESOURCES(cProfileId_EffectPlayer, "block_snake");
 
 EffectPlayer::EffectPlayer(const ActorBuildInfo* buildInfo)
     : Actor(buildInfo)
@@ -118,7 +117,7 @@ u32 EffectPlayer::onCreate()
 
     for (u32 i = 0; i < 4; i++)
         for (u32 j = 0; j < 7; j++)
-            mModel[i][j] = ModelWrapper::create("block_snake", "block_snake");
+            mModel[i][j] = BasicModel::create("block_snake", "block_snake");
 
     LOG("EffectPlayer: onCreate end")
 

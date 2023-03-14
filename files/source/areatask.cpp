@@ -1,5 +1,5 @@
 #include "areatask.h"
-#include "level.h"
+#include "coursedata.h"
 
 #define COLLISION_DRAW 0
 
@@ -12,13 +12,13 @@ void AreaTask::readHaxxOptions()
 {
     this->wrapFlag = 0;
 
-    Level::Area* area = Level::instance()->getArea(LevelInfo::instance()->area);
-    Level::Area::Options* areaOptions = reinterpret_cast<Level::Area::Options*>(area->blocks[1]);
+    CourseDataFile* file = CourseData::instance()->getFile(LevelInfo::instance()->file);
+    Options* options = reinterpret_cast<Options*>(file->blocks[CourseDataFile::cBlock_Options]);
 
-    if (areaOptions->wrapByte & 1)
+    if (options->loop & 1)
         this->wrapFlag = 1;
 
-    if (areaOptions->wrapByte & 2)
+    if (options->loop & 2)
     {
         PlayerJumpArc = 0.5f;
         MiniPlayerJumpArc = 0.5f;
@@ -244,10 +244,10 @@ void AreaTask::debugDraw(const agl::lyr::RenderInfo& renderInfo)
         node = node->next;
     }
 
-    ActorBuffer* actors = &ActorMgr::instance->actors;
+    ActorObjBuffer* actors = &ActorMgr::instance->actors;
     for (int i = 0; i < actors->buffer.getSize(); i++)
     {
-        Actor* actor = sead::DynamicCast<Actor, Base>(actors->buffer[i]);
+        Actor* actor = sead::DynamicCast<Actor>(actors->buffer[i]);
         if (actor == NULL || !actor->isVisible || actor->isDeleted)
             continue;
 

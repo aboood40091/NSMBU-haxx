@@ -2,13 +2,13 @@
 
 #include <heap/seadDisposer.h>
 
-class MusicPlayer
+class SndBgmMgr
 {
-    SEAD_SINGLETON_DISPOSER(MusicPlayer)
+    SEAD_SINGLETON_DISPOSER(SndBgmMgr)
 
 public:
-    MusicPlayer();
-    ~MusicPlayer();
+    SndBgmMgr();
+    ~SndBgmMgr();
 
     // Incomplete
     bool shouldHurryUp();

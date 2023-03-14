@@ -1,49 +1,49 @@
-#include "musicplayer.h"
+#include "sndbgmmgr.h"
 
-bool MusicPlayer::isValidStrmID(s32 strmID)
+bool SndBgmMgr::isValidStrmID(s32 strmID)
 {
-    return strmID < MusicPlayer::NUM_MUSIC_LIST;
+    return strmID < SndBgmMgr::NUM_MUSIC_LIST;
 }
 
 
-const char* MusicPlayer::getStrmNameForID(s32 strmID)
+const char* SndBgmMgr::getStrmNameForID(s32 strmID)
 {
-    bool valid = MusicPlayer::isValidStrmID(strmID);
+    bool valid = SndBgmMgr::isValidStrmID(strmID);
     if (!valid)
         return 0;
 
     const char* strName;
 
-    bool isHurryUp = MusicPlayer::shouldHurryUp();
+    bool isHurryUp = SndBgmMgr::shouldHurryUp();
     if (isHurryUp)
-        strName = MusicPlayer::strmListFast[strmID];
+        strName = SndBgmMgr::strmListFast[strmID];
 
     else
-        strName = MusicPlayer::strmListNormal[strmID];
+        strName = SndBgmMgr::strmListNormal[strmID];
 
     return strName;
 }
 
 
-const char* MusicPlayer::getSeqNameForID(s32 strmID)
+const char* SndBgmMgr::getSeqNameForID(s32 strmID)
 {
-    bool valid = MusicPlayer::isValidStrmID(strmID);
+    bool valid = SndBgmMgr::isValidStrmID(strmID);
     if (!valid)
         return 0;
 
     const char* seqName;
 
-    bool isHurryUp = MusicPlayer::shouldHurryUp();
+    bool isHurryUp = SndBgmMgr::shouldHurryUp();
     if (isHurryUp)
-        seqName = MusicPlayer::seqListFast[strmID];
+        seqName = SndBgmMgr::seqListFast[strmID];
 
     else
-        seqName = MusicPlayer::seqListNormal[strmID];
+        seqName = SndBgmMgr::seqListNormal[strmID];
 
     return seqName;
 }
 
-const char* MusicPlayer::strmListNormal[MusicPlayer::NUM_MUSIC_LIST] = {
+const char* SndBgmMgr::strmListNormal[SndBgmMgr::NUM_MUSIC_LIST] = {
     nullptr,
     "STRM_BGM_CHIJOU",
     "STRM_BGM_CHIKA",
@@ -75,7 +75,7 @@ const char* MusicPlayer::strmListNormal[MusicPlayer::NUM_MUSIC_LIST] = {
     "WSD_BGM_SHIRO_LAST",
 };
 
-const char* MusicPlayer::strmListFast[MusicPlayer::NUM_MUSIC_LIST] = {
+const char* SndBgmMgr::strmListFast[SndBgmMgr::NUM_MUSIC_LIST] = {
     nullptr,
     "STRM_BGM_CHIJOU_FAST",
     "STRM_BGM_CHIKA_FAST",
@@ -107,7 +107,7 @@ const char* MusicPlayer::strmListFast[MusicPlayer::NUM_MUSIC_LIST] = {
     "WSD_BGM_SHIRO_LAST_FAST",
 };
 
-const char* MusicPlayer::seqListNormal[MusicPlayer::NUM_MUSIC_LIST] = {
+const char* SndBgmMgr::seqListNormal[SndBgmMgr::NUM_MUSIC_LIST] = {
     nullptr,
     "SEQ_BGM_CHIJOU_V",
     "SEQ_BGM_CHIKA_V",
@@ -139,7 +139,7 @@ const char* MusicPlayer::seqListNormal[MusicPlayer::NUM_MUSIC_LIST] = {
     nullptr,
 };
 
-const char* MusicPlayer::seqListFast[MusicPlayer::NUM_MUSIC_LIST] = {
+const char* SndBgmMgr::seqListFast[SndBgmMgr::NUM_MUSIC_LIST] = {
     nullptr,
     "SEQ_BGM_CHIJOU_FAST_V",
     "SEQ_BGM_CHIKA_FAST_V",

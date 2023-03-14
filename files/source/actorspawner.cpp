@@ -1,12 +1,12 @@
 #include "actor/actor.h"
 #include "actormgr.h"
-#include "eventmgr.h"
+#include "pswitchmgr.h"
 
 class ActorSpawner : public Actor
 {
 public:
     ActorSpawner(const ActorBuildInfo* buildInfo);
-    static Base* build(const ActorBuildInfo* buildInfo);
+    static ActorBase* build(const ActorBuildInfo* buildInfo);
 
     u32 onCreate() override;
     u32 onExecute() override;
@@ -15,12 +15,12 @@ public:
     bool spawned;
 };
 
-const Profile actorSpawnerProfile(&ActorSpawner::build, ProfileId::ActorSpawner, "ActorSpawner", nullptr, 0);
+const Profile actorSpawnerProfile(&ActorSpawner::build, cProfileId_ActorSpawner, "ActorSpawner", nullptr, 0);
 
 
 ActorSpawner::ActorSpawner(const ActorBuildInfo* buildInfo) : Actor(buildInfo) { }
 
-Base* ActorSpawner::build(const ActorBuildInfo* buildInfo)
+ActorBase* ActorSpawner::build(const ActorBuildInfo* buildInfo)
 {
     return new ActorSpawner(buildInfo);
 }
@@ -44,7 +44,7 @@ u32 ActorSpawner::onCreate()
 
 u32 ActorSpawner::onExecute()
 {
-    if (EventMgr::instance()->isActive(eventId2-1))
+    if (PSwitchMgr::instance()->isActive(eventId2-1))
     {
         if (!spawned)
         {

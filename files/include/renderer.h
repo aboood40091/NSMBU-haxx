@@ -2,15 +2,15 @@
 
 #include "model.h"
 
-class DrawMgr
+class Renderer
 {
 public:
-    static DrawMgr* instance;
+    static Renderer* instance;
 
     void drawModel(Model* model);
-    void drawModel(ModelWrapper* modelWrapper);
+    void drawModel(BasicModel* model);
     void drawTile(u16 tile, const Vec3& position, const u32& rotation, const Vec3& scale);
 
-    void setTargetLayer(ObjLayer* layer, u32 default_);
+    void setTargetLayer(RenderObjLayerBase* layer, u32 default_);
     void resetTargetLayer();
 };

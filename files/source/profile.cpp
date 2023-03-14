@@ -1,5 +1,5 @@
 #include "profile.h"
-#include "actor/base.h"
+#include "actor/actorbase.h"
 
 Profile* Profile::profilesCustom[Profile::NUM_PROFILES_CUSTOM];
 s16 Profile::prioritiesCustom[Profile::NUM_PROFILES_CUSTOM] = { 0 };
@@ -8,7 +8,7 @@ u8 Profile::resourceCountCustom[Profile::NUM_PROFILES_CUSTOM] = { 0 };
 const sead::SafeString* Profile::resourceListsCustom[Profile::NUM_PROFILES_CUSTOM] = { nullptr };
 
 
-Profile::Profile(Base* (*buildFunc)(const ActorBuildInfo*), u32 id, const sead::SafeString& name, const ActorInfo* actorInfo, u32 flags)
+Profile::Profile(ActorBase* (*buildFunc)(const ActorBuildInfo*), u32 id, const sead::SafeString& name, const ActorInfo* actorInfo, u32 flags)
 {
     this->buildFunc = buildFunc;
     this->id = id;
@@ -821,8 +821,8 @@ u32 Profile::spriteToProfileList[] =
     533,    // 723
 
     // Start of custom entries
-    ProfileId::ActorSpawner,  // 724
-    ProfileId::FlipBlock,     // 725
-    ProfileId::MagicPlatform, // 726
-    ProfileId::EffectPlayer   // 727
+    cProfileId_ActorSpawner,  // 724
+    cProfileId_FlipBlock,     // 725
+    cProfileId_MagicPlatform, // 726
+    cProfileId_EffectPlayer   // 727
 };

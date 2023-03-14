@@ -3,24 +3,21 @@
 #include <container/seadBuffer.h>
 
 #include "renderobjlayer.h"
-#include "resarchive.h"
+#include "modelresource.h"
 
-class Model : public RenderObjLayer::Node
+class ModelNW : public Model
 {
-    SEAD_RTTI_OVERRIDE(Model, RenderObjLayer::Node)
-
-public:
-    class Material /*: public RenderObjLayer::Node::Material*/;
+    SEAD_RTTI_OVERRIDE(ModelNW, Model)
 
 public:
     // Calculates the drawing resources for skeleton matrices, shapes and materials
     void calc() override;
 
     // Updates buffers for the GPU
-    void calcGPU(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
+    void calcGPU(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, RenderMgr* renderer) override;
 
     // (Does nothing)
-    void updateView(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
+    void updateView(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, RenderMgr* renderer) override;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -28,21 +25,21 @@ public:
     // 1. Shadow-only shapes and reflection-only shapes are always invisible
     // 2. Shadow casting for a shape is automatically enabled if "shadow_cast" is not present in its material's render info
 
-    void drawOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
-    void drawXlu(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
+    void drawOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, RenderMgr* renderer) override;
+    void drawXlu(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, RenderMgr* renderer) override;
 
     // This draws the shadow of shadow-casting shapes
-    void drawShadowOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
+    void drawShadowOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, RenderMgr* renderer) override;
 
     // These draws the reflection on shapes
-    void drawReflectionOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
-    void drawReflectionXlu(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, ObjLayerRenderer* renderer) override;
+    void drawReflectionOpa(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, RenderMgr* renderer) override;
+    void drawReflectionXlu(s32 viewIndex, const Mtx34& viewMtx, const Mtx44& projMtx, RenderMgr* renderer) override;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     bool hasShadow() const override;
 
-    virtual ~Model();
+    virtual ~ModelNW();
 
     void updateAnimations() override;
     void updateModel() override;
@@ -72,7 +69,7 @@ public:
     u32 getMaterialCount() const override;
     s32 getMaterialIdx(const sead::SafeString& name) const override;
     const char* getMaterialName(u32 idx) const override;
-    RenderObjLayer::Node::Material& getMaterial(u32 idx) override;
+    Material& getMaterial(u32 idx) override;
     void setMaterialVisibility(u32 idx, bool visibility) override;
     bool getMaterialVisibility(u32 idx) const override; // deleted
     void vf124() override; // deleted
@@ -83,13 +80,13 @@ public:
     void setSklAnimRelatedFloat(u32 idx, f32) override;
     f32 getSklAnimRelatedFloat() override; // deleted
     void setSklAnim(u32 idx, const SkeletalAnimation& anim) override;
-    void setTexAnim(u32 idx, const TextureAnimation& anim) override;
-    void setShuAnim(u32 idx, const ShaderAnimation& anim) override;
+    void setTexAnim(u32 idx, const TexturePatternAnimation& anim) override;
+    void setShuAnim(u32 idx, const ShaderParamAnimation& anim) override;
     void setVisAnim(u32 idx, const VisibilityAnimation& anim) override;
     void setShaAnim(u32 idx, const ShapeAnimation& anim) override;
     const SkeletalAnimation** getSklAnims() const override;
-    const TextureAnimation** getTexAnims() const override;
-    const ShaderAnimation** getShuAnims() const override;
+    const TexturePatternAnimation** getTexAnims() const override;
+    const ShaderParamAnimation** getShuAnims() const override;
     const VisibilityAnimation** getVisAnims() const override;
     const ShapeAnimation** getShaAnims() const override;
 
@@ -97,7 +94,7 @@ public:
 };
 
 
-struct Animation
+struct FrameCtrl
 {
     enum Flags
     {
@@ -119,68 +116,68 @@ struct Animation
     u32 flags;      // 18   Inited to FlagRepeat | FlagUnk2
 };
 
-class ModelAnimation : public Animation
+class Animation : public FrameCtrl
 {
 public:
-    ModelAnimation();
+    Animation();
     virtual void calculate() = 0;
 };
 
-class SkeletalAnimation : public ModelAnimation  // size: 0x98
+class SkeletalAnimation : public Animation  // size: 0x98
 {
 public:
     SkeletalAnimation();
     void calculate() override;
 
-    void init(Model* model, ResArchive* archive, void* unk, sead::Heap* heap);
-    void play(ResArchive* archive, const sead::SafeString& identifier);
+    void init(ModelNW* model, ModelResource* resource, void* unk, sead::Heap* heap);
+    void play(ModelResource* resource, const sead::SafeString& identifier);
 
     // nw::g3d::SkeletalAnimObj at 0x20
 };
 
-class TextureAnimation : public ModelAnimation
+class TexturePatternAnimation : public Animation
 {
 public:
-    TextureAnimation();
+    TexturePatternAnimation();
     void calculate() override;
 
-    void play(ResArchive* archive, const sead::SafeString& identifier);
+    void play(ModelResource* resource, const sead::SafeString& identifier);
 };
 
-class ShaderAnimation : public ModelAnimation
+class ShaderParamAnimation : public Animation
 {
 public:
-    ShaderAnimation();
+    ShaderParamAnimation();
     void calculate() override;
 
-    void playColorAnim(ResArchive* archive, const sead::SafeString& identifier);
-    void playTexSrtAnim(ResArchive* archive, const sead::SafeString& identifier);
+    void playColorAnim(ModelResource* resource, const sead::SafeString& identifier);
+    void playTexSrtAnim(ModelResource* resource, const sead::SafeString& identifier);
 };
 
-class VisibilityAnimation : public ModelAnimation
+class VisibilityAnimation : public Animation
 {
 public:
     VisibilityAnimation();
     void calculate() override;
 
-    void play(ResArchive* archive, const sead::SafeString& identifier);
+    void play(ModelResource* resource, const sead::SafeString& identifier);
 };
 
-class ShapeAnimation : public ModelAnimation
+class ShapeAnimation : public Animation
 {
 public:
     ShapeAnimation();
     void calculate() override;
 
-    void play(ResArchive* archive, const sead::SafeString& identifier);
+    void play(ModelResource* resource, const sead::SafeString& identifier);
 };
 
 
-class ModelWrapper
+class BasicModel
 {
 public:
-    ModelWrapper(Model* model, u32 numSklAnims, u32 numTexAnims, u32 numShuAnims, u32 numVisAnims, u32 numShaAnims);
-    void setup(ResArchive* archive, void* unk, sead::Heap* heap);
+    BasicModel(ModelNW* model, u32 numSklAnims, u32 numTexAnims, u32 numShuAnims, u32 numVisAnims, u32 numShaAnims);
+    void setup(ModelResource* resource, void* unk, sead::Heap* heap);
     void updateModel();
     void updateAnimations();
 
@@ -206,55 +203,55 @@ public:
 
     inline void playSklAnim(const sead::SafeString& identifier, u32 idx)
     {
-        sklAnims[idx]->play(archive, identifier);
+        sklAnims[idx]->play(resource, identifier);
     }
 
     inline void playTexPatternAnim(const sead::SafeString& identifier, u32 idx)
     {
-        texAnims[idx]->play(archive, identifier);
+        texAnims[idx]->play(resource, identifier);
     }
 
     inline void playColorAnim(const sead::SafeString& identifier, u32 idx)
     {
-        shuAnims[idx]->playColorAnim(archive, identifier);
+        shuAnims[idx]->playColorAnim(resource, identifier);
     }
 
     inline void playTexSrtAnim(const sead::SafeString& identifier, u32 idx)
     {
-        shuAnims[idx]->playTexSrtAnim(archive, identifier);
+        shuAnims[idx]->playTexSrtAnim(resource, identifier);
     }
 
     inline void playBoneVisAnim(const sead::SafeString& identifier, u32 idx)
     {
-        visAnims[idx]->play(archive, identifier);
+        visAnims[idx]->play(resource, identifier);
     }
 
     inline void playShapeAnim(const sead::SafeString& identifier, u32 idx)
     {
-        shaAnims[idx]->play(archive, identifier);
+        shaAnims[idx]->play(resource, identifier);
     }
 
     // boundingType: 0 = no bounding, 1 = bounding sphere, 2 = bounding box
 
-    static inline ModelWrapper* create(const sead::SafeString& archiveIdentifier, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, u32 boundingType = 0, sead::Heap* heap = nullptr)
+    static inline BasicModel* create(const sead::SafeString& resourceIdentifier, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, u32 boundingType = 0, sead::Heap* heap = nullptr)
     {
-        ResArchive* archive = ResArchiveMgr::instance->get(archiveIdentifier);
-        return create(archive, modelIdentifier, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims, boundingType, heap);
+        ModelResource* resource = ModelResourceMgr::instance->get(resourceIdentifier);
+        return create(resource, modelIdentifier, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims, boundingType, heap);
     }
 
-    static inline ModelWrapper* create(ResArchive* archive, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, u32 boundingType = 0, sead::Heap* heap = nullptr)
+    static inline BasicModel* create(ModelResource* resource, const sead::SafeString& modelIdentifier, u32 numSklAnims = 0, u32 numTexAnims = 0, u32 numShuAnims = 0, u32 numVisAnims = 0, u32 numShaAnims = 0, u32 boundingType = 0, sead::Heap* heap = nullptr)
     {
-        Model* model = archive->getModel(modelIdentifier, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims, boundingType, heap);
-        ModelWrapper* wrapper = new (heap) ModelWrapper(model, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims);
-        wrapper->setup(archive, nullptr, heap);
+        ModelNW* model = resource->getModel(modelIdentifier, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims, boundingType, heap);
+        BasicModel* wrapper = new (heap) BasicModel(model, numSklAnims, numTexAnims, numShuAnims, numVisAnims, numShaAnims);
+        wrapper->setup(resource, nullptr, heap);
         return wrapper;
     }
 
-	Model* model;                                   // 0
-	ResArchive* archive;                            // 4
-	sead::Buffer<SkeletalAnimation*> sklAnims;      // 8
-	sead::Buffer<TextureAnimation*> texAnims;       // 10
-	sead::Buffer<ShaderAnimation*> shuAnims;        // 18
-	sead::Buffer<VisibilityAnimation*> visAnims;    // 20
-	sead::Buffer<ShapeAnimation*> shaAnims;         // 28
+	ModelNW* model;                                     // 0
+	ModelResource* resource;                            // 4
+	sead::Buffer<SkeletalAnimation*> sklAnims;          // 8
+	sead::Buffer<TexturePatternAnimation*> texAnims;    // 10
+	sead::Buffer<ShaderParamAnimation*> shuAnims;       // 18
+	sead::Buffer<VisibilityAnimation*> visAnims;        // 20
+	sead::Buffer<ShapeAnimation*> shaAnims;             // 28
 };

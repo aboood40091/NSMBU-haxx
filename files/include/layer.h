@@ -2,22 +2,21 @@
 
 #include <agl/lyr/aglLayer.h>
 
-class LayerAgl : public agl::lyr::Layer // size: 0x420
+class RenderObjBase
 {
-    SEAD_RTTI_OVERRIDE(LayerAgl, agl::lyr::Layer)
+    SEAD_RTTI_BASE(RenderObjBase)
 
 public:
-    class Node
-    {
-        SEAD_RTTI_BASE(Node)
+    virtual void calc() = 0;
+};
 
-    public:
-        virtual void calc() = 0;
-    };
+class Layer : public agl::lyr::Layer // size: 0x420
+{
+    SEAD_RTTI_OVERRIDE(Layer, agl::lyr::Layer)
 
 public:
-    LayerAgl();
-    virtual ~LayerAgl();
+    Layer();
+    virtual ~Layer();
 
     void preDrawImpl(const agl::lyr::RenderInfo& render_info) const override;
     void postDrawImpl(const agl::lyr::RenderInfo& render_info) const override;
